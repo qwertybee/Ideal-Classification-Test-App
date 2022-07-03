@@ -24,7 +24,8 @@ class _PrimaryState extends State<Primary> {
           children: screens,
         ),
 
-        bottomNavigationBar: BottomNavigationBar( // nav bar is not persistent across pages, fix later
+        bottomNavigationBar: BottomNavigationBar(
+          // nav bar is not persistent across pages, fix later
           onTap: ((index) {
             setState(() {
               currentIndex = index;

@@ -39,7 +39,7 @@ class TestIntro extends StatelessWidget {
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12.0),
-                            side: BorderSide(color: Colors.purple)
+                            side: const BorderSide(color: Colors.purple)
                         )
                     )
                 ),

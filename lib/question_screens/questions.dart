@@ -5,7 +5,6 @@ import 'package:project_2/question_screens/test_2.dart';
 import 'package:project_2/question_screens/test_3.dart';
 import 'package:project_2/question_screens/test_4.dart';
 import 'package:project_2/question_screens/test_5.dart';
-import 'package:project_2/question_screens/test_intro.dart';
 import 'package:project_2/question_screens/test_result.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
