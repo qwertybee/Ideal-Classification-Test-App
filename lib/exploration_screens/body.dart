@@ -63,17 +63,18 @@ class _BodyState extends State<Body> {
                       ),
                     ],
                 ),
-                child: Row(
-                  children: [
-                    Expanded(
+                child:
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: 20.0),
                       child: TextField(
                         onChanged: (value) {
 
                         },
                         decoration: InputDecoration(
-                          hintText: "        Search",
+                          hintText: "Search",
                           hintStyle: TextStyle(
-                            color: Color(0xffce93d8).withOpacity(0.5),
+                            color: Color(0xffce93d8).withOpacity(0.6),
+                            fontSize: 18,
                           ),
                           enabledBorder: InputBorder.none,
                           focusedBorder: InputBorder.none,
@@ -81,8 +82,6 @@ class _BodyState extends State<Body> {
                         ),
                       ),
                     ),
-                  ],
-                ),
                 // decoration: BoxDecoration,
               ))
             ],
