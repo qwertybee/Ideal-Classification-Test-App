@@ -33,8 +33,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int currentIndex = 0;
-  final screens = [const Questions(), const Explore(), const Profile()];
+  int currentIndex = 1;
+  final screens = [const Explore(), const Questions(), const Profile()];
 
   @override
   Widget build(BuildContext context) {
