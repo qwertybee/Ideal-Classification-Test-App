@@ -13,6 +13,7 @@ class _ExploreState extends State<Explore> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false, // might be problem in future
         elevation: 0,
         backgroundColor: const Color(0xffce93d8),
         toolbarHeight: 100,

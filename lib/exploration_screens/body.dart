@@ -36,7 +36,8 @@ class _BodyState extends State<Body> {
                       "Discover jobs!",
                       style: Theme.of(context).textTheme.headline5?.copyWith(
                         color: Colors.white,
-                        fontWeight: FontWeight.bold
+                        fontWeight: FontWeight.bold,
+                        fontSize: 28,
                       ),
                     ),
                     Spacer(),

@@ -3,6 +3,8 @@ import 'package:lottie/lottie.dart';
 import 'package:project_2/question_screens/questions.dart';
 import 'package:project_2/question_screens/test_intro.dart';
 
+import '../primary.dart';
+
 class TestResult extends StatefulWidget {
   const TestResult({Key? key}) : super(key: key);
 
@@ -55,7 +57,7 @@ class _TestResultState extends State<TestResult> {
                   child: const Text("Take Test Again"),
             ),
           ),
-          SizedBox(height: 15),
+          const SizedBox(height: 15),
           SizedBox(
             width: 300,
             height: 40,
@@ -72,7 +74,9 @@ class _TestResultState extends State<TestResult> {
               ),
               onPressed: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const TestIntro()));                },
+                    // might have problem in the future if use Primary cos effects explore page appbar's back button
+                    MaterialPageRoute(builder: (context) => const Primary()));
+                },
               child: const Text("Done"),
             ),
           ),
