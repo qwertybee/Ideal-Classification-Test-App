@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "37111028960",
+    "project_id": "mobile-app-project-2-sm-yuuu",
+    "storage_bucket": "mobile-app-project-2-sm-yuuu.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:37111028960:android:1405687d768401e2f24485",
+        "android_client_info": {
+          "package_name": "com.smyuu.project_2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "37111028960-nlos20velo81tqo1eeeka4csu3ab1gks.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1mhUj5p1EU5hyLcKGYqWdIhzVcC7slPM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "37111028960-nlos20velo81tqo1eeeka4csu3ab1gks.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
