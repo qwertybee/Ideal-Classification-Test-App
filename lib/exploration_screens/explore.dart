@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:project_2/api/explore_categories.dart';
-import 'package:project_2/exploration_screens/explore_0.dart';
+import 'package:project_2/exploration_screens/explore_select.dart';
 import '../question_screens/questions.dart';
 
 class Explore extends StatefulWidget {
