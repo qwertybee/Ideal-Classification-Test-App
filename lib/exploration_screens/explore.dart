@@ -46,30 +46,33 @@ class _ExploreState extends State<Explore> {
               ],
             ),
             SizedBox(height: 30),
-            Expanded(
-                child: StaggeredGridView.countBuilder(
-                    crossAxisCount: 2,
-                    itemCount: 5,
-                    crossAxisSpacing: 20,
-                    mainAxisSpacing: 20,
-                    itemBuilder: (context, index) {
-                      return Container(
-                        padding: EdgeInsets.all(20),
-                        height: index.isEven ? 200 : 240,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16),
-                          color: Colors.purple,
-                          // PUT IMAGES HERE
+            SingleChildScrollView(
+              child: Column(
+                children: [
+                  Container(
+                    height: 24,
+                    child: Stack(
+                      children: [
+                        Padding(padding: EdgeInsets.only(left: 20),
+                        child: Text(
+                          "Major Group",
+                          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                         ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            // TEXT DATA HERE 5:30
-                          ],
                         ),
-                      );
-                    }, 
-                    staggeredTileBuilder: (index) => StaggeredTile.fit(1))
+                        Positioned(
+                          bottom: 0,
+                          left: 0,
+                          right: 0,
+                            child: Container(
+                              margin: EdgeInsets.only(right: 20),
+                              height: 7,
+                              color: Colors.green.withOpacity(0.2),
+                        ))
+                      ],
+                    ),
+                  )
+                ],
+              ),
             )
           ],
         ),
