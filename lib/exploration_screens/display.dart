@@ -12,6 +12,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
   late WageSales? wageSales;
   @override
   void initState() {
