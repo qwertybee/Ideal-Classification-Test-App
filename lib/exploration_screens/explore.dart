@@ -46,20 +46,6 @@ class _ExploreState extends State<Explore> {
               ),
               child: Row(
                 children: [
-                  // Expanded(child: TextField(
-                  //   onChanged: (value) {
-                  //
-                  //   },
-                  //   decoration: InputDecoration(
-                  //     hintText: "    Search",
-                  //     hintStyle: TextStyle(
-                  //       color: Color(0xFFA0A5BD).withOpacity(0.5),
-                  //     ),
-                  //     enabledBorder: InputBorder.none,
-                  //     focusedBorder: InputBorder.none,
-                  //     suffixIcon: const Icon(Icons.search_rounded),
-                  //   ),
-                  // ))
                   Text("Search",
                     style: TextStyle(
                       fontSize: 18, color: Color(0xFFA0A5BD)
@@ -90,7 +76,7 @@ class _ExploreState extends State<Explore> {
                         return GestureDetector(
                           onTap: () {
                             Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => Body()));
+                              MaterialPageRoute(builder: (context) => ExploreSelect()));
                           },
                           child: Container(
                             padding: EdgeInsets.all(20),
@@ -123,7 +109,17 @@ class _ExploreState extends State<Explore> {
                         );
                       },
                       staggeredTileBuilder: (index) => StaggeredTile.fit(1))
-              )
+              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text("Things that might also interest you...",
+                  style: TextStyle(
+                    fontSize: 20, color: Color(0xFF0D1333), fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),

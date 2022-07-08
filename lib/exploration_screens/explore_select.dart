@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:project_2/exploration_screens/category_card.dart';
 
-class Body extends StatefulWidget {
-  const Body({Key? key}) : super(key: key);
+class ExploreSelect extends StatefulWidget {
+  const ExploreSelect({Key? key}) : super(key: key);
 
   @override
-  State<Body> createState() => _BodyState();
+  State<ExploreSelect> createState() => _ExploreSelectState();
 }
 
-class _BodyState extends State<Body> {
+class _ExploreSelectState extends State<ExploreSelect> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
