@@ -98,7 +98,7 @@ class _ExploreState extends State<Explore> {
                                     fontSize: 20, color: Color(0xFF0D1333), fontWeight: FontWeight.bold
                                   ),
                                 ),
-                                Text('${categories[index].numOfCourses} Courses',
+                                Text('${categories[index].numOfGroups} Group',
                                 style: TextStyle(
                                   color: Color(0xFF0D1333).withOpacity(0.5)
                                 ),
@@ -110,16 +110,16 @@ class _ExploreState extends State<Explore> {
                       },
                       staggeredTileBuilder: (index) => StaggeredTile.fit(1))
               ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text("Things that might also interest you...",
-                  style: TextStyle(
-                    fontSize: 20, color: Color(0xFF0D1333), fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: [
+            //     Text("Things that might also interest you...",
+            //       style: TextStyle(
+            //         fontSize: 20, color: Color(0xFF0D1333), fontWeight: FontWeight.bold,
+            //       ),
+            //     ),
+            //   ],
+            // ),
           ],
         ),
       ),
