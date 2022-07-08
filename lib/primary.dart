@@ -11,7 +11,7 @@ class Primary extends StatefulWidget {
 }
 
 class _PrimaryState extends State<Primary> {
-  int currentIndex = 1;
+  int currentIndex = 0;
   final screens = [const Explore(), const TestIntro(), const Profile()];
 
   @override
@@ -47,7 +47,7 @@ class _PrimaryState extends State<Primary> {
           ],
           iconSize: 30.0,
           currentIndex: currentIndex,
-          selectedItemColor: Colors.purple,
+          selectedItemColor: Color(0xff33a474),
           unselectedItemColor: Colors.grey,
           // showSelectedLabels: false,
           // showUnselectedLabels: true,
