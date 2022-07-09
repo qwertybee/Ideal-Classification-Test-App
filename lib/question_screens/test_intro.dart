@@ -45,7 +45,8 @@ class TestIntro extends StatelessWidget {
                 ),
                 onPressed: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Questions()));                },
+                      MaterialPageRoute(builder: (context) => Questions()));
+                  },
                 child: const Text("Take Test"),
             ),
           ),

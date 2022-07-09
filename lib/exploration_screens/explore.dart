@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:project_2/api/explore_categories.dart';
-import 'package:project_2/exploration_screens/explore_select.dart';
-import '../question_screens/questions.dart';
+import 'package:project_2/exploration_screens/explore_groups/explore_main_categories.dart';
+import 'package:project_2/exploration_screens/explore_screens/explore_detail.dart';
+import 'explore_screens/explore_broad.dart';
+import 'explore_screens/explore_major.dart';
+import 'explore_screens/explore_minor.dart';
 
 class Explore extends StatefulWidget {
   const Explore({Key? key}) : super(key: key);
@@ -14,6 +16,12 @@ class Explore extends StatefulWidget {
 class _ExploreState extends State<Explore> {
   @override
   Widget build(BuildContext context) {
+    var catNav = [
+      ExploreMajor(),
+      ExploreBroad(),
+      ExploreMinor(),
+      ExploreDetail(),
+    ];
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.only(left: 20, top: 50, right: 20),
@@ -75,17 +83,16 @@ class _ExploreState extends State<Explore> {
                       itemBuilder: (context, index) {
                         return GestureDetector(
                           onTap: () {
-                            Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => ExploreSelect()));
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => catNav[index]));
                           },
                           child: Container(
                             padding: EdgeInsets.all(20),
-                            height: index.isEven ? 200 : 240,
+                            height: index.isEven ? 200 : 230,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(16),
                               color: Colors.blueGrey,
                               image: DecorationImage(
-                                image: AssetImage(categories[index].image),
+                                image: AssetImage(categories[index].nav),
                                 fit: BoxFit.fill
                               ),
                             ),
@@ -98,7 +105,7 @@ class _ExploreState extends State<Explore> {
                                     fontSize: 20, color: Color(0xFF0D1333), fontWeight: FontWeight.bold
                                   ),
                                 ),
-                                Text('${categories[index].numOfGroups} Group',
+                                Text('${categories[index].tag} Groups',
                                 style: TextStyle(
                                   color: Color(0xFF0D1333).withOpacity(0.5)
                                 ),
@@ -110,16 +117,6 @@ class _ExploreState extends State<Explore> {
                       },
                       staggeredTileBuilder: (index) => StaggeredTile.fit(1))
               ),
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //   children: [
-            //     Text("Things that might also interest you...",
-            //       style: TextStyle(
-            //         fontSize: 20, color: Color(0xFF0D1333), fontWeight: FontWeight.bold,
-            //       ),
-            //     ),
-            //   ],
-            // ),
           ],
         ),
       ),
