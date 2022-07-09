@@ -26,7 +26,7 @@ class _ExploreDetailState extends State<ExploreDetail> {
                   width: double.infinity,
                   decoration: BoxDecoration(
                       image: DecorationImage(
-                          image: AssetImage("images/marketing.png"),
+                          image: AssetImage("images/business.png"),
                           fit: BoxFit.fitWidth
                       ),
                       borderRadius: BorderRadius.only(
@@ -45,10 +45,7 @@ class _ExploreDetailState extends State<ExploreDetail> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text("Major Group",
-                                      style: Theme.of(context).textTheme.displaySmall,
-                                    ),
-                                    Text("Influence",
+                                    Text("Detailed Group",
                                       style: Theme.of(context).textTheme.displaySmall?.copyWith(
                                           fontWeight: FontWeight.bold
                                       ),

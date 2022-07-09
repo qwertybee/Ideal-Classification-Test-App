@@ -25,7 +25,7 @@ class _ExploreMinorState extends State<ExploreMinor> {
                   width: double.infinity,
                   decoration: BoxDecoration(
                       image: DecorationImage(
-                          image: AssetImage("images/marketing.png"),
+                          image: AssetImage("images/photography.png"),
                           fit: BoxFit.fitWidth
                       ),
                       borderRadius: BorderRadius.only(
@@ -44,10 +44,7 @@ class _ExploreMinorState extends State<ExploreMinor> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text("Major Group",
-                                      style: Theme.of(context).textTheme.displaySmall,
-                                    ),
-                                    Text("Influence",
+                                    Text("Minor Group",
                                       style: Theme.of(context).textTheme.displaySmall?.copyWith(
                                           fontWeight: FontWeight.bold
                                       ),

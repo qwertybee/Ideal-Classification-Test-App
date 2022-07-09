@@ -12,8 +12,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
   late WageMajor? wageMajor;
+
   @override
   void initState() {
     super.initState();
@@ -21,7 +21,7 @@ class _HomeState extends State<Home> {
   }
 
   void _getData() async {
-    wageMajor = (await ApiService().getUsers());
+    wageMajor = (await ApiService().getInfo());
     Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {}));
   }
 
