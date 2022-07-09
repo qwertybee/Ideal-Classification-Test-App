@@ -1,85 +1,62 @@
-// import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:firebase_core/firebase_core.dart';
-// import 'package:flutter/material.dart';
-//
-// class LoginScreen extends StatefulWidget {
-//   const LoginScreen({Key? key}) : super(key: key);
-//   State<LoginScreen> createState() => _LoginScreenState();
-// }
-//
-// class _LoginScreenState extends State<LoginScreen>{
-//   late FirebaseAuth _auth;
-//   String email = '';
-//   String password = '';
-//
-//   @override
-//   void initState() {
-//     super.initState();
-//     initFirebase();
-//   }
-//
-//   void initFirebase() async {
-//     await Firebase.initializeApp();
-//     _auth = FirebaseAuth.instance;
-//   }
-//
-//   @override
-//   Widget build(BuildContext context){
-//     return Scaffold(
-//       body: Center(
-//         child: Column(
-//           mainAxisAlignment: MainAxisAlignment.center,
-//           children: <Widget>[
-//             TextField(
-//               decoration: InputDecoration(
-//                 labelText: 'Email',
-//               ),
-//               onChanged: (value) {
-//                 setState(() {
-//                   email = value;
-//                 });
-//                 },
-//             ),
-//             TextField(
-//               decoration: InputDecoration(
-//                 labelText: 'Password',
-//                 ),
-//               onChanged: (value) {
-//                 setState(() {
-//                   password = value;
-//                 });
-//                 },
-//               ),
-//             ElevatedButton(
-//               child: Text('Login'),
-//               onPressed: () async{
-//                 print('Email: $email');
-//                 print('Password: $password');
-//                 try{
-//                   final user = await _auth.signInWithEmailAndPassword(
-//                     email: email,
-//                     password: password,
-//                   );
-//                   if (user != null){
-//                     print('Signed in');
-//                   }
-//                   else{
-//                     print('Error');
-//                   }
-//                 }
-//                 catch (e){
-//                   print(e);
-//                 }}
-//               ),
-//             ElevatedButton(
-//               child: Text('Register'),
-//               onPressed: () async{
-//                 final newUser = await _auth.createUserWithEmailAndPassword(email: email, password: password);
-//               },
-//               ),
-//             ],
-//           ),
-//         ),
-//       );
-//   }
-// }
+ import 'package:firebase_auth/firebase_auth.dart';
+ import 'package:firebase_core/firebase_core.dart';
+ import 'package:flutter/material.dart';
+
+ class LoginScreen extends StatefulWidget {
+   const LoginScreen({Key? key}) : super(key: key);
+   State<LoginScreen> createState() => _LoginScreenState();
+ }
+
+ class _LoginScreenState extends State<LoginScreen>{
+   final emailController = TextEditingController();
+   final passwordController = TextEditingController();
+
+   @override
+   void dispose(){
+     emailController.dispose();
+     passwordController.dispose();
+     super.dispose();
+   }
+
+   @override
+   Widget build(BuildContext context) => SingleChildScrollView(
+     padding: EdgeInsets.all(20),
+     child: Column(
+       mainAxisAlignment: MainAxisAlignment.center,
+       children: [
+         SizedBox(height: 20),
+         TextField(
+           controller: emailController,
+           cursorColor: Colors.black,
+           textInputAction: TextInputAction.next,
+           decoration: InputDecoration(
+             hintText: 'Email',
+             labelText: 'Email',
+           ),
+         ),
+         SizedBox(height: 4),
+         TextField(
+           controller: passwordController,
+           cursorColor: Colors.black,
+           obscureText: true,
+           textInputAction: TextInputAction.done,
+           decoration: InputDecoration(
+             hintText: 'Password',
+             labelText: 'Password'
+           ),
+         ),
+         SizedBox(height: 20),
+         ElevatedButton.icon(icon: Icon(Icons.lock_open_outlined), label: Text('Login', style: TextStyle(fontSize: 24)),
+         onPressed: () async {
+           try {
+             final user = await FirebaseAuth.instance.signInWithEmailAndPassword(
+                 email: emailController.text.trim(), password: passwordController.text.trim());
+             //Navigator.push(context, MaterialPageRoute(builder: (context) => Display(user: user)));
+           } catch (e) {
+             print(e);
+           }
+         }),
+       ],
+     ),
+   );
+ }
