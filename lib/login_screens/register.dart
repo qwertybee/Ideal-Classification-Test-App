@@ -40,23 +40,49 @@
                fontSize: 20, color: Color(0xFF61688B),
              ),
            ),
-           SizedBox(height: 20),
-           const SizedBox(height: 30),
-           TextField(
+           SizedBox(height: 30),
+           Padding(
+             padding: const EdgeInsets.all(8.0),
+             child: Text(
+                 "E-mail address"
+             ),
+           ),
+           TextFormField(
              onChanged: (value) {
                email = value;
              },
              decoration: const InputDecoration(
-               hintText: 'email',
+                 border: OutlineInputBorder(),
+                 hintText: 'Enter your email here',
+                 labelText: 'E-mail'),
+             validator: (value) {
+               if (value == null || value.isEmpty) {
+                 return 'Please enter a value';
+               }
+               return null;
+             },
+           ),
+           Padding(
+             padding: const EdgeInsets.all(8.0),
+             child: Text(
+                 "Password"
              ),
            ),
-           TextField(
+           TextFormField(
              onChanged: (value) {
                password = value;
              },
+             obscureText: true,
              decoration: const InputDecoration(
-               hintText: 'password',
-             ),
+                 border: OutlineInputBorder(),
+                 hintText: 'Enter your password',
+                 labelText: 'Password'),
+             validator: (value) {
+               if (value == null || value.isEmpty) {
+                 return 'Please enter a value';
+               }
+               return null;
+             },
            ),
            ElevatedButton(
                child: const Text('Create account'),
