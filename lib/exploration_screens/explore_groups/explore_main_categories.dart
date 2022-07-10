@@ -1,3 +1,5 @@
+import 'package:project_2/api/constants.dart';
+
 class Category {
   final String name;
   final String tag;
@@ -28,16 +30,16 @@ List<Category> categoriesMajor = categoriesMajorData
     .toList();
 
 var categoriesMajorData = [
-  {"name": "Management, business, science, & arts occupation", 'tag': "Major Occupation Group", 'nav': "images/marketing.png"},
-  {"name": "Sales & Office occupations", 'tag': "Major Occupation Group", 'nav': "images/ux_design.png"},
+  {"name": "Management, business, science, & arts occupation", 'tag': "Major Occupation Group", 'nav': ApiConstants.cateMajorInfo},
+  {"name": "Sales & Office occupations", 'tag': "Major Occupation Group", 'nav': ApiConstants.cateMajorInfo},
   {
     "name": "Service Occupations",
     'tag': "Major Occupation Group",
-    'nav': "images/photography.png"
+    'nav': ApiConstants.cateMajorInfo
   },
-  {"name": "Production, Transportation, & Material Moving Occupations", 'tag': "Major Occupation Group", 'nav': "images/business.png"},
-  {"name": "Natural resources, construction, & maintenance occupations", 'tag': "Major Occupation Group", 'nav': "images/business.png"},
-  {"name": "Military specific occupations", 'tag': "Major Occupation Group", 'nav': "images/business.png"},
+  {"name": "Production, Transportation, & Material Moving Occupations", 'tag': "Major Occupation Group", 'nav': ApiConstants.cateMajorInfo},
+  {"name": "Natural resources, construction, & maintenance occupations", 'tag': "Major Occupation Group", 'nav': ApiConstants.cateMajorInfo},
+  {"name": "Military specific occupations", 'tag': "Major Occupation Group", 'nav': ApiConstants.cateMajorInfo},
 ];
 
 
@@ -47,18 +49,21 @@ List<Category> categoriesBroad = categoriesBroadData
     .toList();
 
 var categoriesBroadData = [
-  {"name": "Transportation Occupations", 'tag': "Broad Occupation Group", 'nav': "images/marketing.png"},
-  {"name": "Material Moving Occupations", 'tag': "Broad Occupation Group", 'nav': "images/ux_design.png"},
+  {"name": "Management Occupations", 'tag': "Broad Occupation Group", 'nav': ApiConstants.cateBroadInfo},
+  {"name": "Education, Training, & Library Occupations", 'tag': "Broad Occupation Group", 'nav': ApiConstants.cateBroadInfo},
+  {"name": "Business & Financial Operations Occupations", 'tag': "Broad Occupation Group", 'nav': ApiConstants.cateBroadInfo},
+  {"name": "Transportation Occupations", 'tag': "Broad Occupation Group", 'nav': ApiConstants.cateBroadInfo},
+  {"name": "Material Moving Occupations", 'tag': "Broad Occupation Group", 'nav': ApiConstants.cateBroadInfo},
   {
     "name": "Computer & Mathematical Occupations",
     'tag': "Broad Occupation Group",
-    'nav': "images/photography.png"
+    'nav': ApiConstants.cateBroadInfo
   },
-  {"name": "Arts, design, entertainment, sports, & media occupations", 'tag': "Broad Occupation Group", 'nav': "images/business.png"},
-  {"name": "Architecture & engineering occupations", 'tag': "Broad Occupation Group", 'nav': "images/business.png"},
-  {"name": "Community & Social Service occupations", 'tag': "Broad Occupation Group", 'nav': "images/business.png"},
-  {"name": "Legal occupations", 'tag': "Broad Occupation Group", 'nav': "images/business.png"},
-  {"name": "Life, physical, & social science occupations", 'tag': "Broad Occupation Group", 'nav': "images/business.png"},
+  {"name": "Arts, design, entertainment, sports, & media occupations", 'tag': "Broad Occupation Group", 'nav': ApiConstants.cateBroadInfo},
+  {"name": "Architecture & engineering occupations", 'tag': "Broad Occupation Group", 'nav': ApiConstants.cateBroadInfo},
+  {"name": "Community & Social Service occupations", 'tag': "Broad Occupation Group", 'nav': ApiConstants.cateBroadInfo},
+  {"name": "Legal occupations", 'tag': "Broad Occupation Group", 'nav': ApiConstants.cateBroadInfo},
+  {"name": "Life, physical, & social science occupations", 'tag': "Broad Occupation Group", 'nav': ApiConstants.cateBroadInfo},
 ];
 
 
@@ -68,26 +73,26 @@ List<Category> categoriesMinor = categoriesMinorData
     .toList();
 
 var categoriesMinorData = [
-  {"name": "Management, business, & financial occupations", 'tag': "Minor Occupation Group", 'nav': "images/marketing.png"},
-  {"name": "Office & Administrative Support occupations", 'tag': "Minor Occupation Group", 'nav': "images/ux_design.png"},
+  {"name": "Management, business, & financial occupations", 'tag': "Minor Occupation Group", 'nav': ApiConstants.cateMinorInfo},
+  {"name": "Office & Administrative Support occupations", 'tag': "Minor Occupation Group", 'nav': ApiConstants.cateMinorInfo},
   {
     "name": "Education, legal, community service, arts, & media occupations",
     'tag': "Minor Occupation Group",
-    'nav': "images/photography.png"
+    'nav': ApiConstants.cateMinorInfo
   },
-  {"name": "Sales & related occupations", 'tag': "Minor Occupation Group", 'nav': "images/business.png"},
-  {"name": "Transportation & material moving occupations", 'tag': "Minor Occupation Group", 'nav': "images/business.png"},
-  {"name": "Food preparation & serving related occupations", 'tag': "Minor Occupation Group", 'nav': "images/business.png"},
+  {"name": "Sales & related occupations", 'tag': "Minor Occupation Group", 'nav': ApiConstants.cateMinorInfo},
+  {"name": "Transportation & material moving occupations", 'tag': "Minor Occupation Group", 'nav': ApiConstants.cateMinorInfo},
+  {"name": "Food preparation & serving related occupations", 'tag': "Minor Occupation Group", 'nav': ApiConstants.cateMinorInfo},
   {"name": "Production occupations", 'tag': "Minor Occupation Group", 'nav': "images/business.png"},
-  {"name": "Healthcare practitioners & technical occupations", 'tag': "Minor Occupation Group", 'nav': "images/business.png"},
-  {"name": "Computer, engineering, & science occupations", 'tag': "Minor Occupation Group", 'nav': "images/business.png"},
-  {"name": "Construction & Extraction occupations", 'tag': "Minor Occupation Group", 'nav': "images/business.png"},
-  {"name": "Building & Grounds Cleaning & Maintenance occupations", 'tag': "Minor Occupation Group", 'nav': "images/business.png"},
-  {"name": "Personal Care & Service occupations", 'tag': "Minor Occupation Group", 'nav': "images/business.png"},
-  {"name": "Installation, maintenance, & report occupations", 'tag': "Minor Occupation Group", 'nav': "images/business.png"},
-  {"name": "Healthcare support occupations", 'tag': "Minor Occupation Group", 'nav': "images/business.png"},
-  {"name": "Protective service occupations", 'tag': "Minor Occupation Group", 'nav': "images/business.png"},
-  {"name": "Farming, Fishing, & Forestry occupations", 'tag': "Minor Occupation Group", 'nav': "images/business.png"},
+  {"name": "Healthcare practitioners & technical occupations", 'tag': "Minor Occupation Group", 'nav': ApiConstants.cateMinorInfo},
+  {"name": "Computer, engineering, & science occupations", 'tag': "Minor Occupation Group", 'nav': ApiConstants.cateMinorInfo},
+  {"name": "Construction & Extraction occupations", 'tag': "Minor Occupation Group", 'nav': ApiConstants.cateMinorInfo},
+  {"name": "Building & Grounds Cleaning & Maintenance occupations", 'tag': "Minor Occupation Group", 'nav': ApiConstants.cateMinorInfo},
+  {"name": "Personal Care & Service occupations", 'tag': "Minor Occupation Group", 'nav': ApiConstants.cateMinorInfo},
+  {"name": "Installation, maintenance, & report occupations", 'tag': "Minor Occupation Group", 'nav': ApiConstants.cateMinorInfo},
+  {"name": "Healthcare support occupations", 'tag': "Minor Occupation Group", 'nav': ApiConstants.cateMinorInfo},
+  {"name": "Protective service occupations", 'tag': "Minor Occupation Group", 'nav': ApiConstants.cateMinorInfo},
+  {"name": "Farming, Fishing, & Forestry occupations", 'tag': "Minor Occupation Group", 'nav': ApiConstants.cateMinorInfo},
 ];
 
 // EACH DETAIL OF DETAILED GROUP CATEGORIES
@@ -99,7 +104,7 @@ var categoriesDetailData = [
   {"name": "Cashiers", 'tag': "Detailed Occupation Group", 'nav': "images/marketing.png"},
   {"name": "Retail salespersons", 'tag': "Detailed Occupation Group", 'nav': "images/ux_design.png"},
   {
-    "name": "Drvier/sales works & truck drivers",
+    "name": "Driver/sales works & truck drivers",
     'tag': "Detailed Occupation Group",
     'nav': "images/photography.png"
   },

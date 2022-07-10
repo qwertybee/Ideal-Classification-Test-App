@@ -1,19 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:project_2/exploration_screens/explore_select.dart';
 
 class CategoryCard extends StatelessWidget {
   final String name;
   final String tag;
+  final String nav;
+  // final String category;
   const CategoryCard({
     Key? key,
     required this.name,
     required this.tag,
+    required this.nav,
+    // required this.category,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return GestureDetector(
-      onTap: null,
+      onTap: () {
+        Navigator.push(context,
+          MaterialPageRoute(builder: (context) => ExploreSelect(title: name, category: tag, nav: nav,)));
+      },
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
         margin: EdgeInsets.only(bottom: 16),

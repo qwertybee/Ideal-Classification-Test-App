@@ -17,10 +17,10 @@ class _ExploreState extends State<Explore> {
   @override
   Widget build(BuildContext context) {
     var catNav = [
-      ExploreMajor(),
-      ExploreBroad(),
-      ExploreMinor(),
-      ExploreDetail(),
+      const ExploreMajor(),
+      const ExploreBroad(),
+      const ExploreMinor(),
+      const ExploreDetail(),
     ];
     return Scaffold(
       body: Padding(

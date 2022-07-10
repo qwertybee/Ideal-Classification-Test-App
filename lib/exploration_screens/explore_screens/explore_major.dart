@@ -44,9 +44,6 @@ class _ExploreMajorState extends State<ExploreMajor> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    // Text("Major Group",
-                                    //   style: Theme.of(context).textTheme.displaySmall,
-                                    // ),
                                     Text("Major Group",
                                       style: Theme.of(context).textTheme.displaySmall?.copyWith(
                                           fontWeight: FontWeight.bold
@@ -81,8 +78,8 @@ class _ExploreMajorState extends State<ExploreMajor> {
                   padding: EdgeInsets.only(top: size.height*.4 - 50),
                   child: Column(
                     children: [
-                      for (var cat in categoriesMajor)
-                        CategoryCard(name: cat.name, tag: cat.tag)
+                      for (int i=0; i<categoriesMajor.length; i++)
+                        CategoryCard(name: categoriesMajor[i].name, tag: categoriesMajor[i].tag, nav: categoriesMajor[i].nav,)
                     ],
                   ),
                 )

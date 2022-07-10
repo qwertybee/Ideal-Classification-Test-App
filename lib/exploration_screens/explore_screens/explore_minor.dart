@@ -78,8 +78,8 @@ class _ExploreMinorState extends State<ExploreMinor> {
                   padding: EdgeInsets.only(top: size.height*.4 - 50),
                   child: Column(
                     children: [
-                      for (var cat in categoriesMinor)
-                        CategoryCard(name: cat.name, tag: cat.tag)
+                      for (int i=0; i<categoriesMinor.length; i++)
+                        CategoryCard(name: categoriesMinor[i].name, tag: categoriesMinor[i].tag, nav: categoriesMinor[i].nav,)
                     ],
                   ),
                 )

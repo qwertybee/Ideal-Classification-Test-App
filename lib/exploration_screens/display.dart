@@ -22,7 +22,7 @@ class _HomeState extends State<Home> {
   }
 
   void _getData() async {
-    wageCat = (await ApiService().getCategoriesWage(ApiConstants.categoriesMajorWage));
+    wageCat = (await ApiService().getCategoriesWage(ApiConstants.categoriesMajorWage[0]));
     Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {}));
   }
 

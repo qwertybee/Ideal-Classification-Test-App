@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:project_2/exploration_screens/category_card.dart';
 import 'package:project_2/exploration_screens/explore_groups/explore_main_categories.dart';
 
+import '../../api/constants.dart';
+
 class ExploreBroad extends StatefulWidget {
   const ExploreBroad({Key? key}) : super(key: key);
 
@@ -78,8 +80,8 @@ class _ExploreBroadState extends State<ExploreBroad> {
                   padding: EdgeInsets.only(top: size.height*.4 - 50),
                   child: Column(
                     children: [
-                      for (var cat in categoriesBroad)
-                        CategoryCard(name: cat.name, tag: cat.tag)
+                      for (int i=0; i<categoriesBroad.length; i++)
+                        CategoryCard(name: categoriesBroad[i].name, tag: categoriesBroad[i].tag, nav: categoriesBroad[i].nav,)
                     ],
                   ),
                 )

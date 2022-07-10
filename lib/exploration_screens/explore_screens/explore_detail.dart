@@ -79,8 +79,8 @@ class _ExploreDetailState extends State<ExploreDetail> {
                   padding: EdgeInsets.only(top: size.height*.4 - 50),
                   child: Column(
                     children: [
-                      for (var cat in categoriesDetail)
-                        CategoryCard(name: cat.name, tag: cat.tag)
+                      for (int i=0; i<categoriesDetail.length; i++)
+                        CategoryCard(name: categoriesDetail[i].name, tag: categoriesDetail[i].tag, nav: categoriesDetail[i].nav,)
                     ],
                   ),
                 )

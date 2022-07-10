@@ -1,9 +1,18 @@
 class ApiConstants {
-  static String categoriesMajorWage = "https://datausa.io/api/data?measure=Average%20Wage,Average%20Wage%20Appx MOE,Record Count&drilldowns=Major Occupation Group&Workforce Status=true&Record Count>=5";
-  static String categoriesBroadWage = "https://datausa.io/api/data?measure=Average%20Wage,Average%20Wage%20Appx MOE,Record Count&drilldowns=Broad Occupation&Workforce Status=true&Record Count>=5";
-  static String categoriesMinorWage = "https://datausa.io/api/data?measure=Average%20Wage,Average%20Wage%20Appx MOE,Record Count&drilldowns=Minor Occupation Group&Workforce Status=true&Record Count>=5";
-  static String categoriesDetailWage = "https://datausa.io/api/data?measure=Average%20Wage,Average%20Wage%20Appx MOE,Record Count&drilldowns=Detailed Occupation&Workforce Status=true&Record Count>=5";
+  static List<String> categoriesMajorWage = ["https://datausa.io/api/data?measure=Average%20Wage,Average%20Wage%20Appx MOE,Record Count&drilldowns=Major Occupation Group&Workforce Status=true&Record Count>=5"];
+  static List<String> categoriesBroadWage = ["https://datausa.io/api/data?measure=Average%20Wage,Average%20Wage%20Appx MOE,Record Count&drilldowns=Broad Occupation&Workforce Status=true&Record Count>=5"];
+  static List<String> categoriesMinorWage = ["https://datausa.io/api/data?measure=Average%20Wage,Average%20Wage%20Appx MOE,Record Count&drilldowns=Minor Occupation Group&Workforce Status=true&Record Count>=5"];
+  static List<String> categoriesDetailWage = ["https://datausa.io/api/data?measure=Average%20Wage,Average%20Wage%20Appx MOE,Record Count&drilldowns=Detailed Occupation&Workforce Status=true&Record Count>=5"];
 
+  static List<List<String>> cateMajorInfo = [
+    // categoriesMajorWage,
+    categoriesMajorManagement,
+    categoriesMajorSales,
+    categoriesMajorService,
+    categoriesMajorProduction,
+    categoriesMajorNatural,
+    categoriesMajorMilitary,
+  ];
   // Major group's subcategories
   static List<String> categoriesMajorManagement = [
     // [0] education [1] skills
@@ -31,6 +40,19 @@ class ApiConstants {
     "null"
   ];
 
+  static List<List<String>> cateBroadInfo = [
+    categoriesBroadManagement,
+    categoriesBroadEdu,
+    categoriesBroadBusiness,
+    categoriesBroadTrans,
+    categoriesBroadMaterial,
+    categoriesBroadComp,
+    categoriesBroadArts,
+    categoriesBroadArch,
+    categoriesBroadComm,
+    categoriesBroadLegal,
+    categoriesBroadLife,
+  ];
   // Broad group's subcategories
   static List<String> categoriesBroadManagement = [
     // [0] education [1] skills
@@ -76,6 +98,25 @@ class ApiConstants {
   static List<String> categoriesBroadLife = [
     "https://datausa.io/api/data?PUMS Occupation=190000&drilldowns=CIP2&measures=Total Population,Total Population MOE Appx,yocpop RCA,Record%20Count&Record%20Count>=5&Workforce Status=true&Degree=21",
     "https://datausa.io/api/data?measure=LV%20Value,RCA&PUMS%20Occupation=190000&drilldowns=Skill%20Element&parents=true"
+  ];
+
+  static List<List<String>> cateMinorInfo = [
+    categoriesMinorManagement,
+    categoriesMinorOffice,
+    categoriesMinorEdu,
+    categoriesMinorSales,
+    categoriesMinorTrans,
+    categoriesMinorFood,
+    categoriesMinorProd,
+    categoriesMinorHealthPrac,
+    categoriesMinorComp,
+    categoriesMinorConstruc,
+    categoriesMinorBuild,
+    categoriesMinorPerson,
+    categoriesMinorInstall,
+    categoriesMinorHealthSupp,
+    categoriesMinorProtect,
+    categoriesMinorFarm,
   ];
 
   // Minor's group subcategories
@@ -144,6 +185,8 @@ class ApiConstants {
     "https://datausa.io/api/data?measure=LV%20Value,RCA&PUMS%20Occupation=450000&drilldowns=Skill%20Element&parents=true"
   ];
 
+
+  static List<List<String>> cateDetailInfo = [];
 
   // Detailed group's subcategories
   static List<String> cateDetailCashier = [];
