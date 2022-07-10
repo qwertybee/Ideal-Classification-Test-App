@@ -1,6 +1,8 @@
  import 'package:firebase_auth/firebase_auth.dart';
  import 'package:firebase_core/firebase_core.dart';
  import 'package:flutter/material.dart';
+import 'package:project_2/login_screens/register.dart';
+import 'package:project_2/profile_screens/profilepage.dart';
 
  class LoginScreen extends StatefulWidget {
    const LoginScreen({Key? key}) : super(key: key);
@@ -24,6 +26,17 @@
      child: Column(
        mainAxisAlignment: MainAxisAlignment.center,
        children: [
+         SizedBox(height: 30),
+         Text("Profile",
+           style: TextStyle(
+             fontSize: 28, color: Color(0xFF0D1333), fontWeight: FontWeight.bold,
+           ),
+         ),
+         Text("Please sign in to continue",
+           style: TextStyle(
+             fontSize: 24, color: Color(0xFF61688B),
+           ),
+         ),
          SizedBox(height: 20),
          TextField(
            controller: emailController,
@@ -46,16 +59,55 @@
            ),
          ),
          SizedBox(height: 20),
-         ElevatedButton.icon(icon: Icon(Icons.lock_open_outlined), label: Text('Login', style: TextStyle(fontSize: 24)),
-         onPressed: () async {
-           try {
-             final user = await FirebaseAuth.instance.signInWithEmailAndPassword(
-                 email: emailController.text.trim(), password: passwordController.text.trim());
-             //Navigator.push(context, MaterialPageRoute(builder: (context) => Display(user: user)));
-           } catch (e) {
-             print(e);
-           }
-         }),
+         SizedBox(
+           width: 300,
+           height: 40,
+           child: TextButton(
+             style: ButtonStyle(
+                 foregroundColor: MaterialStateProperty.all(Colors.white),
+                 backgroundColor: MaterialStateProperty.all(Colors.purple),
+                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                     RoundedRectangleBorder(
+                         borderRadius: BorderRadius.circular(12.0),
+                         side: const BorderSide(color: Colors.purple)
+                     )
+                 )
+             ),
+             onPressed: () async {
+               try {
+                 final user = await FirebaseAuth.instance.signInWithEmailAndPassword(
+                     email: emailController.text.trim(), password: passwordController.text.trim());
+                 //Navigator.push(context, MaterialPageRoute(builder: (context) => Display(user: user)));
+               } catch (e) {
+                 print(e);
+               }
+             },
+             child: const Text("Log in"),
+           ),
+         ),
+
+         SizedBox(height: 20),
+         SizedBox(
+           width: 300,
+           height: 40,
+           child: TextButton(
+             style: ButtonStyle(
+                 foregroundColor: MaterialStateProperty.all(Colors.white),
+
+                 backgroundColor: MaterialStateProperty.all(Color(0xFFFF6F61)),
+                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                     RoundedRectangleBorder(
+                         borderRadius: BorderRadius.circular(12.0),
+                         side: const BorderSide(color: Color(0xFFFD6E61))
+                     )
+                 )
+             ),
+             onPressed: () async {
+                 Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterScreen()));
+               },
+             child: const Text("Register"),
+           ),
+         ),
        ],
      ),
    );
