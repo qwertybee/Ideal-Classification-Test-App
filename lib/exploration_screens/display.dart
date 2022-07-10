@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:project_2/api/wage_major.dart';
+import 'package:project_2/api/constants.dart';
+import 'package:project_2/api/wage_cat.dart';
 import 'package:project_2/api/api_service.dart';
 
 import '../api/api_service.dart';
@@ -12,7 +13,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  late WageMajor? wageMajor;
+  late WageCat? wageCat;
 
   @override
   void initState() {
@@ -21,7 +22,7 @@ class _HomeState extends State<Home> {
   }
 
   void _getData() async {
-    wageMajor = (await ApiService().getInfo());
+    wageCat = (await ApiService().getCategoriesWage(ApiConstants.categoriesMajorWage));
     Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {}));
   }
 
@@ -31,12 +32,12 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
         title: const Text('REST API Example'),
       ),
-      body: wageMajor == null
+      body: wageCat == null
           ? const Center(
         child: CircularProgressIndicator(),
       )
           : ListView.builder(
-        itemCount: wageMajor!.data.length,
+        itemCount: wageCat!.data.length,
         itemBuilder: (context, index) {
           return Card(
             child: Column(
@@ -44,8 +45,8 @@ class _HomeState extends State<Home> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Text(wageMajor!.data[0].averageWage.toString()),
-                    Text(wageMajor!.data[0].detailedOccupation),
+                    Text(wageCat!.data[0].averageWage.toString()),
+                    Text(wageCat!.data[0].detailedOccupation),
                   ],
                 ),
               ],

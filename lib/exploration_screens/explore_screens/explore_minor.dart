@@ -52,7 +52,7 @@ class _ExploreMinorState extends State<ExploreMinor> {
                                     Row(children: [
                                       Expanded(child: Column(
                                         children: [
-                                          Text("Major Group categories contain 17 major categories that comprises of the jobs of the world",
+                                          Text("Minor Group categories contain ${categoriesMinor.length} that comprises of the jobs of the world",
                                             maxLines: 5,
                                             style: TextStyle(
                                               fontSize: 20,

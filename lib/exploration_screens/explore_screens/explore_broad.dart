@@ -52,7 +52,7 @@ class _ExploreBroadState extends State<ExploreBroad> {
                                     Row(children: [
                                       Expanded(child: Column(
                                         children: [
-                                          Text("Major Group categories contain 17 major categories that comprises of the jobs of the world",
+                                          Text("Broad Group categories contain ${categoriesBroad.length} that comprises of the jobs of the world",
                                             maxLines: 5,
                                             style: TextStyle(
                                               fontSize: 20,

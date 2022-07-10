@@ -1,29 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'wage_major.dart';
+import 'wage_cat.dart';
 import 'constants.dart';
 
 class ApiService {
-  Future<WageMajor?> getInfo() async {
+  Future<WageCat?> getCategoriesWage(String link) async {
     try {
-      var url = Uri.parse("");
+      var url = Uri.parse(link);
       var response = await http.get(url);
       if (response.statusCode == 200) {
-        WageMajor _model = wageMajorFromJson(response.body);
-        return _model;
-      }
-    } catch (e) {
-      debugPrint(e.toString());
-    }
-    return null;
-  }
-
-  Future<WageMajor?> getCategoriesWage() async {
-    try {
-      var url = Uri.parse(ApiConstants.categoriesMajorWage);
-      var response = await http.get(url);
-      if (response.statusCode == 200) {
-        WageMajor _model = wageMajorFromJson(response.body);
+        WageCat _model = wageCatFromJson(response.body);
         return _model;
       }
     } catch (e) {

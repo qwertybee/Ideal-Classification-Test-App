@@ -55,7 +55,7 @@ class _ExploreMajorState extends State<ExploreMajor> {
                                     Row(children: [
                                       Expanded(child: Column(
                                         children: [
-                                          Text("Major Group categories contain 17 major categories that comprises of the jobs of the world",
+                                          Text("Major Group categories contain ${categoriesMajor.length} that comprises of the jobs of the world",
                                             maxLines: 5,
                                             style: TextStyle(
                                               fontSize: 20,

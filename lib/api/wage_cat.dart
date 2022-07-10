@@ -1,11 +1,11 @@
 import 'dart:convert';
 
-WageMajor wageMajorFromJson(String str) => WageMajor.fromJson(json.decode(str));
+WageCat wageCatFromJson(String str) => WageCat.fromJson(json.decode(str));
 
-String wageMajorToJson(WageMajor data) => json.encode(data.toJson());
+String wageCatToJson(WageCat data) => json.encode(data.toJson());
 
-class WageMajor {
-  WageMajor({
+class WageCat {
+  WageCat({
     required this.data,
     required this.source,
   });
@@ -13,7 +13,7 @@ class WageMajor {
   List<Datum> data;
   List<Source> source;
 
-  factory WageMajor.fromJson(Map<String, dynamic> json) => WageMajor(
+  factory WageCat.fromJson(Map<String, dynamic> json) => WageCat(
     data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
     source: List<Source>.from(json["source"].map((x) => Source.fromJson(x))),
   );

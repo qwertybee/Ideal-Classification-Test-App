@@ -31,26 +31,30 @@ class CategoryCard extends StatelessWidget {
         ),
         child: Row(
           children: [
-            RichText(
-                text: TextSpan(
-                    children: [
-                      TextSpan(
-                        text: "$name\n",
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Color(0xFF393939),
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      TextSpan(
-                          text: tag,
+            // Flexible(
+              RichText(
+                // maxLines: 2,
+                //   overflow: TextOverflow.ellipsis,
+                  text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: (name.length > 28 ? name.substring(0,27)+"..." : name),
                           style: TextStyle(
-                            color: Color(0xFF8F8F8F),
-                          )
-                      )
-                    ]
-                )
-            ),
+                            fontSize: 16,
+                            color: Color(0xFF393939),
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        TextSpan(
+                            text: "\n$tag",
+                            style: TextStyle(
+                              color: Color(0xFF8F8F8F),
+                            )
+                        )
+                      ]
+                  )
+              ),
+            // ),
             Spacer(),
             IconButton(
                 onPressed: null,
