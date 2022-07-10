@@ -1,6 +1,7 @@
  import 'package:firebase_auth/firebase_auth.dart';
  import 'package:firebase_core/firebase_core.dart';
  import 'package:flutter/material.dart';
+import 'package:project_2/profile_screens/profilepage.dart';
 
  class RegisterScreen extends StatefulWidget {
    @override
@@ -84,16 +85,55 @@
                return null;
              },
            ),
-           ElevatedButton(
-               child: const Text('Create account'),
-               onPressed: () async {
-                 try {
-                   final newUser = await _auth.createUserWithEmailAndPassword(
-                       email: email, password: password);
-                 } catch (e) {
-                   print(e);
-                 }
-               }),
+           SizedBox(height: 20),
+           SizedBox(
+             width: 300,
+             height: 40,
+             child: TextButton(
+               style: ButtonStyle(
+                   foregroundColor: MaterialStateProperty.all(Colors.white),
+                   backgroundColor: MaterialStateProperty.all(Colors.purple),
+                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                       RoundedRectangleBorder(
+                           borderRadius: BorderRadius.circular(12.0),
+                           side: const BorderSide(color: Colors.purple)
+                       )
+                   )
+               ),
+               child: const Text("Create account"),
+                 onPressed: () async {
+                   try {
+                     final newUser = await _auth.createUserWithEmailAndPassword(
+                         email: email, password: password);
+                   } catch (e) {
+                     print(e);
+                   }
+                  },
+             ),
+           ),
+
+           SizedBox(height: 20),
+           SizedBox(
+             width: 300,
+             height: 40,
+             child: TextButton(
+               style: ButtonStyle(
+                   foregroundColor: MaterialStateProperty.all(Colors.white),
+
+                   backgroundColor: MaterialStateProperty.all(Color(0xFFFF6F61)),
+                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                       RoundedRectangleBorder(
+                           borderRadius: BorderRadius.circular(12.0),
+                           side: const BorderSide(color: Color(0xFFFD6E61))
+                       )
+                   )
+               ),
+               onPressed: () {
+                 Navigator.push(context, MaterialPageRoute(builder: (context) => ProfilePage()));
+               },
+               child: const Text("Cancel"),
+             ),
+           ),
          ],
        ),
      );
