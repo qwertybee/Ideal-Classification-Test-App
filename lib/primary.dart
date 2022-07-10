@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_2/exploration_screens/explore.dart';
-import 'package:project_2/profile_screens/profile.dart';
+import 'package:project_2/profile_screens/profilepage.dart';
 import 'package:project_2/question_screens/test_intro.dart';
 
 class Primary extends StatefulWidget {
@@ -12,7 +12,7 @@ class Primary extends StatefulWidget {
 
 class _PrimaryState extends State<Primary> {
   int currentIndex = 0;
-  final screens = [const Explore(), const TestIntro(), const Profile()];
+  final screens = [const Explore(), const TestIntro(), ProfilePage()];
 
   @override
   Widget build(BuildContext context) {
