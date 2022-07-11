@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_2/exploration_screens/explore.dart';
-import 'package:project_2/profile_screens/profile.dart';
+import 'package:project_2/profile_screens/profilecontroller.dart';
 import 'package:project_2/question_screens/test_intro.dart';
 
 class Primary extends StatefulWidget {
