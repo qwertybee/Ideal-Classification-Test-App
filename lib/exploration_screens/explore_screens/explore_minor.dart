@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:project_2/exploration_screens/category_card.dart';
 import 'package:project_2/exploration_screens/explore_groups/explore_main_categories.dart';
 
+import '../../api/constants.dart';
+
 class ExploreMinor extends StatefulWidget {
   const ExploreMinor({Key? key}) : super(key: key);
 
@@ -79,7 +81,7 @@ class _ExploreMinorState extends State<ExploreMinor> {
                   child: Column(
                     children: [
                       for (int i=0; i<categoriesMinor.length; i++)
-                        CategoryCard(name: categoriesMinor[i].name, tag: categoriesMinor[i].tag, nav: categoriesMinor[i].nav,)
+                        CategoryCard(name: categoriesMinor[i].name, tag: "Minor Occupation Group", nav: ApiConstants.cateMinorInfo[i],)
                     ],
                   ),
                 )

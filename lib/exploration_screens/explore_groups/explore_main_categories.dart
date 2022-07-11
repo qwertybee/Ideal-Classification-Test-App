@@ -103,11 +103,7 @@ List<Category> categoriesDetail = categoriesDetailData
 var categoriesDetailData = [
   {"name": "Cashiers", 'tag': "Detailed Occupation Group", 'nav': "images/marketing.png"},
   {"name": "Retail salespersons", 'tag': "Detailed Occupation Group", 'nav': "images/ux_design.png"},
-  {
-    "name": "Driver/sales works & truck drivers",
-    'tag': "Detailed Occupation Group",
-    'nav': "images/photography.png"
-  },
+  {"name": "Driver/sales works & truck drivers", 'tag': "Detailed Occupation Group", 'nav': "images/photography.png"},
   {"name": "Elementary & middle school teachers", 'tag': "Detailed Occupation Group", 'nav': "images/business.png"},
   {"name": "Registered nurses", 'tag': "Detailed Occupation Group", 'nav': "images/business.png"},
   {"name": "Firstline supervisors of retail sales workers", 'tag': "Detailed Occupation Group", 'nav': "images/business.png"},

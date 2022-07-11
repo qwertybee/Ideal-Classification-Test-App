@@ -4,7 +4,7 @@ import 'package:project_2/exploration_screens/explore_select.dart';
 class CategoryCard extends StatelessWidget {
   final String name;
   final String tag;
-  final String nav;
+  final List<String> nav;
   // final String category;
   const CategoryCard({
     Key? key,

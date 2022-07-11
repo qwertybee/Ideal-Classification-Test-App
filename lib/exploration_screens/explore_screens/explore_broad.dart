@@ -81,7 +81,7 @@ class _ExploreBroadState extends State<ExploreBroad> {
                   child: Column(
                     children: [
                       for (int i=0; i<categoriesBroad.length; i++)
-                        CategoryCard(name: categoriesBroad[i].name, tag: categoriesBroad[i].tag, nav: categoriesBroad[i].nav,)
+                        CategoryCard(name: categoriesBroad[i].name, tag: "Broad Occupation Group", nav: ApiConstants.cateBroadInfo[i],)
                     ],
                   ),
                 )

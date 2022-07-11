@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_2/api/constants.dart';
 import 'package:project_2/exploration_screens/explore_groups/explore_main_categories.dart';
 
 import '../category_card.dart';
@@ -80,7 +81,7 @@ class _ExploreDetailState extends State<ExploreDetail> {
                   child: Column(
                     children: [
                       for (int i=0; i<categoriesDetail.length; i++)
-                        CategoryCard(name: categoriesDetail[i].name, tag: categoriesDetail[i].tag, nav: categoriesDetail[i].nav,)
+                        CategoryCard(name: categoriesDetail[i].name, tag: "Detailed Occupation Group", nav: ApiConstants.cateDetailInfo[i],)
                     ],
                   ),
                 )
