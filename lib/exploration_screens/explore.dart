@@ -33,12 +33,12 @@ class _ExploreState extends State<Explore> {
               children: [],
             ),
             SizedBox(height: 30),
-            Text("Hey User, ",
+            const Text("Hey User, ",
               style: TextStyle(
                 fontSize: 28, color: Color(0xFF0D1333), fontWeight: FontWeight.bold,
               ),
             ),
-            Text("Discover more jobs",
+            const Text("Discover more jobs",
               style: TextStyle(
                 fontSize: 24, color: Color(0xFF61688B),
               ),

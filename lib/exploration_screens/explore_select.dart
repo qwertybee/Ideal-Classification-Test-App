@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project_2/api/api_service.dart';
 import 'package:project_2/api/constants.dart';
 
-import '../api/wage_cat.dart';
+import '../api/category_api/wage_cat.dart';
 
 class ExploreSelect extends StatefulWidget {
   final String title;

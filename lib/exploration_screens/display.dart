@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_2/api/constants.dart';
-import 'package:project_2/api/wage_cat.dart';
+import 'package:project_2/api/category_api/wage_cat.dart';
 import 'package:project_2/api/api_service.dart';
 
 import '../api/api_service.dart';

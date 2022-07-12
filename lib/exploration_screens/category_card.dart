@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:project_2/exploration_screens/explore_select.dart';
+
+import 'explore_display/display_broad.dart';
+import 'explore_display/display_detail.dart';
+import 'explore_display/display_major.dart';
+import 'explore_display/display_minor.dart';
 
 class CategoryCard extends StatelessWidget {
   final String name;
@@ -14,13 +18,30 @@ class CategoryCard extends StatelessWidget {
     // required this.category,
   }) : super(key: key);
 
+  Widget getDisplayCate(String name, String tag, List<String> nav) {
+    if (tag == "Major Occupation Group") { // tag == category
+      return DisplayMajor(title: name, category: tag, nav: nav,);
+    }
+    else if (tag == "Broad Occupation Group") {
+      return DisplayBroad(title: name, category: tag, nav: nav,);
+    }
+    else if (tag == "Minor Occupation Group") {
+      return DisplayMinor(title: name, category: tag, nav: nav,);
+    }
+    else {
+      return DisplayDetail(title: name, category: tag, nav: nav,);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: () {
+        // maybe make condition IF BROAD, DETAIL, MINOR, MAJOR then display_diff screen since
+        // seems like each category has different ways to calling APIs
         Navigator.push(context,
-          MaterialPageRoute(builder: (context) => ExploreSelect(title: name, category: tag, nav: nav,)));
+          MaterialPageRoute(builder: (context) => getDisplayCate(name, tag, nav)));
       },
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
