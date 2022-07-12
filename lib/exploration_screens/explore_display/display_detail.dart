@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:project_2/api/constants.dart';
 
 import '../../api/api_service.dart';
 import '../../api/category_api/cateDetail/detail_edu.dart';
 import '../../api/category_api/cateDetail/detail_skill.dart';
+import '../../api/category_api/wage_cat.dart';
 
 class DisplayDetail extends StatefulWidget {
   final String title;
@@ -18,6 +20,7 @@ class _DisplayDetailState extends State<DisplayDetail> {
 
   late DetailEdu? detailEdu;
   late DetailSkill? detailSkill;
+  late WageCat? wageCat;
 
   @override
   void initState() {
@@ -28,13 +31,14 @@ class _DisplayDetailState extends State<DisplayDetail> {
   void _getData() async {
     detailEdu = (await ApiService().getDetailEdu(widget.nav[0]));
     detailSkill = (await ApiService().getDetailSkill(widget.nav[1]));
+    wageCat = (await ApiService().getCategoriesWage(ApiConstants.categoriesDetailWage[0]));
     Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {}));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: (detailEdu == null || detailSkill == null)
+      body: (detailEdu == null || detailSkill == null || wageCat == null)
           ? const Center(
         child: CircularProgressIndicator(),
       )
@@ -44,6 +48,7 @@ class _DisplayDetailState extends State<DisplayDetail> {
             SizedBox(height: 100,),
             Text("Employment title ${widget.title}\n"),
             Text("Information on the businesses and industries that employs ${widget.category}"),
+            Text("WAGES ${wageCat!.data[0].averageWage.toString()}"),
             Text("Show education [0] ${detailEdu!.data[0].yocpopRca.toString()}"),
             Text("Show skills [1] ${detailSkill!.data[0].idSkillElement.toString()}"),
           ],

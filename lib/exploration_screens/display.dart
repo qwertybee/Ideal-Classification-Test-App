@@ -46,7 +46,7 @@ class _HomeState extends State<Home> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Text(wageCat!.data[0].averageWage.toString()),
-                    Text(wageCat!.data[0].detailedOccupation),
+                    Text(wageCat!.data[0].idMajorOccupationGroup),
                   ],
                 ),
               ],

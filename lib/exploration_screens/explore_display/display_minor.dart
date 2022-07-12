@@ -3,6 +3,8 @@ import 'package:project_2/api/category_api/cateMinor/minor_edu.dart';
 
 import '../../api/api_service.dart';
 import '../../api/category_api/cateMinor/minor_skill.dart';
+import '../../api/category_api/wage_cat.dart';
+import '../../api/constants.dart';
 
 class DisplayMinor extends StatefulWidget {
   final String title;
@@ -18,6 +20,7 @@ class _DisplayMinorState extends State<DisplayMinor> {
 
   late MinorEdu? minorEdu;
   late MinorSkill? minorSkill;
+  late WageCat? wageCat;
 
   @override
   void initState() {
@@ -28,13 +31,14 @@ class _DisplayMinorState extends State<DisplayMinor> {
   void _getData() async {
     minorEdu = (await ApiService().getMinorEdu(widget.nav[0]));
     minorSkill = (await ApiService().getMinorSkill(widget.nav[1]));
+    wageCat = (await ApiService().getCategoriesWage(ApiConstants.categoriesMinorWage[0]));
     Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {}));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: (minorEdu == null || minorSkill == null)
+      body: (minorEdu == null || minorSkill == null || wageCat == null)
           ? const Center(
         child: CircularProgressIndicator(),
       )
@@ -44,8 +48,9 @@ class _DisplayMinorState extends State<DisplayMinor> {
             SizedBox(height: 100,),
             Text("Employment title ${widget.title}\n"),
             Text("Information on the businesses and industries that employs ${widget.category}"),
+            Text("WAGES ${wageCat!.data[0].averageWage.toString()}"),
             Text("Show education [0] ${minorEdu!.data[0].yocpopRca.toString()}"),
-            Text("Show skills [1] ${minorSkill!.data[0].idSkillElement.toString()}"),
+            Text("Show skills [1] ${minorSkill!.data[0].year.toString()}"),
           ],
         ),
       ),

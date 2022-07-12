@@ -1,3 +1,7 @@
+// To parse this JSON data, do
+//
+//     final wageCat = wageCatFromJson(jsonString);
+
 import 'dart:convert';
 
 WageCat wageCatFromJson(String str) => WageCat.fromJson(json.decode(str));
@@ -26,8 +30,8 @@ class WageCat {
 
 class Datum {
   Datum({
-    required this.idDetailedOccupation,
-    required this.detailedOccupation,
+    required this.idMajorOccupationGroup,
+    required this.majorOccupationGroup,
     required this.idYear,
     required this.year,
     required this.idWorkforceStatus,
@@ -35,11 +39,11 @@ class Datum {
     required this.averageWage,
     required this.averageWageAppxMoe,
     required this.recordCount,
-    required this.slugDetailedOccupation,
+    required this.slugMajorOccupationGroup,
   });
 
-  String idDetailedOccupation;
-  String detailedOccupation;
+  String idMajorOccupationGroup;
+  String majorOccupationGroup;
   int idYear;
   String year;
   bool idWorkforceStatus;
@@ -47,11 +51,11 @@ class Datum {
   double averageWage;
   double averageWageAppxMoe;
   int recordCount;
-  String slugDetailedOccupation;
+  String slugMajorOccupationGroup;
 
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
-    idDetailedOccupation: json["ID Detailed Occupation"],
-    detailedOccupation: json["Detailed Occupation"],
+    idMajorOccupationGroup: json["ID Major Occupation Group"],
+    majorOccupationGroup: json["Major Occupation Group"],
     idYear: json["ID Year"],
     year: json["Year"],
     idWorkforceStatus: json["ID Workforce Status"],
@@ -59,12 +63,12 @@ class Datum {
     averageWage: json["Average Wage"].toDouble(),
     averageWageAppxMoe: json["Average Wage Appx MOE"].toDouble(),
     recordCount: json["Record Count"],
-    slugDetailedOccupation: json["Slug Detailed Occupation"],
+    slugMajorOccupationGroup: json["Slug Major Occupation Group"],
   );
 
   Map<String, dynamic> toJson() => {
-    "ID Detailed Occupation": idDetailedOccupation,
-    "Detailed Occupation": detailedOccupation,
+    "ID Major Occupation Group": idMajorOccupationGroup,
+    "Major Occupation Group": majorOccupationGroup,
     "ID Year": idYear,
     "Year": year,
     "ID Workforce Status": idWorkforceStatus,
@@ -72,7 +76,7 @@ class Datum {
     "Average Wage": averageWage,
     "Average Wage Appx MOE": averageWageAppxMoe,
     "Record Count": recordCount,
-    "Slug Detailed Occupation": slugDetailedOccupation,
+    "Slug Major Occupation Group": slugMajorOccupationGroup,
   };
 }
 
@@ -147,134 +151,3 @@ class Annotations {
     "hidden_measures": hiddenMeasures,
   };
 }
-
-
-// To parse this JSON data, do
-//
-//     final userModel = userModelFromJson(jsonString);
-//
-// import 'dart:convert';
-//
-// List<UserModel> userModelFromJson(String str) => List<UserModel>.from(json.decode(str).map((x) => UserModel.fromJson(x)));
-//
-// String userModelToJson(List<UserModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
-//
-// class UserModel {
-//   UserModel({
-//     required this.id,
-//     required this.name,
-//     required this.username,
-//     required this.email,
-//     required this.address,
-//     required this.phone,
-//     required this.website,
-//     required this.company,
-//   });
-//
-//   int id;
-//   String name;
-//   String username;
-//   String email;
-//   Address address;
-//   String phone;
-//   String website;
-//   Company company;
-//
-//   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
-//     id: json["id"],
-//     name: json["name"],
-//     username: json["username"],
-//     email: json["email"],
-//     address: Address.fromJson(json["address"]),
-//     phone: json["phone"],
-//     website: json["website"],
-//     company: Company.fromJson(json["company"]),
-//   );
-//
-//   Map<String, dynamic> toJson() => {
-//     "id": id,
-//     "name": name,
-//     "username": username,
-//     "email": email,
-//     "address": address.toJson(),
-//     "phone": phone,
-//     "website": website,
-//     "company": company.toJson(),
-//   };
-// }
-//
-// class Address {
-//   Address({
-//     required this.street,
-//     required this.suite,
-//     required this.city,
-//     required this.zipcode,
-//     required this.geo,
-//   });
-//
-//   String street;
-//   String suite;
-//   String city;
-//   String zipcode;
-//   Geo geo;
-//
-//   factory Address.fromJson(Map<String, dynamic> json) => Address(
-//     street: json["street"],
-//     suite: json["suite"],
-//     city: json["city"],
-//     zipcode: json["zipcode"],
-//     geo: Geo.fromJson(json["geo"]),
-//   );
-//
-//   Map<String, dynamic> toJson() => {
-//     "street": street,
-//     "suite": suite,
-//     "city": city,
-//     "zipcode": zipcode,
-//     "geo": geo.toJson(),
-//   };
-// }
-//
-// class Geo {
-//   Geo({
-//     required this.lat,
-//     required this.lng,
-//   });
-//
-//   String lat;
-//   String lng;
-//
-//   factory Geo.fromJson(Map<String, dynamic> json) => Geo(
-//     lat: json["lat"],
-//     lng: json["lng"],
-//   );
-//
-//   Map<String, dynamic> toJson() => {
-//     "lat": lat,
-//     "lng": lng,
-//   };
-// }
-//
-// class Company {
-//   Company({
-//     required this.name,
-//     required this.catchPhrase,
-//     required this.bs,
-//   });
-//
-//   String name;
-//   String catchPhrase;
-//   String bs;
-//
-//   factory Company.fromJson(Map<String, dynamic> json) => Company(
-//     name: json["name"],
-//     catchPhrase: json["catchPhrase"],
-//     bs: json["bs"],
-//   );
-//
-//   Map<String, dynamic> toJson() => {
-//     "name": name,
-//     "catchPhrase": catchPhrase,
-//     "bs": bs,
-//   };
-// }
