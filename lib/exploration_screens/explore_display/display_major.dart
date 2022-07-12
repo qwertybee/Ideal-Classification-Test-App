@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:project_2/api/category_api/cateMajor/major_edu.dart';
+import 'package:project_2/api/category_api/cateMajor/major_skill.dart';
+
+import '../../api/api_service.dart';
 
 class DisplayMajor extends StatefulWidget {
   final String title;
@@ -11,20 +15,36 @@ class DisplayMajor extends StatefulWidget {
 }
 
 class _DisplayMajorState extends State<DisplayMajor> {
+  late MajEdu? majEdu;
+  late MajSkill? majSkill;
+
+  @override
+  void initState() {
+    super.initState();
+    _getData();
+  }
+
+  void _getData() async {
+    majEdu = (await ApiService().getMajorEdu(widget.nav[0]));
+    majSkill = (await ApiService().getMajorSkill(widget.nav[1]));
+    Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {}));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
+      body: (majEdu == null || majSkill == null)
+          ? const Center(
+        child: CircularProgressIndicator(),
+      )
+          : SingleChildScrollView(
         child: Column(
           children: [
             SizedBox(height: 100,),
             Text("Employment title ${widget.title}\n"),
-            Text(
-                "Information on the businesses and industries that employs ${widget
-                    .category}"),
-            Text("Show education [0] ${widget.nav[0]}"),
-            // Text("Show education [0] ${ApiService().getCategoriesWage(widget.nav[0])}"),
-            // Text("Show skills [1] ${ApiService().getCategoriesWage(widget.nav[1])}"),
+            Text("Information on the businesses and industries that employs ${widget.category}"),
+            Text("Show education [0] ${majEdu!.data[0].yocpopRca.toString()}"),
+            Text("Show skills [1] ${majSkill!.data[0].idSkillElement.toString()}"),
           ],
         ),
       ),
