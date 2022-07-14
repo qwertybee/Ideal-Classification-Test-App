@@ -6,6 +6,9 @@ import '../../api/category_api/cateDetail/detail_edu.dart';
 import '../../api/category_api/cateDetail/detail_skill.dart';
 import '../../api/category_api/wage_cat.dart';
 
+import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:syncfusion_flutter_charts/sparkcharts.dart';
+
 class DisplayDetail extends StatefulWidget {
   final String title;
   final String category;

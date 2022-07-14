@@ -6,6 +6,9 @@ import '../../api/category_api/cateMinor/minor_skill.dart';
 import '../../api/category_api/wage_cat.dart';
 import '../../api/constants.dart';
 
+import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:syncfusion_flutter_charts/sparkcharts.dart';
+
 class DisplayMinor extends StatefulWidget {
   final String title;
   final String category;

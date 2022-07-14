@@ -6,6 +6,9 @@ import '../../api/api_service.dart';
 import '../../api/category_api/cateBroad/broad_skill.dart';
 import '../../api/constants.dart';
 
+import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:syncfusion_flutter_charts/sparkcharts.dart';
+
 class DisplayBroad extends StatefulWidget {
   final String title;
   final String category;
