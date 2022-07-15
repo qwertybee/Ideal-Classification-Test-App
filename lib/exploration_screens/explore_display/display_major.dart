@@ -12,6 +12,7 @@ import '../../api/constants.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 import 'package:syncfusion_flutter_treemap/treemap.dart';
+import 'package:intl/intl.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
@@ -125,18 +126,15 @@ class _DisplayMajorState extends State<DisplayMajor> {
       }
     }
   }
-
-  // List<> getCircularData() {
-  //
-  // }
-
   @override
   Widget build(BuildContext context) {
     getAvgSalary();
     moreOrLess();
     getTopMajs();
     getMaxSkill();
-    late List<EduFrequency> eduFreq = getTreeMapData();
+    late List<EduFrequency> eduFreq = getEduTreeMapData();
+    List<YearlyWage>? yearlyWage = getYearlyBarChart();
+    late TooltipBehavior toolTipBehaviorWage = TooltipBehavior(enable: true);
     return Scaffold(
       body: (majEdu == null || majSkill == null || wageCat == null)
           // || avgSal == null || salDiff == null || topEduMajs == null ||
@@ -168,13 +166,30 @@ class _DisplayMajorState extends State<DisplayMajor> {
                 Text("This chart shows the various occupations closest to ${widget.title} as "
                     "measured by average annual salary in the US.\n"),
                 Text("SHOW YEARLY WAGE BAR CHART HEREEEEE\n"),
-                SfCartesianChart(),
+                SfCartesianChart(
+                  tooltipBehavior: toolTipBehaviorWage,
+                  // title: ChartTitle(text: "TEST HERE"),
+                  series: <ChartSeries>[
+                    BarSeries<YearlyWage, String>(
+                      name: "Average annual salary in ${wageCat!.data[0].year}",
+                      dataSource: yearlyWage!,
+                      xValueMapper: (YearlyWage val,_) => val.majGroup,
+                      yValueMapper: (YearlyWage val,_) => val.wage,
+                      dataLabelSettings: const DataLabelSettings(isVisible: true),
+                      enableTooltip: true
+                    )
+                  ],
+                  primaryXAxis: CategoryAxis(),
+                  primaryYAxis: NumericAxis(edgeLabelPlacement: EdgeLabelPlacement.shift,
+                  numberFormat: NumberFormat.simpleCurrency(decimalDigits: 0),
+                  title: AxisTitle(text: 'Average annual salary in ${wageCat!.data[0].year}')),
+                ),
                 Text("EDUCATION\n"),
                 Text("Data on higher education choices for ${widget.title} from The"
                     "Department of Education and Census Bureau. The most common major for"
                     "${widget.title} is ${eduFreq.last.majorName.toString()}.\n"),
                 // "but a relatively high number of ${widget.title} hold a major in ...\n"),
-                Text("TOP 5 MOST COMMON & SPECIALIZED MAJORS:"),
+                const Text("TOP 5 MOST COMMON & SPECIALIZED MAJORS:"),
                 Text("1) ${eduFreq.last.majorName.toString()}\n"
                     "2) ${eduFreq[eduFreq.length-2].majorName.toString()}\n"
                     "3) ${eduFreq[eduFreq.length-3].majorName.toString()}\n"
@@ -214,7 +229,6 @@ class _DisplayMajorState extends State<DisplayMajor> {
                   ),
                 ),
 
-
                 Text("SKILLS ${majSkill!.data[0].lvValue.toString()}\n"), // match title as well
                 Text("Data on the critical and distinctive skills necessary for ${widget.title}"
                     "from the Bureau of Labor Statistics. ${widget.title} need many skills"
@@ -229,24 +243,41 @@ class _DisplayMajorState extends State<DisplayMajor> {
     );
   }
 
-  List<EduFrequency> getTreeMapData() {
+  List<YearlyWage>? getYearlyBarChart() {
+    if (wageCat != null) {
+      List<YearlyWage> yearlyChart = [];
+      String latestYear = wageCat!.data[0].year.toString();
+      for (var eachWage in wageCat!.data) {
+        if (latestYear == eachWage.year) {
+          yearlyChart.add(YearlyWage(eachWage.majorOccupationGroup.substring(0,10), eachWage.averageWage.toInt()));
+        }
+        else {
+          break;
+        }
+      }
+      return yearlyChart;
+    }
+    return null;
+  }
+
+  List<EduFrequency> getEduTreeMapData() {
     List<EduFrequency> treeMap = [];
     topEduMajs?.forEach((key, value) {
       treeMap.add(EduFrequency(value, majEdu!.data[0].year, key));
     });
-    // debugPrint("TREEMAP HEREEEE\n");
     // debugPrint(treeMap[2].majorName.toString());
     return treeMap;
   }
 }
 
 class YearlyWage {
-
+  YearlyWage(this.majGroup, this.wage);
+  final String majGroup;
+  final int wage;
 }
 
 class EduFrequency {
   EduFrequency(this.majorName, this.year, this.frequency);
-
   final String majorName;
   final String year;
   final int frequency;
