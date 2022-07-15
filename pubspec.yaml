@@ -41,6 +41,8 @@ dependencies:
   flutter_svg: ^1.1.1+1
   google_sign_in: ^5.4.0
   syncfusion_flutter_charts: ^20.2.38
+  syncfusion_flutter_treemap: ^20.2.38-beta
+  flutter_svg_provider: ^1.0.3
   
 dev_dependencies:
   flutter_test:
