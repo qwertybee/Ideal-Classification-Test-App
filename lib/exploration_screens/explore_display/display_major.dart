@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:project_2/api/category_api/cateMajor/major_edu.dart';
 import 'package:project_2/api/category_api/cateMajor/major_skill.dart';
-import 'package:project_2/api/category_api/wage_cat.dart';
 
 import '../../api/api_service.dart';
 import '../../api/category_api/cateMajor/major_wage.dart';

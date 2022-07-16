@@ -4,7 +4,6 @@ import 'package:project_2/api/category_api/cateMinor/minor_wage.dart';
 
 import '../../api/api_service.dart';
 import '../../api/category_api/cateMinor/minor_skill.dart';
-import '../../api/category_api/wage_cat.dart';
 import '../../api/constants.dart';
 
 import 'package:syncfusion_flutter_charts/charts.dart';

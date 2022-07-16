@@ -5,7 +5,6 @@ import 'package:project_2/api/constants.dart';
 import '../../api/api_service.dart';
 import '../../api/category_api/cateDetail/detail_edu.dart';
 import '../../api/category_api/cateDetail/detail_skill.dart';
-import '../../api/category_api/wage_cat.dart';
 
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:syncfusion_flutter_charts/sparkcharts.dart';

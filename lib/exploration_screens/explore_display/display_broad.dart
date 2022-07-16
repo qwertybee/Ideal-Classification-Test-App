@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_2/api/category_api/cateBroad/broad_edu.dart';
 import 'package:project_2/api/category_api/cateBroad/broad_wage.dart';
-import 'package:project_2/api/category_api/wage_cat.dart';
 
 import '../../api/api_service.dart';
 import '../../api/category_api/cateBroad/broad_skill.dart';
