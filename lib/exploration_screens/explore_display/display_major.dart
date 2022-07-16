@@ -9,8 +9,8 @@ import 'package:project_2/api/category_api/wage_cat.dart';
 import '../../api/api_service.dart';
 import '../../api/constants.dart';
 
+import 'package:multi_charts/multi_charts.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 import 'package:syncfusion_flutter_treemap/treemap.dart';
 import 'package:intl/intl.dart';
 
@@ -135,6 +135,10 @@ class _DisplayMajorState extends State<DisplayMajor> {
     late List<EduFrequency> eduFreq = getEduTreeMapData();
     List<YearlyWage>? yearlyWage = getYearlyBarChart();
     late TooltipBehavior toolTipBehaviorWage = TooltipBehavior(enable: true);
+    List<SkillsGroupFreq>? skillsGroup = getSkillGroupPieChart();
+    late TooltipBehavior tooltipBehaviorSkillsGroup = TooltipBehavior(enable: true);
+    List<SkillsElemFreq>? skillsElem = getSkillsBarChart();
+    late TooltipBehavior toolTipBehaviorSkillsElem = TooltipBehavior(enable: true);
     return Scaffold(
       body: (majEdu == null || majSkill == null || wageCat == null)
           // || avgSal == null || salDiff == null || topEduMajs == null ||
@@ -235,12 +239,108 @@ class _DisplayMajorState extends State<DisplayMajor> {
                     "but most especially ${topSkill.toString()}\n"),
                 Text("The revealed comparative advantage (RCA) shows that ${widget.title}"
                     "need more than the average amount of .... and .....\n"),
+                SfCircularChart(
+                  title: ChartTitle(text: "Skills Group Total Value"),
+                  tooltipBehavior: tooltipBehaviorSkillsGroup,
+                  series: <CircularSeries>[
+                    PieSeries<SkillsGroupFreq, String>(
+                      dataSource: skillsGroup,
+                      xValueMapper: (SkillsGroupFreq data,_) => data.skillGroup,
+                      yValueMapper: (SkillsGroupFreq data,_) => num.parse(data.skillFreq.toStringAsFixed(2)),
+                      dataLabelSettings: const DataLabelSettings(isVisible: true),
+                      enableTooltip: true,
+                    )
+                  ],
+                ),
+                SizedBox(
+                  height: 600,
+                  child: SfCartesianChart(
+                    title: ChartTitle(text: "Each Skills Element Value"),
+                    tooltipBehavior: toolTipBehaviorSkillsElem,
+                    series: <ChartSeries>[
+                      BarSeries<SkillsElemFreq, String>(
+                          name: "Skills Element Value in ${majSkill!.data[0].year}",
+                          dataSource: skillsElem!,
+                          xValueMapper: (SkillsElemFreq val,_) => val.skillName.substring(0,7),
+                          yValueMapper: (SkillsElemFreq val,_) => num.parse(val.skillFreq.toStringAsFixed(2)),
+                          pointColorMapper: (SkillsElemFreq val,_) => val.color,
+                          dataLabelSettings: const DataLabelSettings(isVisible: true),
+                          enableTooltip: true
+                      )
+                    ],
+                    primaryXAxis: CategoryAxis(),
+                    primaryYAxis: NumericAxis(edgeLabelPlacement: EdgeLabelPlacement.shift,
+                        // numberFormat: NumberFormat.simpleCurrency(decimalDigits: 0),
+                        title: AxisTitle(text: 'Skills Element Value in ${majSkill!.data[0].year}')),
+                  ),
+                ),
               ],
             ),
           )
         ),
       ),
     );
+  }
+
+  Color? getSkillsColor(String skillsGroupName) {
+    // debugPrint(skillsGroupName);
+    if (skillsGroupName == 'SkillElementGroup.CONTENT') return Colors.indigoAccent;
+    else if (skillsGroupName == 'SkillElementGroup.PROCESS') return Colors.purple;
+    else if (skillsGroupName == 'SkillElementGroup.SOCIAL_SKILLS') return Colors.redAccent;
+    else if (skillsGroupName == 'SkillElementGroup.COMPLEX_PROBLEM_SOLVING_SKILLS') return Colors.orange;
+    else if (skillsGroupName == 'SkillElementGroup.TECHNICAL_SKILLS') return Colors.lightGreen;
+    else if (skillsGroupName == 'SkillElementGroup.SYSTEMS_SKILLS') return Colors.green;
+    else if (skillsGroupName == 'SkillElementGroup.RESOURCE_MANAGEMENT_SKILLS') return Colors.deepPurple;
+    else return null;
+  }
+
+  List<SkillsElemFreq>? getSkillsBarChart() {
+    if (majSkill != null) {
+      List<SkillsElemFreq> skillFreq = [];
+      String latestYear = majSkill!.data[0].year.toString();
+      for (var eachSkill in majSkill!.data) {
+        if (latestYear == eachSkill.year) {
+          skillFreq.add(
+              SkillsElemFreq(
+                  eachSkill.skillElement,
+                  eachSkill.lvValue.toDouble(),
+                  getSkillsColor(eachSkill.skillElementGroup.toString()))
+          );
+        }
+        else {
+          break;
+        }
+      }
+      return skillFreq;
+    }
+    return null;
+  }
+
+  List<SkillsGroupFreq>? getSkillGroupPieChart() {
+    if (majSkill != null) {
+      List<SkillsGroupFreq> skillFreq = [];
+      Map<String, double> skillGroup = {};
+      String latestYear = majSkill!.data[0].year.toString();
+      for (var eachSkill in majSkill!.data) {
+        if (latestYear == eachSkill.year) {
+          if (skillGroup.containsKey(eachSkill.skillElementGroup.toString())) {
+            skillGroup[eachSkill.skillElementGroup.toString()] =
+                eachSkill.lvValue.toDouble() + skillGroup[eachSkill.skillElementGroup.toString()]!;
+          }
+          else {
+            skillGroup[eachSkill.skillElementGroup.toString()] = eachSkill.lvValue.toDouble();
+          }
+        }
+        else {
+          break;
+        }
+      }
+      skillGroup.forEach((key, value) {
+        skillFreq.add(SkillsGroupFreq(key, value));
+      });
+      return skillFreq;
+    }
+    return null;
   }
 
   List<YearlyWage>? getYearlyBarChart() {
@@ -268,6 +368,19 @@ class _DisplayMajorState extends State<DisplayMajor> {
     // debugPrint(treeMap[2].majorName.toString());
     return treeMap;
   }
+}
+
+class SkillsElemFreq {
+  SkillsElemFreq(this.skillName, this.skillFreq, this.color);
+  final String skillName;
+  final double skillFreq;
+  final Color? color;
+}
+
+class SkillsGroupFreq {
+  SkillsGroupFreq(this.skillGroup, this.skillFreq);
+  final String skillGroup;
+  final double skillFreq;
 }
 
 class YearlyWage {
