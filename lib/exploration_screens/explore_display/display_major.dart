@@ -7,6 +7,7 @@ import 'package:project_2/api/category_api/cateMajor/major_skill.dart';
 import 'package:project_2/api/category_api/wage_cat.dart';
 
 import '../../api/api_service.dart';
+import '../../api/category_api/cateMajor/major_wage.dart';
 import '../../api/constants.dart';
 
 import 'package:multi_charts/multi_charts.dart';
@@ -30,7 +31,7 @@ class DisplayMajor extends StatefulWidget {
 class _DisplayMajorState extends State<DisplayMajor> {
   MajEdu? majEdu;
   MajSkill? majSkill;
-  WageCat? wageCat;
+  MajorWage? majorWage;
   int? avgSal;
   int? salDiff;
   SplayTreeMap<int, String>? topEduMajs;
@@ -47,16 +48,16 @@ class _DisplayMajorState extends State<DisplayMajor> {
   void getData() async {
     majEdu = (await ApiService().getMajorEdu(widget.nav[0]));
     majSkill = (await ApiService().getMajorSkill(widget.nav[1]));
-    wageCat = (await ApiService().getCategoriesWage(ApiConstants.categoriesMajorWage[0]));
+    majorWage = (await ApiService().getMajorWage(ApiConstants.categoriesMajorWage[0]));
     Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {}));
   }
 
   void getAvgSalary() {
-    if (wageCat != null) {
-      String latestYr = wageCat!.data[0].year;
+    if (majorWage != null) {
+      String latestYr = majorWage!.data[0].year;
       int sumWage = 0;
       int count = 0;
-      for (var eachWage in wageCat!.data) {
+      for (var eachWage in majorWage!.data) {
         if (eachWage.year == latestYr) {
           sumWage += eachWage.averageWage.toInt();
           count++;
@@ -72,8 +73,8 @@ class _DisplayMajorState extends State<DisplayMajor> {
   }
 
   void moreOrLess() {
-    if (wageCat != null) {
-      int cateSal = wageCat!.data[0].averageWage.toInt();
+    if (majorWage != null) {
+      int cateSal = majorWage!.data[0].averageWage.toInt();
       salDiff = (avgSal! - cateSal).abs();
       if (avgSal! > cateSal) {
         moreLess = "more";
@@ -133,7 +134,7 @@ class _DisplayMajorState extends State<DisplayMajor> {
     getTopMajs();
     getMaxSkill();
     late List<EduFrequency> eduFreq = getEduTreeMapData();
-    List<YearlyWage>? yearlyWage = getYearlyBarChart();
+    List<YearlyWage>? yearlyWage = getYearlyWageBarChart();
     late TooltipBehavior toolTipBehaviorWage = TooltipBehavior(enable: true);
     List<SkillsGroupFreq>? skillsGroup = getSkillGroupPieChart();
     late TooltipBehavior tooltipBehaviorSkillsGroup = TooltipBehavior(enable: true);
@@ -142,7 +143,7 @@ class _DisplayMajorState extends State<DisplayMajor> {
     List<String>? skillsElemName = getSkillsNameRadarChart();
     List<double>? skillsElemVal = getSkillsValRadarChart();
     return Scaffold(
-      body: (majEdu == null || majSkill == null || wageCat == null)
+      body: (majEdu == null || majSkill == null || majorWage == null)
           // || avgSal == null || salDiff == null || topEduMajs == null ||
       // topSkill == null || topSkillVal == null || moreLess == null)
           ? const Center(
@@ -165,8 +166,8 @@ class _DisplayMajorState extends State<DisplayMajor> {
                 // NOTE WE MANUALLY ADD INDEX OF WHERE CATEGORY IS IN API
                 const SizedBox(height: 100,),
                 Text("YEARLY WAGES\n"), // match title as well
-                Text("In ${wageCat!.data[0].year.toString()}, ${widget.title} earned an "
-                    "average yearly salary of ${wageCat!.data[0].averageWage.toString()},"
+                Text("In ${majorWage!.data[0].year.toString()}, ${widget.title} earned an "
+                    "average yearly salary of ${majorWage!.data[0].averageWage.toString()},"
                     " ${salDiff.toString()} ${moreLess} than the average"
                     "national salary of ${avgSal}\n"), // match title as well
                 Text("This chart shows the various occupations closest to ${widget.title} as "
@@ -177,7 +178,7 @@ class _DisplayMajorState extends State<DisplayMajor> {
                   // title: ChartTitle(text: "TEST HERE"),
                   series: <ChartSeries>[
                     BarSeries<YearlyWage, String>(
-                      name: "Average annual salary in ${wageCat!.data[0].year}",
+                      name: "Average annual salary in ${majorWage!.data[0].year}",
                       dataSource: yearlyWage!,
                       xValueMapper: (YearlyWage val,_) => val.majGroup,
                       yValueMapper: (YearlyWage val,_) => val.wage,
@@ -188,7 +189,7 @@ class _DisplayMajorState extends State<DisplayMajor> {
                   primaryXAxis: CategoryAxis(),
                   primaryYAxis: NumericAxis(edgeLabelPlacement: EdgeLabelPlacement.shift,
                   numberFormat: NumberFormat.simpleCurrency(decimalDigits: 0),
-                  title: AxisTitle(text: 'Average annual salary in ${wageCat!.data[0].year}')),
+                  title: AxisTitle(text: 'Average annual salary in ${majorWage!.data[0].year}')),
                 ),
                 Text("EDUCATION\n"),
                 Text("Data on higher education choices for ${widget.title} from The"
@@ -387,11 +388,11 @@ class _DisplayMajorState extends State<DisplayMajor> {
     return null;
   }
 
-  List<YearlyWage>? getYearlyBarChart() {
-    if (wageCat != null) {
+  List<YearlyWage>? getYearlyWageBarChart() {
+    if (majorWage != null) {
       List<YearlyWage> yearlyChart = [];
-      String latestYear = wageCat!.data[0].year.toString();
-      for (var eachWage in wageCat!.data) {
+      String latestYear = majorWage!.data[0].year.toString();
+      for (var eachWage in majorWage!.data) {
         if (latestYear == eachWage.year) {
           yearlyChart.add(YearlyWage(eachWage.majorOccupationGroup.substring(0,10), eachWage.averageWage.toInt()));
         }

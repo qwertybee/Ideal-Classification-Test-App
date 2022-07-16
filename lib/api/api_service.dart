@@ -1,22 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:project_2/api/category_api/cateBroad/broad_wage.dart';
 import 'package:project_2/api/category_api/cateMajor/major_edu.dart';
 import 'category_api/cateBroad/broad_edu.dart';
 import 'category_api/cateBroad/broad_skill.dart';
 import 'category_api/cateDetail/detail_edu.dart';
 import 'category_api/cateDetail/detail_skill.dart';
+import 'category_api/cateDetail/detail_wage.dart';
 import 'category_api/cateMajor/major_skill.dart';
+import 'category_api/cateMajor/major_wage.dart';
 import 'category_api/cateMinor/minor_edu.dart';
 import 'category_api/cateMinor/minor_skill.dart';
-import 'category_api/wage_cat.dart';
+import 'category_api/cateMinor/minor_wage.dart';
 
 class ApiService {
-  Future<WageCat?> getCategoriesWage(String link) async {
+  Future<MajorWage?> getMajorWage(String link) async {
     try {
       var url = Uri.parse(link);
       var response = await http.get(url);
       if (response.statusCode == 200) {
-        WageCat _model = wageCatFromJson(response.body);
+        MajorWage _model = majorWageFromJson(response.body);
         return _model;
       }
     } catch (e) {
@@ -53,6 +56,21 @@ class ApiService {
     return null;
   }
 
+  // BROAD CATEGORIES API CALLS
+  Future<BroadWage?> getBroadWage(String link) async {
+    try {
+      var url = Uri.parse(link);
+      var response = await http.get(url);
+      if (response.statusCode == 200) {
+        BroadWage _model = broadWageFromJson(response.body);
+        return _model;
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+    return null;
+  }
+
   Future<BroadEdu?> getBroadEdu(String link) async {
     try {
       var url = Uri.parse(link);
@@ -72,6 +90,21 @@ class ApiService {
       var response = await http.get(url);
       if (response.statusCode == 200) {
         BroadSkill _model = broadSkillFromJson(response.body);
+        return _model;
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+    return null;
+  }
+
+  // MINOR CATEGORIES API CALLS
+  Future<MinorWage?> getMinorWage(String link) async {
+    try {
+      var url = Uri.parse(link);
+      var response = await http.get(url);
+      if (response.statusCode == 200) {
+        MinorWage _model = minorWageFromJson(response.body);
         return _model;
       }
     } catch (e) {
@@ -100,6 +133,21 @@ class ApiService {
       var response = await http.get(url);
       if (response.statusCode == 200) {
         MinorSkill _model = minorSkillFromJson(response.body);
+        return _model;
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+    return null;
+  }
+
+  // DETAILED CATEGORIES API CALLS
+  Future<DetailWage?> getDetailWage(String link) async {
+    try {
+      var url = Uri.parse(link);
+      var response = await http.get(url);
+      if (response.statusCode == 200) {
+        DetailWage _model = detailWageFromJson(response.body);
         return _model;
       }
     } catch (e) {
