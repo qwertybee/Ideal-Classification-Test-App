@@ -139,6 +139,8 @@ class _DisplayMajorState extends State<DisplayMajor> {
     late TooltipBehavior tooltipBehaviorSkillsGroup = TooltipBehavior(enable: true);
     List<SkillsElemFreq>? skillsElem = getSkillsBarChart();
     late TooltipBehavior toolTipBehaviorSkillsElem = TooltipBehavior(enable: true);
+    List<String>? skillsElemName = getSkillsNameRadarChart();
+    List<double>? skillsElemVal = getSkillsValRadarChart();
     return Scaffold(
       body: (majEdu == null || majSkill == null || wageCat == null)
           // || avgSal == null || salDiff == null || topEduMajs == null ||
@@ -252,6 +254,14 @@ class _DisplayMajorState extends State<DisplayMajor> {
                     )
                   ],
                 ),
+                // RadarChart(
+                //   values: skillsElemVal!,
+                //   labels: skillsElemName,
+                //   maxValue: 5,
+                //   fillColor: Colors.red,
+                //   chartRadiusFactor: 0.8,
+                //   // labelWidth: 1000,
+                // ),
                 SizedBox(
                   height: 600,
                   child: SfCartesianChart(
@@ -280,6 +290,40 @@ class _DisplayMajorState extends State<DisplayMajor> {
         ),
       ),
     );
+  }
+
+  List<String>? getSkillsNameRadarChart() {
+    if (majSkill != null) {
+      List<String> skills = [];
+      String latestYear = majSkill!.data[0].year.toString();
+      for (var eachSkill in majSkill!.data) {
+        if (latestYear == eachSkill.year) {
+          skills.add(eachSkill.skillElement.toString());
+        }
+        else {
+          break;
+        }
+      }
+      return skills;
+    }
+    return null;
+  }
+
+  List<double>? getSkillsValRadarChart() {
+    if (majSkill != null) {
+      List<double> skillsVal = [];
+      String latestYear = majSkill!.data[0].year.toString();
+      for (var eachSkill in majSkill!.data) {
+        if (latestYear == eachSkill.year) {
+          skillsVal.add(eachSkill.lvValue);
+        }
+        else {
+          break;
+        }
+      }
+      return skillsVal;
+    }
+    return null;
   }
 
   Color? getSkillsColor(String skillsGroupName) {
