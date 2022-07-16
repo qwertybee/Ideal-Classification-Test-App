@@ -1,7 +1,5 @@
 import 'dart:collection';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:project_2/api/category_api/cateMajor/major_edu.dart';
 import 'package:project_2/api/category_api/cateMajor/major_skill.dart';
 
@@ -126,6 +124,7 @@ class _DisplayMajorState extends State<DisplayMajor> {
       }
     }
   }
+
   @override
   Widget build(BuildContext context) {
     getAvgSalary();
@@ -143,8 +142,6 @@ class _DisplayMajorState extends State<DisplayMajor> {
     List<double>? skillsElemVal = getSkillsValRadarChart();
     return Scaffold(
       body: (majEdu == null || majSkill == null || majorWage == null)
-          // || avgSal == null || salDiff == null || topEduMajs == null ||
-      // topSkill == null || topSkillVal == null || moreLess == null)
           ? const Center(
         child: CircularProgressIndicator(),
       )

@@ -63,7 +63,7 @@ class Datum {
     averageWage: json["Average Wage"].toDouble(),
     averageWageAppxMoe: json["Average Wage Appx MOE"].toDouble(),
     recordCount: json["Record Count"],
-    slugBroadOccupation: json["Slug Broad Occupation"] == null ? null : json["Slug Broad Occupation"],
+    slugBroadOccupation: json["Slug Broad Occupation"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -76,7 +76,7 @@ class Datum {
     "Average Wage": averageWage,
     "Average Wage Appx MOE": averageWageAppxMoe,
     "Record Count": recordCount,
-    "Slug Broad Occupation": slugBroadOccupation == null ? null : slugBroadOccupation,
+    "Slug Broad Occupation": slugBroadOccupation,
   };
 }
 

@@ -14,6 +14,8 @@ import 'category_api/cateMinor/minor_skill.dart';
 import 'category_api/cateMinor/minor_wage.dart';
 
 class ApiService {
+
+  // MAJOR CATEGORIES API CALLS
   Future<MajorWage?> getMajorWage(String link) async {
     try {
       var url = Uri.parse(link);
