@@ -38,26 +38,45 @@ import 'package:project_2/profile_screens/profilepage.dart';
            ),
          ),
          SizedBox(height: 20),
-         TextField(
-           controller: emailController,
-           cursorColor: Colors.black,
-           textInputAction: TextInputAction.next,
-           decoration: InputDecoration(
-             hintText: 'Email',
-             labelText: 'Email',
+         Container(
+         child: Padding(
+         padding: EdgeInsets.all(8.0),
+           child: Column(
+           crossAxisAlignment: CrossAxisAlignment.start,
+           children: <Widget>[
+             Padding(
+               padding: const EdgeInsets.all(8.0),
+               child: Text(
+                   "E-mail address"
+               ),
+             ),
+             TextField(
+               controller: passwordController,
+               cursorColor: Colors.black,
+               obscureText: true,
+               textInputAction: TextInputAction.done,
+               decoration: const InputDecoration(
+                 border: OutlineInputBorder(),
+                 hintText: 'E-mail address',),
+             ),
+             Padding(
+               padding: const EdgeInsets.all(8.0),
+               child: Text(
+                   "Password"
+               ),
+             ),
+             TextField(
+               controller: passwordController,
+               cursorColor: Colors.black,
+               obscureText: true,
+               textInputAction: TextInputAction.done,
+               decoration: const InputDecoration(
+                   border: OutlineInputBorder(),
+                   hintText: 'Password',),
+             ),
+            ])
            ),
-         ),
-         SizedBox(height: 4),
-         TextField(
-           controller: passwordController,
-           cursorColor: Colors.black,
-           obscureText: true,
-           textInputAction: TextInputAction.done,
-           decoration: InputDecoration(
-             hintText: 'Password',
-             labelText: 'Password'
-           ),
-         ),
+          ),
          SizedBox(height: 20),
          SizedBox(
            width: 300,

@@ -69,8 +69,7 @@ import 'package:project_2/profile_screens/profilepage.dart';
                          keyboardType: TextInputType.emailAddress,
                          decoration: const InputDecoration(
                              border: OutlineInputBorder(),
-                             hintText: 'Name',
-                             labelText: 'Name'),
+                             hintText: 'Name',),
                          validator: (value) {
                            if (value == null || value.isEmpty) {
                              return 'Please enter your name';
@@ -93,8 +92,7 @@ import 'package:project_2/profile_screens/profilepage.dart';
                          keyboardType: TextInputType.emailAddress,
                          decoration: const InputDecoration(
                              border: OutlineInputBorder(),
-                             hintText: 'Enter your amount here',
-                             labelText: 'E-mail address'),
+                             hintText: 'Enter your amount here'),
                          validator: (value) {
                            if (value == null || value.isEmpty) {
                              return 'Please enter your e-mail address';
@@ -118,7 +116,6 @@ import 'package:project_2/profile_screens/profilepage.dart';
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
                             hintText: 'Password',
-                            labelText: 'Password',
                             suffixIcon: IconButton(
                               icon: Icon(_passwordVisible
                                   ? Icons.visibility
