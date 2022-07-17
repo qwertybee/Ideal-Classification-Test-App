@@ -14,11 +14,10 @@ class _ProfilePageState extends State<ProfilePage>{
       body: Padding(
         padding: EdgeInsets.all(32),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('Welcome ${user.displayName}', style: TextStyle(fontSize: 16)),
-            SizedBox(height: 8),
-            Text(user.email!, style: TextStyle(fontSize: 16)),
+            const SizedBox(height: 24),
+            buildName(user),
+
             SizedBox(height: 40),
             ElevatedButton.icon(
               style: ElevatedButton.styleFrom(
@@ -36,4 +35,20 @@ class _ProfilePageState extends State<ProfilePage>{
       ),
     );
   }
+
+  Widget buildName(User user) => Column(
+    children: [
+      Text(
+        'Hello, ' + user.displayName.toString() + '!',
+        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+      ),
+      const SizedBox(height: 4),
+      Text(
+        user.email.toString(),
+        style: TextStyle(color: Colors.grey),
+      )
+    ],
+  );
+
+
 }
