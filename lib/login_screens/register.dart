@@ -46,7 +46,7 @@ import 'package:project_2/profile_screens/profilepage.dart';
      return Scaffold(
        body: Column(
          children: [
-           SizedBox(height: 40),
+           SizedBox(height: MediaQuery.of(context).size.height/7),
            Text("Account Registration",
              style: TextStyle(
                fontSize: 28, color: Color(0xFF0D1333), fontWeight: FontWeight.bold,
@@ -61,7 +61,7 @@ import 'package:project_2/profile_screens/profilepage.dart';
            ),
            Container(
              child: Padding(
-               padding: EdgeInsets.all(8.0),
+               padding: EdgeInsets.all(15.0),
                child: Form(
                  key: _formKey,
                  child: SingleChildScrollView(
@@ -169,7 +169,7 @@ import 'package:project_2/profile_screens/profilepage.dart';
                        )
                    )
                ),
-               child: const Text("Create account"),
+               child: const Text("Create Account"),
                  onPressed: () async {
                    FocusManager.instance.primaryFocus?.unfocus();
                     if (_formKey.currentState!.validate()) {
@@ -216,7 +216,7 @@ import 'package:project_2/profile_screens/profilepage.dart';
                onPressed: () {
                  Navigator.pop(context);
                },
-               child: const Text("Cancel"),
+               child: const Text("Return to Login"),
              ),
            ),
          ],

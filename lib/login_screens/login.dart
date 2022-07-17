@@ -34,7 +34,7 @@ import 'package:project_2/profile_screens/profilepage.dart';
      child: Column(
        mainAxisAlignment: MainAxisAlignment.center,
        children: [
-         SizedBox(height: 30),
+         SizedBox(height: MediaQuery.of(context).size.height/7),
          Text("Profile",
            style: TextStyle(
              fontSize: 28, color: Color(0xFF0D1333), fontWeight: FontWeight.bold,
@@ -145,7 +145,7 @@ import 'package:project_2/profile_screens/profilepage.dart';
                  }
                }
              },
-             child: const Text("Sign in"),
+             child: const Text("Sign In"),
            ),
          ),
 
