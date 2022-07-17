@@ -14,6 +14,14 @@ import 'package:project_2/profile_screens/profilepage.dart';
    final passwordController = TextEditingController();
 
    @override
+   void initState() {
+     super.initState();
+     _passwordVisible = false;
+   }
+
+   bool _passwordVisible = false;
+
+   @override
    void dispose(){
      emailController.dispose();
      passwordController.dispose();
@@ -38,26 +46,57 @@ import 'package:project_2/profile_screens/profilepage.dart';
            ),
          ),
          SizedBox(height: 20),
-         TextField(
-           controller: emailController,
-           cursorColor: Colors.black,
-           textInputAction: TextInputAction.next,
-           decoration: InputDecoration(
-             hintText: 'Email',
-             labelText: 'Email',
+         Container(
+         child: Padding(
+         padding: EdgeInsets.all(8.0),
+           child: Column(
+           crossAxisAlignment: CrossAxisAlignment.start,
+           children: <Widget>[
+             Padding(
+               padding: const EdgeInsets.all(8.0),
+               child: Text(
+                   "E-mail address"
+               ),
+             ),
+             TextField(
+               controller: emailController,
+               cursorColor: Colors.black,
+               keyboardType: TextInputType.emailAddress,
+               textInputAction: TextInputAction.next,
+               decoration: const InputDecoration(
+                 border: OutlineInputBorder(),
+                 hintText: 'E-mail address',),
+             ),
+             Padding(
+               padding: const EdgeInsets.all(8.0),
+               child: Text(
+                   "Password"
+               ),
+             ),
+             TextField(
+               controller: passwordController,
+               cursorColor: Colors.black,
+               textInputAction: TextInputAction.done,
+               keyboardType: TextInputType.visiblePassword,
+               obscureText: !_passwordVisible,
+               decoration: InputDecoration(
+                 border: OutlineInputBorder(),
+                 hintText: 'Password',
+                 suffixIcon: IconButton(
+                   icon: Icon(_passwordVisible
+                       ? Icons.visibility
+                       : Icons.visibility_off),
+                   onPressed: () {
+                     setState(() {
+                       _passwordVisible = !_passwordVisible;
+                     });
+                   },
+                 ),
+               ),
+             ),
+            ])
            ),
-         ),
-         SizedBox(height: 4),
-         TextField(
-           controller: passwordController,
-           cursorColor: Colors.black,
-           obscureText: true,
-           textInputAction: TextInputAction.done,
-           decoration: InputDecoration(
-             hintText: 'Password',
-             labelText: 'Password'
-           ),
-         ),
+          ),
          SizedBox(height: 20),
          SizedBox(
            width: 300,
@@ -74,15 +113,39 @@ import 'package:project_2/profile_screens/profilepage.dart';
                  )
              ),
              onPressed: () async {
+               FocusManager.instance.primaryFocus?.unfocus();
                try {
                  final user = await FirebaseAuth.instance.signInWithEmailAndPassword(
                      email: emailController.text.trim(), password: passwordController.text.trim());
+                 ScaffoldMessenger.of(context).showSnackBar(
+                   const SnackBar(content: Text('Signed in successfully!')),);
                  //Navigator.push(context, MaterialPageRoute(builder: (context) => Display(user: user)));
-               } catch (e) {
+               } on FirebaseAuthException catch (e) {
                  print(e);
+
+               if(e.code == 'invalid-email'){
+                   ScaffoldMessenger.of(context).showSnackBar(
+                     const SnackBar(content: Text('Invalid email specified, please try again.')),);
+               }
+               else if(e.code == 'user-not-found') {
+                 ScaffoldMessenger.of(context).showSnackBar(
+                   const SnackBar(content: Text('The provided email does not exist in the system, please try again or register.')),);
+               }
+               else if(e.code == 'wrong-password') {
+                   ScaffoldMessenger.of(context).showSnackBar(
+                     const SnackBar(content: Text('Incorrect password specified, please try again.')),);
+                 }
+               else if(e.code == 'user-disabled') {
+                   ScaffoldMessenger.of(context).showSnackBar(
+                     const SnackBar(content: Text('Account disabled, please contact the app developer.')),);
+                 }
+               else{
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('An error occurred, please try again.')),);
+                 }
                }
              },
-             child: const Text("Log in"),
+             child: const Text("Sign in"),
            ),
          ),
 

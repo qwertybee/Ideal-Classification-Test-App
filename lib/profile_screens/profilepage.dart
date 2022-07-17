@@ -14,26 +14,52 @@ class _ProfilePageState extends State<ProfilePage>{
       body: Padding(
         padding: EdgeInsets.all(32),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('Welcome ${user.displayName}', style: TextStyle(fontSize: 16)),
-            SizedBox(height: 8),
-            Text(user.email!, style: TextStyle(fontSize: 16)),
+            const SizedBox(height: 24),
+            buildName(user),
+
             SizedBox(height: 40),
             ElevatedButton.icon(
               style: ElevatedButton.styleFrom(
                 minimumSize: Size.fromHeight(50),
               ),
-              icon: Icon(Icons.arrow_back, size: 32),
+              icon: Icon(Icons.exit_to_app_rounded, size: 32),
               label: Text(
                 'Sign Out',
                 style: TextStyle(fontSize: 24),
               ),
-              onPressed: () => FirebaseAuth.instance.signOut(),
+              onPressed: () {
+                try{
+                  FirebaseAuth.instance.signOut();
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Signed out successfully!')),);
+                }
+                catch(e){
+                  print(e);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Failed to sign out, please try again later.')),);
+                  }
+                },
             )
           ],
         ),
       ),
     );
   }
+
+  Widget buildName(User user) => Column(
+    children: [
+      Text(
+        'Hello, ' + user.displayName.toString() + '!',
+        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+      ),
+      const SizedBox(height: 4),
+      Text(
+        user.email.toString(),
+        style: TextStyle(color: Colors.grey),
+      )
+    ],
+  );
+
+
 }
