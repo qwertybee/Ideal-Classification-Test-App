@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_2/question_screens/questionnaires.dart';
 import 'package:project_2/question_screens/test_0.dart';
 import 'package:project_2/question_screens/test_1.dart';
 import 'package:project_2/question_screens/test_2.dart';
@@ -30,16 +31,13 @@ class _QuestionsState extends State<Questions> {
             onPageChanged: (index) {
               setState(() {
                 onFirstPage = (index == 0);
-                onLastPage = (index == 5);
+                onLastPage = (index == 34);
               });
             },
             children: [
               Test0(),
-              Test1(),
-              Test2(),
-              Test3(),
-              Test4(),
-              Test5(),
+              for (var eachQuestion in Questionnaires.lstQuestions)
+                Test1(question: eachQuestion),
             ],
           ),
           Container(
@@ -60,7 +58,7 @@ class _QuestionsState extends State<Questions> {
 
                 // dot page indicator
                 SmoothPageIndicator(
-                  controller: _controller, count: 6,
+                  controller: _controller, count: 35,
                   effect: ScrollingDotsEffect(fixedCenter: true),
                 ),
 
