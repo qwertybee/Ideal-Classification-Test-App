@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:project_2/question_screens/questions.dart';
+import 'package:project_2/question_screens/view_local_history.dart';
 
 class TestIntro extends StatelessWidget {
   const TestIntro({Key? key}) : super(key: key);
@@ -11,7 +12,7 @@ class TestIntro extends StatelessWidget {
       body: Column(
         children: [
           Container(
-            padding: const EdgeInsets.fromLTRB(75, 80, 75, 20),
+            padding: const EdgeInsets.fromLTRB(75, 50, 75, 20),
             child: Column(
               children: [
                 Text("BE YOU",
@@ -28,13 +29,17 @@ class TestIntro extends StatelessWidget {
                   ),
                   textAlign: TextAlign.center,
                 ),
-                SizedBox(height: 25),
+                SizedBox(height: 15),
                 Lottie.network(
                     "https://assets5.lottiefiles.com/private_files/lf30_ppdduhse.json",
                   // repeat: true,
                 ),
               ],
             ),
+          ),
+          const Text(
+            "Only takes 10 minutes\n",
+            style: TextStyle(fontStyle: FontStyle.italic, color: Colors.blueGrey),
           ),
           SizedBox(
             width: 300,
@@ -46,7 +51,6 @@ class TestIntro extends StatelessWidget {
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12.0),
-                            side: const BorderSide(color: Colors.purple)
                         )
                     )
                 ),
@@ -57,10 +61,26 @@ class TestIntro extends StatelessWidget {
                 child: const Text("Take Test"),
             ),
           ),
-          Text(
-            "\nOnly takes 10 minutes",
-            style: TextStyle(fontStyle: FontStyle.italic, color: Colors.blueGrey),
-          )
+          SizedBox(height: 15),
+          SizedBox(
+            width: 300,
+            height: 40,
+            child: TextButton(
+              style: ButtonStyle(
+                  foregroundColor: MaterialStateProperty.all(Colors.white),
+                  backgroundColor: MaterialStateProperty.all(Colors.purple),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12.0),
+                      )
+                  )
+              ),
+              onPressed: () async {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => ViewLocalHistory()));
+              },
+              child: const Text("View Test History"),
+            ),
+          ),
         ],
       ),
     );

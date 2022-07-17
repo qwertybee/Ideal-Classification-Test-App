@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:project_2/login_screens/register.dart';
-import 'package:project_2/login_screens/view_local_history.dart';
+import 'package:project_2/question_screens/view_local_history.dart';
 
  class LoginScreen extends StatefulWidget {
    const LoginScreen({Key? key}) : super(key: key);
@@ -199,30 +199,6 @@ import 'package:project_2/login_screens/view_local_history.dart';
                  Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterScreen()));
                },
              child: const Text("Register"),
-           ),
-         ),
-
-         SizedBox(height: 20),
-         SizedBox(
-           width: 300,
-           height: 40,
-           child: TextButton(
-
-             style: ButtonStyle(
-                 foregroundColor: MaterialStateProperty.all(Colors.white),
-
-                 backgroundColor: MaterialStateProperty.all(Color(0xFFCC41FF)),
-                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                     RoundedRectangleBorder(
-                         borderRadius: BorderRadius.circular(12.0),
-                         side: const BorderSide(color: Color(0xFFCC41FF))
-                     )
-                 )
-             ),
-             onPressed: () async {
-               Navigator.push(context, MaterialPageRoute(builder: (context) => ViewLocalHistory()));
-             },
-             child: const Text("View Test History (Local)"),
            ),
          ),
        ],

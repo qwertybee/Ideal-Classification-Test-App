@@ -13,6 +13,14 @@ class TestResult extends StatefulWidget {
 }
 
 class _TestResultState extends State<TestResult> {
+
+  void getTestResult() {
+    // get API for skills in detailed occupation
+    // get difference/variance of each occupation's skills
+    // get average of all variance
+    // lowest variance is the result
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,7 +82,6 @@ class _TestResultState extends State<TestResult> {
               ),
               onPressed: () {
                 Navigator.push(context,
-                    // might have problem in the future if use Primary cos effects explore page appbar's back button
                     MaterialPageRoute(builder: (context) => const Primary()));
                 },
               child: const Text("Done"),
