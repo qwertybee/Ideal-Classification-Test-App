@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:project_2/profile_screens/change_password.dart';
+import 'package:project_2/profile_screens/edit_user_info.dart';
 
 class ProfilePage extends StatefulWidget{
   @override
@@ -20,7 +22,36 @@ class _ProfilePageState extends State<ProfilePage>{
 
             SizedBox(height: 40),
             ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.green,
+                  minimumSize: Size.fromHeight(50),
+                ),
+                icon: Icon(Icons.edit_note_rounded, size: 32),
+                label: Text(
+                  'Edit user information',
+                  style: TextStyle(fontSize: 24),
+                ),
+                onPressed: () => changeUserDetailAlert(context, user)
+            ),
+
+            SizedBox(height: 40),
+            ElevatedButton.icon(
               style: ElevatedButton.styleFrom(
+                primary: Colors.blue,
+                minimumSize: Size.fromHeight(50),
+              ),
+              icon: Icon(Icons.key_rounded, size: 32),
+              label: Text(
+                'Change Password',
+                style: TextStyle(fontSize: 24),
+              ),
+              onPressed: () => changePasswordAlert(context, user)
+            ),
+
+            SizedBox(height: 40),
+            ElevatedButton.icon(
+              style: ElevatedButton.styleFrom(
+                primary: Colors.redAccent,
                 minimumSize: Size.fromHeight(50),
               ),
               icon: Icon(Icons.exit_to_app_rounded, size: 32),
@@ -40,7 +71,8 @@ class _ProfilePageState extends State<ProfilePage>{
                   const SnackBar(content: Text('Failed to sign out, please try again later.')),);
                   }
                 },
-            )
+            ),
+
           ],
         ),
       ),

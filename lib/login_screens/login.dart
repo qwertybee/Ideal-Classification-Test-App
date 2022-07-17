@@ -154,6 +154,7 @@ import 'package:project_2/profile_screens/profilepage.dart';
            width: 300,
            height: 40,
            child: TextButton(
+
              style: ButtonStyle(
                  foregroundColor: MaterialStateProperty.all(Colors.white),
 
