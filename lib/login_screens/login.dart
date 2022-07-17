@@ -14,6 +14,14 @@ import 'package:project_2/profile_screens/profilepage.dart';
    final passwordController = TextEditingController();
 
    @override
+   void initState() {
+     super.initState();
+     _passwordVisible = false;
+   }
+
+   bool _passwordVisible = false;
+
+   @override
    void dispose(){
      emailController.dispose();
      passwordController.dispose();
@@ -51,10 +59,10 @@ import 'package:project_2/profile_screens/profilepage.dart';
                ),
              ),
              TextField(
-               controller: passwordController,
+               controller: emailController,
                cursorColor: Colors.black,
-               obscureText: true,
-               textInputAction: TextInputAction.done,
+               keyboardType: TextInputType.emailAddress,
+               textInputAction: TextInputAction.next,
                decoration: const InputDecoration(
                  border: OutlineInputBorder(),
                  hintText: 'E-mail address',),
@@ -68,11 +76,24 @@ import 'package:project_2/profile_screens/profilepage.dart';
              TextField(
                controller: passwordController,
                cursorColor: Colors.black,
-               obscureText: true,
                textInputAction: TextInputAction.done,
-               decoration: const InputDecoration(
-                   border: OutlineInputBorder(),
-                   hintText: 'Password',),
+               keyboardType: TextInputType.visiblePassword,
+               obscureText: !_passwordVisible,
+               decoration: InputDecoration(
+                 border: OutlineInputBorder(),
+                 hintText: 'Password',
+                 suffixIcon: IconButton(
+                   icon: Icon(_passwordVisible
+                       ? Icons.visibility
+                       : Icons.visibility_off),
+                   onPressed: () {
+                     setState(() {
+                       _passwordVisible = !_passwordVisible;
+                     });
+                   },
+                 ),
+               ),
+               keyboardType: TextInputType.visiblePassword,
              ),
             ])
            ),
