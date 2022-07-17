@@ -12,12 +12,12 @@ class Explore extends StatefulWidget {
 
   @override
   State<Explore> createState() => _ExploreState();
+
 }
 
 class _ExploreState extends State<Explore> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   String? userName = 'User';
-
 
 
   void getUserName() async {
@@ -28,7 +28,6 @@ class _ExploreState extends State<Explore> {
       userName = 'User';
     }
   }
-
 
   @override
   Widget build(BuildContext context) {

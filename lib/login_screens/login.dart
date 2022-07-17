@@ -116,12 +116,35 @@ import 'package:project_2/profile_screens/profilepage.dart';
                try {
                  final user = await FirebaseAuth.instance.signInWithEmailAndPassword(
                      email: emailController.text.trim(), password: passwordController.text.trim());
+                 ScaffoldMessenger.of(context).showSnackBar(
+                   const SnackBar(content: Text('Signed in successfully!')),);
                  //Navigator.push(context, MaterialPageRoute(builder: (context) => Display(user: user)));
-               } catch (e) {
+               } on FirebaseAuthException catch (e) {
                  print(e);
+
+               if(e.code == 'invalid-email'){
+                   ScaffoldMessenger.of(context).showSnackBar(
+                     const SnackBar(content: Text('Invalid email specified, please try again.')),);
+               }
+               else if(e.code == 'user-not-found') {
+                 ScaffoldMessenger.of(context).showSnackBar(
+                   const SnackBar(content: Text('The provided email does not exist in the system, please try again or register.')),);
+               }
+               else if(e.code == 'wrong-password') {
+                   ScaffoldMessenger.of(context).showSnackBar(
+                     const SnackBar(content: Text('Incorrect password specified, please try again.')),);
+                 }
+               else if(e.code == 'user-disabled') {
+                   ScaffoldMessenger.of(context).showSnackBar(
+                     const SnackBar(content: Text('Account disabled, please contact the app developer.')),);
+                 }
+               else{
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('An error occurred, please try again.')),);
+                 }
                }
              },
-             child: const Text("Log in"),
+             child: const Text("Sign in"),
            ),
          ),
 

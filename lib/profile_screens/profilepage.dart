@@ -23,12 +23,23 @@ class _ProfilePageState extends State<ProfilePage>{
               style: ElevatedButton.styleFrom(
                 minimumSize: Size.fromHeight(50),
               ),
-              icon: Icon(Icons.arrow_back, size: 32),
+              icon: Icon(Icons.exit_to_app_rounded, size: 32),
               label: Text(
                 'Sign Out',
                 style: TextStyle(fontSize: 24),
               ),
-              onPressed: () => FirebaseAuth.instance.signOut(),
+              onPressed: () {
+                try{
+                  FirebaseAuth.instance.signOut();
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Signed out successfully!')),);
+                }
+                catch(e){
+                  print(e);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Failed to sign out, please try again later.')),);
+                  }
+                },
             )
           ],
         ),
