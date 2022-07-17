@@ -34,7 +34,9 @@ class _DisplayDetailState extends State<DisplayDetail> {
   int? salDiff;
   SplayTreeMap<int, String>? topEduMajs;
   String? topSkill;
-  int? topSkillVal;
+  double? topSkillVal;
+  String? topSkillRca;
+  double? topSkillRcaVal;
   String? moreLess;
 
   @override
@@ -105,12 +107,17 @@ class _DisplayDetailState extends State<DisplayDetail> {
   void getMaxSkill() {
     if (detailSkill != null) {
       String latestYr = detailSkill!.data[0].year;
-      int highestSkill = detailSkill!.data[0].lvValue.toInt();
+      double highestSkill = detailSkill!.data[0].lvValue.toDouble();
+      double highestRca = detailSkill!.data[0].rca.toDouble();
       for (var eachSkill in detailSkill!.data) {
         if (eachSkill.year == latestYr) {
           if (eachSkill.lvValue > highestSkill) {
             topSkill = eachSkill.skillElement;
-            topSkillVal = eachSkill.lvValue.toInt(); // highestSkill == eachSkill.lvValue
+            topSkillVal = eachSkill.lvValue.toDouble();
+          }
+          if (eachSkill.rca > highestRca) {
+            topSkillRcaVal = eachSkill.rca;
+            topSkillRca = eachSkill.skillElement;
           }
         }
         else {
@@ -142,7 +149,7 @@ class _DisplayDetailState extends State<DisplayDetail> {
       )
           : Scaffold(
         body: Container(
-            padding: EdgeInsets.all(20),
+            padding: const EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0.0),
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
             decoration: const BoxDecoration(
@@ -155,14 +162,19 @@ class _DisplayDetailState extends State<DisplayDetail> {
               child: Column(
                 children: [
                   // NOTE WE MANUALLY ADD INDEX OF WHERE CATEGORY IS IN API
-                  const SizedBox(height: 100,),
-                  Text("YEARLY WAGES\n"), // match title as well
+                  const SizedBox(height: 50,),
+                  Text(
+                    "About ${widget.title}\n",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                  ),
+                  Text("Wage\n", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)), // match title as well
                   Text("In ${detailWage!.data[0].year.toString()}, ${widget.title} earned an "
-                      "average yearly salary of ${detailWage!.data[0].averageWage.toString()},"
-                      " ${salDiff.toString()} ${moreLess} than the average"
-                      "national salary of ${avgSal}\n"), // match title as well
+                      "average yearly salary of \$${detailWage!.data[0].averageWage.toStringAsFixed(2)},"
+                      " \$${salDiff.toString()} ${moreLess} than the average"
+                      "national salary of \$${avgSal}\n", style: TextStyle(fontSize: 16)), // match title as well
                   Text("This chart shows the various occupations closest to ${widget.title} as "
-                      "measured by average annual salary in the US.\n"),
+                      "measured by average annual salary in the US.\n", style: TextStyle(fontSize: 16)),
                   Text("Average annual salary in ${detailWage!.data[0].year}"),
                   Container(
                     height: 110,
@@ -185,59 +197,62 @@ class _DisplayDetailState extends State<DisplayDetail> {
                           title: AxisTitle(text: 'USD')),
                     ),
                   ),
-                  Text("EDUCATION\n"),
-                  Text("Data on higher education choices for ${widget.title} from The"
-                      "Department of Education and Census Bureau. The most common major for"
-                      "${widget.title} is ${eduFreq.last.majorName.toString()}.\n"),
-                  // "but a relatively high number of ${widget.title} hold a major in ...\n"),
-                  const Text("TOP 5 MOST COMMON & SPECIALIZED MAJORS:"),
+                  Text("\nEducation\n",  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                  Text("Data on higher education choices for ${widget.title} from The "
+                      "Department of Education and Census Bureau. The most common major for "
+                      "${widget.title} is ${eduFreq.last.majorName.toString()}, "
+                      "but a relatively high number of ${widget.title} hold a major in "
+                      "${eduFreq[eduFreq.length-2].majorName.toString()} as well.\n", style: TextStyle(fontSize: 16)),
+                  const Text("Most Common & Specialized Majors:\n", style: TextStyle(fontStyle: FontStyle.italic, fontSize: 16)),
                   Text("1) ${eduFreq.last.majorName.toString()}\n"
                       "2) ${eduFreq[eduFreq.length-2].majorName.toString()}\n"
                       "3) ${eduFreq[eduFreq.length-3].majorName.toString()}\n"
                       "4) ${eduFreq[eduFreq.length-4].majorName.toString()}\n"
-                      "5) ${eduFreq[eduFreq.length-5].majorName.toString()}\n"),
-                  Container(
-                    // height: MediaQuery.of(context).size.height,
-                    // width: MediaQuery.of(context).size.width,
-                    // padding: EdgeInsets.all(10),
-                    child: SfTreemap(
-                        dataCount: eduFreq.length,
-                        levels: [
-                          TreemapLevel(
-                              groupMapper: (int index) {
-                                return eduFreq[index].majorName;
-                              },
-                              labelBuilder: (BuildContext context, TreemapTile tile) {
-                                return Padding(
-                                    padding: const EdgeInsets.all(2.5),
-                                    child: Text(tile.group)
-                                );
-                              },
-                              tooltipBuilder: (BuildContext context, TreemapTile tile) {
-                                return Padding(padding: const EdgeInsets.all(2.5),
-                                  child: Text('Bachelor Degree: ${tile.group}\n'
-                                      'People in workforce: ${tile.weight}\n'
-                                      'Year: ${detailEdu!.data[0].year}',
-                                    style: const TextStyle(fontWeight: FontWeight.bold),
-                                  ),
-                                );
-                              }
-                          )
-                        ],
-                        weightValueMapper: (int index) {
-                          return eduFreq[index].frequency.toDouble();
-                        }
-                    ),
+                      "5) ${eduFreq[eduFreq.length-5].majorName.toString()}\n", style: TextStyle(fontSize: 16)),
+                  SfTreemap(
+                      dataCount: eduFreq.length,
+                      levels: [
+                        TreemapLevel(
+                            groupMapper: (int index) {
+                              return eduFreq[index].majorName;
+                            },
+                            labelBuilder: (BuildContext context, TreemapTile tile) {
+                              return Padding(
+                                  padding: const EdgeInsets.all(2.5),
+                                  child: Text(tile.group)
+                              );
+                            },
+                            tooltipBuilder: (BuildContext context, TreemapTile tile) {
+                              return Padding(padding: const EdgeInsets.all(2.5),
+                                child: Text('Bachelor Degree: ${tile.group}\n'
+                                    'People in workforce: ${tile.weight}\n'
+                                    'Year: ${detailEdu!.data[0].year}',
+                                  style: const TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                              );
+                            }
+                        )
+                      ],
+                      weightValueMapper: (int index) {
+                        return eduFreq[index].frequency.toDouble();
+                      }
                   ),
 
-                  Text("SKILLS ${detailSkill!.data[0].lvValue.toString()}\n"), // match title as well
-                  Text("Data on the critical and distinctive skills necessary for ${widget.title}"
-                      "from the Bureau of Labor Statistics. ${widget.title} need many skills"
-                      "but most especially ${topSkill.toString()}\n"),
-                  Text("The revealed comparative advantage (RCA) shows that ${widget.title}"
-                      "need more than the average amount of .... and .....\n"),
+                  Text("\nSkills\n",  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)), // match title as well
+                  Text("Data on the critical and distinctive skills necessary for ${widget.title} "
+                      "from the Bureau of Labor Statistics. ${widget.title} need many skills "
+                      "but most especially ${topSkill.toString()} with a LV Value of ${topSkillVal?.toStringAsFixed(2)}.\n",
+                      style: TextStyle(fontSize: 16)),
+                  Text("The revealed comparative advantage (RCA), defined in "
+                      "international economics for calculating the relative advantage or disadvantage "
+                      "of a certain country in a certain class of goods or services as evidenced "
+                      "by trade flows, shows that ${widget.title} "
+                      "need more than the average amount of ${topSkillRca}. It has an RCA value of ${topSkillRcaVal?.toStringAsFixed(2)} "
+                      "so ${topSkillRcaVal?.toStringAsFixed(2)} ${(topSkillRcaVal! > 1) ? "times more advantage" : "times more disadvantage"} "
+                      "the average comparative advantage in global and domestic goods and services.\n",
+                      style: TextStyle(fontSize: 16)),
                   SfCircularChart(
-                    title: ChartTitle(text: "Skills Group Total Value"),
+                    title: ChartTitle(text: "Skills Group Total LV Value in ${detailSkill!.data[0].year}"),
                     tooltipBehavior: tooltipBehaviorSkillsGroup,
                     series: <CircularSeries>[
                       PieSeries<SkillsGroupFreq, String>(
@@ -260,7 +275,7 @@ class _DisplayDetailState extends State<DisplayDetail> {
                   SizedBox(
                     height: 600,
                     child: SfCartesianChart(
-                      title: ChartTitle(text: "Each Skills Element Value"),
+                      title: ChartTitle(text: "Skills Element in ${detailSkill!.data[0].year}"),
                       tooltipBehavior: toolTipBehaviorSkillsElem,
                       series: <ChartSeries>[
                         BarSeries<SkillsElemFreq, String>(
@@ -276,7 +291,7 @@ class _DisplayDetailState extends State<DisplayDetail> {
                       primaryXAxis: CategoryAxis(),
                       primaryYAxis: NumericAxis(edgeLabelPlacement: EdgeLabelPlacement.shift,
                           // numberFormat: NumberFormat.simpleCurrency(decimalDigits: 0),
-                          title: AxisTitle(text: 'Skills Element Value in ${detailSkill!.data[0].year}')),
+                          title: AxisTitle(text: 'LV Value')),
                     ),
                   ),
                 ],
