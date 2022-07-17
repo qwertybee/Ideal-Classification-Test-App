@@ -11,7 +11,7 @@ class TestIntro extends StatelessWidget {
       body: Column(
         children: [
           Container(
-            padding: const EdgeInsets.fromLTRB(75, 75, 75, 75),
+            padding: const EdgeInsets.fromLTRB(75, 80, 75, 20),
             child: Column(
               children: [
                 Text("BE YOU",
@@ -21,7 +21,14 @@ class TestIntro extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
                 ),
-                const Text("Welcome to Be You, where you can find your perfect job!"),
+                const Text(
+                  "Welcome to Be You, where you can find your perfect job!",
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(height: 25),
                 Lottie.network(
                     "https://assets5.lottiefiles.com/private_files/lf30_ppdduhse.json",
                   // repeat: true,
@@ -50,6 +57,10 @@ class TestIntro extends StatelessWidget {
                 child: const Text("Take Test"),
             ),
           ),
+          Text(
+            "\nOnly takes 10 minutes",
+            style: TextStyle(fontStyle: FontStyle.italic, color: Colors.blueGrey),
+          )
         ],
       ),
     );

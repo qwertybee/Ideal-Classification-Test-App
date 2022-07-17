@@ -40,36 +40,32 @@ class _ExploreState extends State<Explore> {
     ];
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.only(left: 20, top: 50, right: 20),
+        padding: EdgeInsets.only(left: 30, top: 50, right: 30),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [],
-            ),
-            SizedBox(height: 30),
+            const SizedBox(height: 27),
             Text("Hey $userName, ",
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 28, color: Color(0xFF0D1333), fontWeight: FontWeight.bold,
               ),
             ),
             const Text("Discover more jobs",
               style: TextStyle(
-                fontSize: 24, color: Color(0xFF61688B),
+                fontSize: 24, fontWeight: FontWeight.bold, color: Color(0xFF61688B),
               ),
             ),
             Container(
-              margin: EdgeInsets.symmetric(vertical: 30),
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+              margin: const EdgeInsets.symmetric(vertical: 25),
+              padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
               height: 50,
               width: double.infinity,
               decoration: BoxDecoration(
-                color: Color(0xFFF5F5F7),
+                color: const Color(0xFFF5F5F7),
                 borderRadius: BorderRadius.circular(40),
               ),
               child: Row(
-                children: [
+                children: const [
                   Text("Search",
                     style: TextStyle(
                       fontSize: 18, color: Color(0xFFA0A5BD)
@@ -80,58 +76,57 @@ class _ExploreState extends State<Explore> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Text("Category",
                   style: TextStyle(
-                    fontSize: 20, color: Color(0xFF0D1333), fontWeight: FontWeight.bold,
+                    fontSize: 21, color: Color(0xFF0D1333), fontWeight: FontWeight.bold,
                   ),
                 ),
               ],
             ),
-            SizedBox(height: 20),
             Expanded(
-                  child: StaggeredGridView.countBuilder(
-                    padding: EdgeInsets.all(10),
-                      crossAxisCount: 2,
-                      itemCount: categories.length,
-                      crossAxisSpacing: 20,
-                      mainAxisSpacing: 20,
-                      itemBuilder: (context, index) {
-                        return GestureDetector(
-                          onTap: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => catNav[index]));
-                          },
-                          child: Container(
-                            padding: EdgeInsets.all(20),
-                            height: index.isEven ? 200 : 230,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(16),
-                              color: Colors.blueGrey,
-                              image: DecorationImage(
-                                image: AssetImage(categories[index].nav),
-                                fit: BoxFit.fill
+              child: StaggeredGridView.countBuilder(
+                // padding: EdgeInsets.all(10),
+                  crossAxisCount: 2,
+                  itemCount: categories.length,
+                  crossAxisSpacing: 20,
+                  mainAxisSpacing: 20,
+                  itemBuilder: (context, index) {
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => catNav[index]));
+                      },
+                      child: Container(
+                        padding: EdgeInsets.all(20),
+                        height: index.isEven ? 200 : 230,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16),
+                          color: Colors.blueGrey,
+                          image: DecorationImage(
+                            image: AssetImage(categories[index].nav),
+                            fit: BoxFit.fill
+                          ),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              categories[index].name,
+                              style: TextStyle(
+                                fontSize: 20, color: Color(0xFF0D1333), fontWeight: FontWeight.bold
                               ),
                             ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  categories[index].name,
-                                  style: TextStyle(
-                                    fontSize: 20, color: Color(0xFF0D1333), fontWeight: FontWeight.bold
-                                  ),
-                                ),
-                                Text('${categories[index].tag} Groups',
-                                style: TextStyle(
-                                  color: Color(0xFF0D1333).withOpacity(0.5)
-                                ),
-                                )
-                              ],
+                            Text('${categories[index].tag} Groups',
+                            style: TextStyle(
+                              color: Color(0xFF0D1333).withOpacity(0.5)
                             ),
-                          ),
-                        );
-                      },
-                      staggeredTileBuilder: (index) => StaggeredTile.fit(1))
+                            )
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                  staggeredTileBuilder: (index) => StaggeredTile.fit(1))
               ),
           ],
         ),
