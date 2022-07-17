@@ -173,9 +173,16 @@ Future changeUserDetailAlert(BuildContext context, User user) async {
                       Navigator.pop(context);
                     }
                   },
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.purple,
-                    // fixedSize: Size(250, 50),
+                  style: ButtonStyle(
+                      foregroundColor: MaterialStateProperty.all(Colors.white),
+
+                      backgroundColor: MaterialStateProperty.all(Colors.purple),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12.0),
+                              side: const BorderSide(color: Colors.purple)
+                          )
+                      )
                   ),
                   child: Text(
                     "Submit",
@@ -190,9 +197,16 @@ Future changeUserDetailAlert(BuildContext context, User user) async {
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  style: ElevatedButton.styleFrom(
-                    primary: Color(0xFFEB5951),
-                    // fixedSize: Size(250, 50),
+                  style: ButtonStyle(
+                      foregroundColor: MaterialStateProperty.all(Colors.white),
+
+                      backgroundColor: MaterialStateProperty.all(Color(0xFFEB5951)),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12.0),
+                              side: const BorderSide(color: Color(0xFFEB5951))
+                          )
+                      )
                   ),
                   child: Text(
                     "Cancel",
