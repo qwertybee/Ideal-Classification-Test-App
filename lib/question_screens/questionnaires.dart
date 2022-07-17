@@ -6,13 +6,13 @@ class Questionnaires {
     "4You have the speaking ability to convey information clearly",
     "5You are good at maths",
     "6You are good at science",
-    "7You are good at critical thinking skill",
+    "7You are good in critical thinking skill",
     "8You actively reach out and try to learn subjects surrounding you",
     "9You are able to strategies how you approach learning subjects",
-    "10You are constantly consciously aware of your surroundings",
-    "11You have good understanding of social perception",
+    "10You are quite conscious/aware of your surroundings",
+    "11You have a good understanding of social perception",
     "12You keep track of coordination of where things are surrounding you",
-    "13You have good ways of persuading people"
+    "13You are good at persuading people"
     "14You are good at making negotiation and convincing people",
     "15You are good at instructing people",
     "16You tend to give your service to others",

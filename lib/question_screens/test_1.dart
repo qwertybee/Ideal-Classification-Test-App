@@ -29,17 +29,16 @@ class _Test1State extends State<Test1> {
                   children: [
                     const SizedBox(height: 150,),
                     Container(
-                      padding: EdgeInsets.fromLTRB(50.0, 0.0, 50.0, 0.0),
+                      padding: const EdgeInsets.fromLTRB(50.0, 0.0, 50.0, 0.0),
                       child:
                       Text("${widget.question}.",
                         style: const TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 20, color: Colors.black54),
+                            fontWeight: FontWeight.bold, fontSize: 23, color: Colors.black54),
                         textAlign: TextAlign.center,
                       ),
                     ),
-                    // const SizedBox(height: 70,),
                     Container(
-                      padding: const EdgeInsets.fromLTRB(50.0, 80.0, 50.0, 30.0),
+                      padding: const EdgeInsets.fromLTRB(50.0, 65.0, 50.0, 30.0),
                       child: Column(
                         children: [
                           ListTile(
