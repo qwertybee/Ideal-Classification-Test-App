@@ -1,6 +1,7 @@
  import 'package:firebase_auth/firebase_auth.dart';
  import 'package:firebase_core/firebase_core.dart';
  import 'package:flutter/material.dart';
+import 'package:project_2/profile_screens/profilecontroller.dart';
 import 'package:project_2/profile_screens/profilepage.dart';
 
  class RegisterScreen extends StatefulWidget {
@@ -110,7 +111,7 @@ import 'package:project_2/profile_screens/profilepage.dart';
                        TextFormField(
                          onSaved: (String? value){
                            if (value != null){
-                             email = value;
+                             password = value;
                            }
                          },
                          obscureText: !_passwordVisible,
@@ -163,16 +164,25 @@ import 'package:project_2/profile_screens/profilepage.dart';
                ),
                child: const Text("Create account"),
                  onPressed: () async {
-                   try {
-                     final newUser = await _auth.createUserWithEmailAndPassword(
+                    if (_formKey.currentState!.validate()) {
+                      _formKey.currentState?.save();
+                      try {
+                         final newUser = await _auth.createUserWithEmailAndPassword(
                          email: email, password: password);
-                     User? user = newUser.user;
-                     user?.updateDisplayName(name);
-                   } catch (e) {
-                     print(e);
-                   }
-                  },
+                         User? user = newUser.user;
+                         user?.updateDisplayName(name);
 
+                         ScaffoldMessenger.of(context).showSnackBar(
+                         const SnackBar(content: Text('Registration successful!')),);
+                         Navigator.push(
+                            context, MaterialPageRoute(builder: (context) => Profile()));
+                        } catch (e) {
+                          print(e);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Registration failed.')),);
+                        }
+                      }
+                   }
              ),
            ),
 
