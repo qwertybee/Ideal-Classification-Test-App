@@ -113,6 +113,7 @@ import 'package:project_2/profile_screens/profilepage.dart';
                  )
              ),
              onPressed: () async {
+               FocusManager.instance.primaryFocus?.unfocus();
                try {
                  final user = await FirebaseAuth.instance.signInWithEmailAndPassword(
                      email: emailController.text.trim(), password: passwordController.text.trim());

@@ -29,6 +29,18 @@ import 'package:project_2/profile_screens/profilepage.dart';
      _auth = FirebaseAuth.instance;
    }
 
+   String? validateEmail(String? value) {
+     String pattern =
+         r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]"
+         r"{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]"
+         r"{0,253}[a-zA-Z0-9])?)*$";
+     RegExp regex = RegExp(pattern);
+     if (value == null || value.isEmpty || !regex.hasMatch(value))
+       return 'Please enter a valid email address';
+     else
+       return null;
+   }
+
    @override
    Widget build(BuildContext context) {
      return Scaffold(
@@ -94,13 +106,8 @@ import 'package:project_2/profile_screens/profilepage.dart';
                          keyboardType: TextInputType.emailAddress,
                          decoration: const InputDecoration(
                              border: OutlineInputBorder(),
-                             hintText: 'Enter your amount here'),
-                         validator: (value) {
-                           if (value == null || value.isEmpty) {
-                             return 'Please enter your e-mail address';
-                           }
-                           return null;
-                         },
+                             hintText: 'E-mail address',),
+                         validator: (value) => validateEmail(value),
                        ),
                        Padding(
                          padding: const EdgeInsets.all(8.0),
@@ -164,6 +171,7 @@ import 'package:project_2/profile_screens/profilepage.dart';
                ),
                child: const Text("Create account"),
                  onPressed: () async {
+                   FocusManager.instance.primaryFocus?.unfocus();
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState?.save();
                       try {
