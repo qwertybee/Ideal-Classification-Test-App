@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:project_2/question_screens/history_screens/viewHistoryController.dart';
 import 'package:project_2/question_screens/questions.dart';
-import 'package:project_2/question_screens/view_local_history.dart';
 
 class TestIntro extends StatelessWidget {
   const TestIntro({Key? key}) : super(key: key);
@@ -76,7 +76,7 @@ class TestIntro extends StatelessWidget {
                   )
               ),
               onPressed: () async {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => ViewLocalHistory()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => ViewHistory()));
               },
               child: const Text("View Test History"),
             ),
