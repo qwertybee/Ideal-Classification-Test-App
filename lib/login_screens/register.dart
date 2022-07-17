@@ -10,12 +10,16 @@ import 'package:project_2/profile_screens/profilepage.dart';
 
  class _RegisterScreenState extends State<RegisterScreen> {
    late FirebaseAuth _auth;
+   bool _passwordVisible = false;
+   String name = '';
    String email = '';
    String password = '';
+   final _formKey = GlobalKey<FormState>();
 
    @override
    void initState() {
      super.initState();
+     _passwordVisible = false;
      initFirebase();
    }
 
@@ -41,49 +45,108 @@ import 'package:project_2/profile_screens/profilepage.dart';
                fontSize: 20, color: Color(0xFF61688B),
              ),
            ),
-           SizedBox(height: 30),
-           Padding(
-             padding: const EdgeInsets.all(8.0),
-             child: Text(
-                 "E-mail address"
+           Container(
+             child: Padding(
+               padding: EdgeInsets.all(8.0),
+               child: Form(
+                 key: _formKey,
+                 child: SingleChildScrollView(
+                   child: Column(
+                     crossAxisAlignment: CrossAxisAlignment.start,
+                     children: <Widget>[
+                       Padding(
+                         padding: const EdgeInsets.all(8.0),
+                         child: Text(
+                             "Name"
+                         ),
+                       ),
+                       TextFormField(
+                         onSaved: (String? value){
+                           if (value != null){
+                             name = value;
+                           }
+                         },
+                         keyboardType: TextInputType.emailAddress,
+                         decoration: const InputDecoration(
+                             border: OutlineInputBorder(),
+                             hintText: 'Name',
+                             labelText: 'Name'),
+                         validator: (value) {
+                           if (value == null || value.isEmpty) {
+                             return 'Please enter your name';
+                           }
+                           return null;
+                         },
+                       ),
+                       Padding(
+                         padding: const EdgeInsets.all(8.0),
+                         child: Text(
+                             "E-mail address"
+                         ),
+                       ),
+                       TextFormField(
+                         onSaved: (String? value){
+                           if (value != null){
+                             email = value;
+                           }
+                         },
+                         keyboardType: TextInputType.emailAddress,
+                         decoration: const InputDecoration(
+                             border: OutlineInputBorder(),
+                             hintText: 'Enter your amount here',
+                             labelText: 'E-mail address'),
+                         validator: (value) {
+                           if (value == null || value.isEmpty) {
+                             return 'Please enter your e-mail address';
+                           }
+                           return null;
+                         },
+                       ),
+                       Padding(
+                         padding: const EdgeInsets.all(8.0),
+                         child: Text(
+                             "Password"
+                         ),
+                       ),
+                       TextFormField(
+                         onSaved: (String? value){
+                           if (value != null){
+                             email = value;
+                           }
+                         },
+                         obscureText: !_passwordVisible,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            hintText: 'Password',
+                            labelText: 'Password',
+                            suffixIcon: IconButton(
+                              icon: Icon(_passwordVisible
+                                  ? Icons.visibility
+                                  : Icons.visibility_off),
+                              onPressed: () {
+                                setState(() {
+                                  _passwordVisible = !_passwordVisible;
+                                });
+                              },
+                            ),
+                          ),
+                         keyboardType: TextInputType.visiblePassword,
+
+                         validator: (value) {
+                           if (value == null || value.isEmpty) {
+                             return 'Your password cannot be empty';
+                           }
+                           else if(value.length < 6){
+                             return 'Your password must be at least 6 characters';
+                           }
+                           return null;
+                         },
+                       ),
+                     ],
+                   ),
+                 ),
+               ),
              ),
-           ),
-           TextFormField(
-             onChanged: (value) {
-               email = value;
-             },
-             decoration: const InputDecoration(
-                 border: OutlineInputBorder(),
-                 hintText: 'Enter your email here',
-                 labelText: 'E-mail'),
-             validator: (value) {
-               if (value == null || value.isEmpty) {
-                 return 'Please enter a value';
-               }
-               return null;
-             },
-           ),
-           Padding(
-             padding: const EdgeInsets.all(8.0),
-             child: Text(
-                 "Password"
-             ),
-           ),
-           TextFormField(
-             onChanged: (value) {
-               password = value;
-             },
-             obscureText: true,
-             decoration: const InputDecoration(
-                 border: OutlineInputBorder(),
-                 hintText: 'Enter your password',
-                 labelText: 'Password'),
-             validator: (value) {
-               if (value == null || value.isEmpty) {
-                 return 'Please enter a value';
-               }
-               return null;
-             },
            ),
            SizedBox(height: 20),
            SizedBox(
@@ -109,6 +172,7 @@ import 'package:project_2/profile_screens/profilepage.dart';
                      print(e);
                    }
                   },
+
              ),
            ),
 
