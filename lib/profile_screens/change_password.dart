@@ -146,7 +146,7 @@ Future changePasswordAlert(BuildContext context, User user) async {
                     }
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.green,
+                    primary: Colors.purple,
                     // fixedSize: Size(250, 50),
                   ),
                   child: Text(
@@ -163,7 +163,7 @@ Future changePasswordAlert(BuildContext context, User user) async {
                     Navigator.of(context).pop();
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.redAccent,
+                    primary: Color(0xFFEB5951),
                     // fixedSize: Size(250, 50),
                   ),
                   child: Text(
