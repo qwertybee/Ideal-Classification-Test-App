@@ -39,6 +39,7 @@ import 'package:project_2/profile_screens/profilepage.dart';
                fontSize: 28, color: Color(0xFF0D1333), fontWeight: FontWeight.bold,
              ),
            ),
+           SizedBox(height: 2),
            Text("Register now and enjoy benefits from our app!",
              textAlign: TextAlign.center,
              style: TextStyle(
@@ -165,6 +166,8 @@ import 'package:project_2/profile_screens/profilepage.dart';
                    try {
                      final newUser = await _auth.createUserWithEmailAndPassword(
                          email: email, password: password);
+                     User? user = newUser.user;
+                     user?.updateDisplayName(name);
                    } catch (e) {
                      print(e);
                    }

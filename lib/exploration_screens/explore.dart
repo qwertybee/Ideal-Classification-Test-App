@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:project_2/exploration_screens/explore_groups/explore_main_categories.dart';
@@ -14,8 +15,24 @@ class Explore extends StatefulWidget {
 }
 
 class _ExploreState extends State<Explore> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  String? userName = 'User';
+
+
+
+  void getUserName() async {
+    String? currentUserName = await _auth.currentUser?.displayName;
+    if (currentUserName != null) {
+      userName = currentUserName;
+    } else {
+      userName = 'User';
+    }
+  }
+
+
   @override
   Widget build(BuildContext context) {
+    getUserName();
     var catNav = [
       const ExploreMajor(),
       const ExploreBroad(),
@@ -33,7 +50,7 @@ class _ExploreState extends State<Explore> {
               children: [],
             ),
             SizedBox(height: 30),
-            const Text("Hey User, ",
+            Text("Hey $userName, ",
               style: TextStyle(
                 fontSize: 28, color: Color(0xFF0D1333), fontWeight: FontWeight.bold,
               ),
