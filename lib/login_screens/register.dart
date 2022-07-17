@@ -46,7 +46,7 @@ import 'package:project_2/profile_screens/profilepage.dart';
      return GestureDetector(
        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
        child: Scaffold(
-           body: Container(
+         body: Container(
                padding: EdgeInsets.all(20.0),
                child: SingleChildScrollView(
                  child: Column(
@@ -198,11 +198,11 @@ import 'package:project_2/profile_screens/profilepage.dart';
                          style: ButtonStyle(
                              foregroundColor: MaterialStateProperty.all(Colors.white),
 
-                             backgroundColor: MaterialStateProperty.all(Color(0xFFFF6F61)),
+                             backgroundColor: MaterialStateProperty.all(Color(0xFFEB5951)),
                              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                                  RoundedRectangleBorder(
                                      borderRadius: BorderRadius.circular(12.0),
-                                     side: const BorderSide(color: Color(0xFFFD6E61))
+                                     side: const BorderSide(color: Color(0xFFEB5951))
                                  )
                              )
                          ),
