@@ -47,7 +47,7 @@ class _PrimaryState extends State<Primary> {
           ],
           iconSize: 30.0,
           currentIndex: currentIndex,
-          selectedItemColor: Color(0xff33a474),
+          selectedItemColor: Color(0xffb19cd9),
           unselectedItemColor: Colors.grey,
           // showSelectedLabels: false,
           // showUnselectedLabels: true,
