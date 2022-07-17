@@ -174,8 +174,11 @@ import 'package:project_2/profile_screens/profilepage.dart';
 
                          ScaffoldMessenger.of(context).showSnackBar(
                          const SnackBar(content: Text('Registration successful!')),);
-                         Navigator.push(
-                            context, MaterialPageRoute(builder: (context) => Profile()));
+
+                         // Temporary fix so that you can still see the nav screen on the profile page
+                         Navigator.pop(context);
+                         //Navigator.push(
+                            //context, MaterialPageRoute(builder: (context) => Profile()));
                         } catch (e) {
                           print(e);
                           ScaffoldMessenger.of(context).showSnackBar(
@@ -203,7 +206,7 @@ import 'package:project_2/profile_screens/profilepage.dart';
                    )
                ),
                onPressed: () {
-                 Navigator.push(context, MaterialPageRoute(builder: (context) => ProfilePage()));
+                 Navigator.pop(context);
                },
                child: const Text("Cancel"),
              ),
