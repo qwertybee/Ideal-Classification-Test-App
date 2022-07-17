@@ -93,7 +93,6 @@ import 'package:project_2/profile_screens/profilepage.dart';
                    },
                  ),
                ),
-               keyboardType: TextInputType.visiblePassword,
              ),
             ])
            ),
