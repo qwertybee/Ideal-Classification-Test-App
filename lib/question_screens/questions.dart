@@ -12,7 +12,7 @@ class Questionnaires {
     "10) You are quite conscious/aware of your surroundings",
     "11) You have a good understanding of social perception",
     "12) You keep track of coordination of where things are surrounding you",
-    "13) You are good at persuading people"
+    "13) You are good at persuading people",
     "14) You are good at making negotiation and convincing people",
     "15) You are good at instructing people",
     "16) You tend to give your service to others",

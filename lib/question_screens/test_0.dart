@@ -1,8 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class Test0 extends StatelessWidget {
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../shared.dart';
+
+
+class Test0 extends StatefulWidget {
   const Test0({Key? key}) : super(key: key);
+
+  @override
+  State<Test0> createState() => _Test0State();
+}
+
+class _Test0State extends State<Test0> {
+  // late final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+
+  @override
+  void initState() {
+    super.initState();
+    SharedPrefUtils.clearPref();
+  }
+
+  // Future<void> _clearPref() async { // clear all data from sharedPrefs
+  //   final SharedPreferences prefs = await _prefs;
+  //   await prefs.clear();
+  // }
 
   @override
   Widget build(BuildContext context) {

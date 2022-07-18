@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:project_2/exploration_screens/explore_categories.dart';
 import 'package:project_2/question_screens/display_questions.dart';
 import 'package:project_2/question_screens/questions.dart';
+import 'package:project_2/shared.dart';
 
 import '../api/api_services.dart';
 import '../api/category_api/cateDetail/detail_skill.dart';
@@ -18,12 +20,13 @@ class TestResult extends StatefulWidget {
 
 class _TestResultState extends State<TestResult> {
   List<DetailSkill?>? allDetailSkill;
-  late final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  String? userResult = "";
 
   @override
   void initState() {
     super.initState();
     _getData();
+    getTestResult();
   }
 
   void _getData() async {
@@ -31,51 +34,42 @@ class _TestResultState extends State<TestResult> {
     Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {}));
   }
 
-  Future<void> saveResultToFirebase() async {
-    final SharedPreferences prefs = await _prefs;
-    for (int i = 0; i < Questionnaires.lstQuestions.length; i++) {
-      String eachUserSkillVal = prefs.getString(i.toString()) ?? '0';
-      // sth like this using prefs.getStuff() like dictionary
-    }
-  }
+  // Future<void> saveResultToFirebase() async {
+  //   final SharedPreferences prefs = await _prefs;
+  //   for (int i = 0; i < Questionnaires.lstQuestions.length; i++) {
+  //     String eachUserSkillVal = prefs.getString(i.toString()) ?? '0';
+  //     // sth like this using prefs.getStuff() like dictionary
+  //   }
+  // }
 
   Future<void> getTestResult() async {
-    final SharedPreferences prefs = await _prefs;
-    List<List<int>> lstVariance = [];
+    double leastVar = 1000;
+    String currLeastVar = "";
     for (var eachDetailSkill in allDetailSkill!) {
-      List<int> variance = [];
+      debugPrint(SharedPrefUtils.readPrefInt(0.toString()));
+      double sumDiff = 0;
+      int count = 0;
       for (int i = 0; i < Questionnaires.lstQuestions.length; i++) {
-        // there's 35 skills to compare in each occupation
-        // variance = user's 35 skills between each skill's lv value
-        String eachUserSkillVal = prefs.getString(i.toString()) ?? '0';
+        int eachUserSkillVal = SharedPrefUtils.readPrefInt(i.toString()) ?? 0;
+        debugPrint("index with value of $eachUserSkillVal");
+        sumDiff += (eachUserSkillVal - eachDetailSkill!.data[i].lvValue).abs();
+        debugPrint("val of sumDiff $sumDiff");
         if (i == Questionnaires.lstQuestions.length-1) {
-          // when last element
-
+          if (sumDiff < leastVar) {
+            leastVar = sumDiff;
+            currLeastVar = categoriesDetail[count].name;
+            debugPrint("done with count $count with result as $currLeastVar");
+          }
         }
-        debugPrint(eachUserSkillVal);
       }
-      lstVariance.add(variance);
+      count++;
     }
-    // get API for skills in detailed occupation
-    // get difference/variance of each occupation's skills
-    // get average of all variance
-    // lowest variance is the result
+    userResult = currLeastVar;
   }
 
 
   @override
   Widget build(BuildContext context) {
-    late final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
-    late String userResult;
-
-
-    // Future<void> _clearPref() async { // clear all data from sharedPrefs
-    //   final SharedPreferences prefs = await _prefs;
-    //   await prefs.clear();
-    // }
-
-    // if function is not async, no need for await when accessing its return value
-    getTestResult();
     return Scaffold(
       body: (allDetailSkill == null)
           ? const Center(
@@ -87,10 +81,7 @@ class _TestResultState extends State<TestResult> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  // Text(allDetailSkill![0]!.data[0].lvValue.toString()),
-                  // Text(allDetailSkill![1]!.data[0].lvValue.toString()),
-                  // Text(allDetailSkill![2]!.data[0].lvValue.toString()),
-                  // Text(allDetailSkill![3]!.data[0].lvValue.toString()),
+                  Text("result is here ${userResult.toString()}"),
                   const Text("RESULT",
                     style: TextStyle(
                       fontSize: 37,
