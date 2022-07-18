@@ -31,6 +31,14 @@ class _TestResultState extends State<TestResult> {
     Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {}));
   }
 
+  Future<void> saveResultToFirebase() async {
+    final SharedPreferences prefs = await _prefs;
+    for (int i = 0; i < Questionnaires.lstQuestions.length; i++) {
+      String eachUserSkillVal = prefs.getString(i.toString()) ?? '0';
+      // sth like this using prefs.getStuff() like dictionary
+    }
+  }
+
   Future<void> getTestResult() async {
     final SharedPreferences prefs = await _prefs;
     List<List<int>> lstVariance = [];
