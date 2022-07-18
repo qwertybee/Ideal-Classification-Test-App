@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:project_2/exploration_screens/category_card.dart';
-import 'package:project_2/exploration_screens/explore_groups/explore_main_categories.dart';
+import 'package:project_2/exploration_screens/explore_categories.dart';
 
-import '../../api/constants.dart';
-import '../explore_groups/explore_main_categories.dart';
+import '../../api/api_links.dart';
 
-class ExploreMajor extends StatefulWidget {
-  const ExploreMajor({Key? key}) : super(key: key);
+class ExploreMinor extends StatefulWidget {
+  const ExploreMinor({Key? key}) : super(key: key);
 
   @override
-  State<ExploreMajor> createState() => _ExploreMajorState();
+  State<ExploreMinor> createState() => _ExploreMinorState();
 }
 
-class _ExploreMajorState extends State<ExploreMajor> {
+class _ExploreMinorState extends State<ExploreMinor> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -28,7 +27,7 @@ class _ExploreMajorState extends State<ExploreMajor> {
                   width: double.infinity,
                   decoration: BoxDecoration(
                       image: DecorationImage(
-                          image: AssetImage("images/marketing.png"),
+                          image: AssetImage("images/photography.png"),
                           fit: BoxFit.fitWidth
                       ),
                       borderRadius: BorderRadius.only(
@@ -47,7 +46,7 @@ class _ExploreMajorState extends State<ExploreMajor> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text("Major Group",
+                                    Text("Minor Group",
                                       style: Theme.of(context).textTheme.displaySmall?.copyWith(
                                           fontWeight: FontWeight.bold
                                       ),
@@ -55,7 +54,7 @@ class _ExploreMajorState extends State<ExploreMajor> {
                                     Row(children: [
                                       Expanded(child: Column(
                                         children: [
-                                          Text("Major Group categories contain ${categoriesMajor.length} that comprises of the jobs of the world",
+                                          Text("Minor Group categories contain ${categoriesMinor.length} that comprises of the jobs of the world",
                                             maxLines: 5,
                                             style: TextStyle(
                                               fontSize: 20,
@@ -81,8 +80,8 @@ class _ExploreMajorState extends State<ExploreMajor> {
                   padding: EdgeInsets.only(top: size.height*.4 - 50),
                   child: Column(
                     children: [
-                      for (int i=0; i<categoriesMajor.length; i++)
-                        CategoryCard(name: categoriesMajor[i].name, tag: "Major Occupation Group", nav: ApiConstants.cateMajorInfo[i],)
+                      for (int i=0; i<categoriesMinor.length; i++)
+                        CategoryCard(name: categoriesMinor[i].name, tag: "Minor Occupation Group", nav: ApiConstants.cateMinorInfo[i],)
                     ],
                   ),
                 )

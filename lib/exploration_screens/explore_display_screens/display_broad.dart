@@ -5,9 +5,9 @@ import 'package:multi_charts/multi_charts.dart';
 import 'package:project_2/api/category_api/cateBroad/broad_edu.dart';
 import 'package:project_2/api/category_api/cateBroad/broad_wage.dart';
 
-import '../../api/api_service.dart';
+import '../../api/api_services.dart';
 import '../../api/category_api/cateBroad/broad_skill.dart';
-import '../../api/constants.dart';
+import '../../api/api_links.dart';
 
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:syncfusion_flutter_treemap/treemap.dart';

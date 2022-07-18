@@ -1,11 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:project_2/exploration_screens/explore_groups/explore_main_categories.dart';
-import 'package:project_2/exploration_screens/explore_screens/explore_detail.dart';
-import 'explore_screens/explore_broad.dart';
-import 'explore_screens/explore_major.dart';
-import 'explore_screens/explore_minor.dart';
+import 'package:project_2/exploration_screens/explore_categories.dart';
+import 'list_exploration_screens/explore_broad.dart';
+import 'list_exploration_screens/explore_detail.dart';
+import 'list_exploration_screens/explore_major.dart';
+import 'list_exploration_screens/explore_minor.dart';
 
 class Explore extends StatefulWidget {
   const Explore({Key? key}) : super(key: key);
@@ -112,7 +112,7 @@ class _ExploreState extends State<Explore> {
                           children: [
                             Text(
                               categories[index].name,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 20, color: Color(0xFF0D1333), fontWeight: FontWeight.bold
                               ),
                             ),

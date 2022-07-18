@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:project_2/question_screens/questions.dart';
-import 'package:project_2/question_screens/test_intro.dart';
+import 'package:project_2/question_screens/display_questions.dart';
 
+import '../api/api_services.dart';
+import '../api/category_api/cateDetail/detail_skill.dart';
 import '../primary.dart';
 
 class TestResult extends StatefulWidget {
@@ -13,6 +14,18 @@ class TestResult extends StatefulWidget {
 }
 
 class _TestResultState extends State<TestResult> {
+  List<DetailSkill?>? allDetailSkill;
+
+  @override
+  void initState() {
+    super.initState();
+    _getData();
+  }
+
+  void _getData() async {
+    allDetailSkill = (await ApiService().getAllDetailSkill());
+    Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {}));
+  }
 
   void getTestResult() {
     // get API for skills in detailed occupation
@@ -24,71 +37,79 @@ class _TestResultState extends State<TestResult> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Container(
+      body: (allDetailSkill == null)
+          ? const Center(
+        child: CircularProgressIndicator(),
+      )
+          : Scaffold(
+        body: Container(
             padding: const EdgeInsets.fromLTRB(75, 75, 75, 75),
-            child: Column(
-              children: [
-                Text("RESULT",
-                  style: TextStyle(
-                    fontSize: 37,
-                    color: Colors.purple,
-                    fontWeight: FontWeight.bold,
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  // Text(allDetailSkill![0]!.data[0].lvValue.toString()),
+                  // Text(allDetailSkill![1]!.data[0].lvValue.toString()),
+                  // Text(allDetailSkill![2]!.data[0].lvValue.toString()),
+                  // Text(allDetailSkill![3]!.data[0].lvValue.toString()),
+                  const Text("RESULT",
+                    style: TextStyle(
+                      fontSize: 37,
+                      color: Colors.purple,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-                const Text("Show result here, latest result stored in 'Profile' section"),
-                Lottie.network(
-                  "https://assets2.lottiefiles.com/packages/lf20_h4bos27x.json",
-                  // repeat: true,
-                ),
-              ],
-            ),
-          ),
-          SizedBox(
-            width: 300,
-            height: 40,
-            child: TextButton(
-                  style: ButtonStyle(
-                      foregroundColor: MaterialStateProperty.all(Colors.white),
-                      backgroundColor: MaterialStateProperty.all(Colors.purple),
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12.0),
-                              side: const BorderSide(color: Colors.purple)
+                  const Text("Show result here, latest result stored in 'Profile' section"),
+                  Lottie.network(
+                    "https://assets2.lottiefiles.com/packages/lf20_h4bos27x.json",
+                    // repeat: true,
+                  ),
+                  SizedBox(
+                    width: 300,
+                    height: 40,
+                    child: TextButton(
+                          style: ButtonStyle(
+                              foregroundColor: MaterialStateProperty.all(Colors.white),
+                              backgroundColor: MaterialStateProperty.all(Colors.purple),
+                              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(12.0),
+                                      side: const BorderSide(color: Colors.purple)
+                                  )
+                              )
+                          ),
+                          onPressed: () {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) => const Questions()));                },
+                          child: const Text("Take Test Again"),
+                    ),
+                  ),
+                  const SizedBox(height: 15),
+                  SizedBox(
+                    width: 300,
+                    height: 40,
+                    child: TextButton(
+                      style: ButtonStyle(
+                          foregroundColor: MaterialStateProperty.all(Colors.white),
+                          backgroundColor: MaterialStateProperty.all(Colors.purple),
+                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12.0),
+                                  side: const BorderSide(color: Colors.purple)
+                              )
                           )
-                      )
+                      ),
+                      onPressed: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => const Primary()));
+                        },
+                      child: const Text("Done"),
+                    ),
                   ),
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => const Questions()));                },
-                  child: const Text("Take Test Again"),
-            ),
-          ),
-          const SizedBox(height: 15),
-          SizedBox(
-            width: 300,
-            height: 40,
-            child: TextButton(
-              style: ButtonStyle(
-                  foregroundColor: MaterialStateProperty.all(Colors.white),
-                  backgroundColor: MaterialStateProperty.all(Colors.purple),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12.0),
-                          side: const BorderSide(color: Colors.purple)
-                      )
-                  )
+                ],
               ),
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const Primary()));
-                },
-              child: const Text("Done"),
-            ),
           ),
-        ],
-      ),
+        ),
+      )
     );
   }
 }

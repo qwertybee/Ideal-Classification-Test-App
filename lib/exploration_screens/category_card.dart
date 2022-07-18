@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'explore_display/display_broad.dart';
-import 'explore_display/display_detail.dart';
-import 'explore_display/display_major.dart';
-import 'explore_display/display_minor.dart';
+import 'explore_display_screens/display_broad.dart';
+import 'explore_display_screens/display_detail.dart';
+import 'explore_display_screens/display_major.dart';
+import 'explore_display_screens/display_minor.dart';
 
 class CategoryCard extends StatelessWidget {
   final String name;

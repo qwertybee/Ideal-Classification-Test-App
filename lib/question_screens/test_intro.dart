@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:project_2/question_screens/history_screens/viewHistoryController.dart';
-import 'package:project_2/question_screens/questions.dart';
+import 'package:project_2/question_screens/display_questions.dart';
 
 class TestIntro extends StatelessWidget {
   const TestIntro({Key? key}) : super(key: key);
@@ -15,7 +15,7 @@ class TestIntro extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(75, 50, 75, 20),
             child: Column(
               children: [
-                Text("BE YOU",
+                const Text("BE YOU",
                 style: TextStyle(
                   fontSize: 37,
                   color: Colors.purple,

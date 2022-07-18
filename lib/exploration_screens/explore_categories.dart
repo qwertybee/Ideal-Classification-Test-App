@@ -1,4 +1,4 @@
-import 'package:project_2/api/constants.dart';
+import 'package:project_2/api/api_links.dart';
 
 class Category {
   final String name;

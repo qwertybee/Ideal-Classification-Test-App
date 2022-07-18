@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:project_2/api/category_api/cateMajor/major_edu.dart';
 import 'package:project_2/api/category_api/cateMajor/major_skill.dart';
 
-import '../../api/api_service.dart';
+import '../../api/api_services.dart';
 import '../../api/category_api/cateMajor/major_wage.dart';
-import '../../api/constants.dart';
+import '../../api/api_links.dart';
 
 import 'package:multi_charts/multi_charts.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';

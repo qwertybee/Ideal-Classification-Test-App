@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:project_2/api/category_api/cateBroad/broad_wage.dart';
 import 'package:project_2/api/category_api/cateMajor/major_edu.dart';
+import 'package:project_2/api/api_links.dart';
 import 'category_api/cateBroad/broad_edu.dart';
 import 'category_api/cateBroad/broad_skill.dart';
 import 'category_api/cateDetail/detail_edu.dart';
@@ -185,4 +186,23 @@ class ApiService {
     }
     return null;
   }
+
+  Future<List<DetailSkill?>?> getAllDetailSkill() async {
+    try {
+      List<DetailSkill?> temp = [];
+      for (var eachDetailOcc in ApiConstants.cateDetailInfo) {
+        var url = Uri.parse(eachDetailOcc[1]);
+        var response = await http.get(url);
+        if (response.statusCode == 200) {
+          DetailSkill _model = detailSkillFromJson(response.body);
+          temp.add(_model);
+        }
+      }
+      return temp;
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+    return null;
+  }
+
 }

@@ -1,85 +1,39 @@
-import 'package:flutter/material.dart';
-import 'package:project_2/question_screens/questionnaires.dart';
-import 'package:project_2/question_screens/test_0.dart';
-import 'package:project_2/question_screens/test_1.dart';
-import 'package:project_2/question_screens/test_result.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
-class Questions extends StatefulWidget {
-  const Questions({Key? key}) : super(key: key);
-
-  @override
-  State<Questions> createState() => _QuestionsState();
-}
-
-class _QuestionsState extends State<Questions> {
-  PageController _controller = PageController();
-  bool onLastPage = false;
-  bool onFirstPage = true;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          PageView(
-            controller: _controller,
-            onPageChanged: (index) {
-              setState(() {
-                onFirstPage = (index == 0);
-                onLastPage = (index == 34);
-              });
-            },
-            children: [
-              Test0(),
-              for (var eachQuestion in Questionnaires.lstQuestions)
-                Test1(question: eachQuestion),
-            ],
-          ),
-          Container(
-            alignment: Alignment(0, 0.75),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                // back or not show button
-                onFirstPage
-                ? Text("")
-                : GestureDetector(
-                  onTap: () {
-                    _controller.previousPage(
-                        duration: Duration(milliseconds: 500), curve: Curves.easeIn);
-                  },
-                  child: Text('back'),
-                ),
-
-                // dot page indicator
-                SmoothPageIndicator(
-                  controller: _controller, count: 35,
-                  effect: ScrollingDotsEffect(fixedCenter: true),
-                ),
-
-                // next or done button
-                onLastPage
-                ? GestureDetector(
-                  onTap: () {
-                    Navigator.push(context, MaterialPageRoute(
-                        builder: (context) {
-                          return TestResult();
-                    }));
-                  }, 
-                    child: Text('done')
-                )
-                : GestureDetector(
-                    onTap: () {
-                     _controller.nextPage(
-                        duration: Duration(milliseconds: 500), curve: Curves.easeIn);
-                    },
-                    child: Text('next')),
-              ],
-            )
-          )
-        ],
-      )
-    );
-  }
+class Questionnaires {
+  static List<String> lstQuestions = [
+    "1) You actively read and understand subjects around you",
+    "2) You actively listen to subjects around you",
+    "3) You are able to write information subjects clearly",
+    "4) You have the speaking ability to convey information clearly",
+    "5) You are good at maths",
+    "6) You are good at science",
+    "7) You are good in critical thinking skill",
+    "8) You actively reach out and try to learn subjects surrounding you",
+    "9) You are able to strategies how you approach learning subjects",
+    "10) You are quite conscious/aware of your surroundings",
+    "11) You have a good understanding of social perception",
+    "12) You keep track of coordination of where things are surrounding you",
+    "13) You are good at persuading people"
+    "14) You are good at making negotiation and convincing people",
+    "15) You are good at instructing people",
+    "16) You tend to give your service to others",
+    "17) You love dealing with complex problems",
+    "18) You are good at analyzing how things operate at technical level",
+    "19) You love designs in technology",
+    "20) You are good at selecting how things come together",
+    "21) You are good at bringing things together to work",
+    "22) You are good at programming things to work as they should",
+    "23) You are good at monitoring operations",
+    "24) You are good at controlling how operations go",
+    "25) You enjoy maintenance especially in equipments",
+    "26) You are good at deducing why errors occur or troubleshooting",
+    "27) You are good at repairing objects",
+    "28) You are good at analyzing quality of given objects",
+    "29) You are good at decision and judgement-making",
+    "30) You know how to analyze how systems work",
+    "31) You are good at giving fair analysis to systems",
+    "32) You are good in managing time",
+    "33) You are good at managing finances", // lv value 1.25
+    "34) You are good at managing materials",
+    "35) You are good at managing people", // lv value 2.12
+  ];
 }

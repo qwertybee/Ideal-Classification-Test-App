@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:project_2/api/constants.dart';
-import 'package:project_2/exploration_screens/explore_groups/explore_main_categories.dart';
+import 'package:project_2/exploration_screens/category_card.dart';
+import 'package:project_2/exploration_screens/explore_categories.dart';
 
-import '../category_card.dart';
+import '../../api/api_links.dart';
 
-class ExploreDetail extends StatefulWidget {
-  const ExploreDetail({Key? key}) : super(key: key);
+class ExploreBroad extends StatefulWidget {
+  const ExploreBroad({Key? key}) : super(key: key);
 
   @override
-  State<ExploreDetail> createState() => _ExploreDetailState();
+  State<ExploreBroad> createState() => _ExploreBroadState();
 }
 
-class _ExploreDetailState extends State<ExploreDetail> {
+class _ExploreBroadState extends State<ExploreBroad> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -27,7 +27,7 @@ class _ExploreDetailState extends State<ExploreDetail> {
                   width: double.infinity,
                   decoration: BoxDecoration(
                       image: DecorationImage(
-                          image: AssetImage("images/business.png"),
+                          image: AssetImage("images/ux_design.png"),
                           fit: BoxFit.fitWidth
                       ),
                       borderRadius: BorderRadius.only(
@@ -46,7 +46,7 @@ class _ExploreDetailState extends State<ExploreDetail> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text("Detailed Group",
+                                    Text("Broad Group",
                                       style: Theme.of(context).textTheme.displaySmall?.copyWith(
                                           fontWeight: FontWeight.bold
                                       ),
@@ -54,7 +54,7 @@ class _ExploreDetailState extends State<ExploreDetail> {
                                     Row(children: [
                                       Expanded(child: Column(
                                         children: [
-                                          Text("Detailed Group categories contain ${categoriesDetail.length} major categories that comprises of the jobs of the world",
+                                          Text("Broad Group categories contain ${categoriesBroad.length} that comprises of the jobs of the world",
                                             maxLines: 5,
                                             style: TextStyle(
                                               fontSize: 20,
@@ -80,8 +80,8 @@ class _ExploreDetailState extends State<ExploreDetail> {
                   padding: EdgeInsets.only(top: size.height*.4 - 50),
                   child: Column(
                     children: [
-                      for (int i=0; i<categoriesDetail.length; i++)
-                        CategoryCard(name: categoriesDetail[i].name, tag: "Detailed Occupation Group", nav: ApiConstants.cateDetailInfo[i],)
+                      for (int i=0; i<categoriesBroad.length; i++)
+                        CategoryCard(name: categoriesBroad[i].name, tag: "Broad Occupation Group", nav: ApiConstants.cateBroadInfo[i],)
                     ],
                   ),
                 )
