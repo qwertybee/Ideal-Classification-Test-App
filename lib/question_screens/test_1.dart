@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:project_2/shared.dart';
+import 'package:provider/provider.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../providers/user_provider.dart';
 
 class Test1 extends StatefulWidget {
   final String question;
@@ -21,7 +24,9 @@ class _Test1State extends State<Test1> {
   @override
   void initState() {
     super.initState();
-    SharedPrefUtils.saveInt(widget.index.toString(), scale);
+    context.read<UserProvider>().userSkillVals[widget.index] = scale;
+    debugPrint(context.read<UserProvider>().getMapVal(widget.index).toString());
+    // SharedPrefUtils.saveInt(widget.index.toString(), scale);
   }
 
   // Future<void> _storeValue() async {
@@ -67,9 +72,9 @@ class _Test1State extends State<Test1> {
                               groupValue: scale,
                               onChanged: (val) {
                                 setState(() {
-                                  scale = val as int;
-                                  SharedPrefUtils.saveInt(widget.index.toString(), scale);
-                                  // debugPrint(scale.toString());
+                                  scale = 2;
+                                  context.read<UserProvider>().setMapVal(widget.index, scale);
+                                  debugPrint(context.read<UserProvider>().getMapVal(widget.index).toString());
                                 });
                               },
                               activeColor: Colors.blue,
@@ -82,9 +87,9 @@ class _Test1State extends State<Test1> {
                               groupValue: scale,
                               onChanged: (val) {
                                 setState(() {
-                                  scale = val as int;
-                                  SharedPrefUtils.saveInt(widget.index.toString(), scale);
-                                  // debugPrint(scale.toString());
+                                  scale = 1;
+                                  context.read<UserProvider>().setMapVal(widget.index, scale);
+                                  debugPrint(context.read<UserProvider>().getMapVal(widget.index).toString());
                                 });
                               },
                               activeColor: Colors.blue,
@@ -97,10 +102,9 @@ class _Test1State extends State<Test1> {
                               groupValue: scale,
                               onChanged: (val) {
                                 setState(() {
-                                  scale = val as int;
-                                  SharedPrefUtils.saveInt(widget.index.toString(), scale);
-                                  SharedPrefUtils.readPrefInt((widget.index-1).toString());
-                                  // debugPrint(scale.toString());
+                                  scale = 0;
+                                  context.read<UserProvider>().setMapVal(widget.index, scale);
+                                  debugPrint(context.read<UserProvider>().getMapVal(widget.index).toString());
                                 });
                               },
                               activeColor: Colors.blue,
@@ -113,9 +117,9 @@ class _Test1State extends State<Test1> {
                               groupValue: scale,
                               onChanged: (val) {
                                 setState(() {
-                                  scale = val as int;
-                                  SharedPrefUtils.saveInt(widget.index.toString(), scale);
-                                  // debugPrint(scale.toString());
+                                  scale = 1;
+                                  context.read<UserProvider>().setMapVal(widget.index, scale);
+                                  debugPrint(context.read<UserProvider>().getMapVal(widget.index).toString());
                                 });
                               },
                               activeColor: Colors.blue,
@@ -128,9 +132,9 @@ class _Test1State extends State<Test1> {
                               groupValue: scale,
                               onChanged: (val) {
                                 setState(() {
-                                  scale = val as int;
-                                  SharedPrefUtils.saveInt(widget.index.toString(), scale);
-                                  // debugPrint(scale.toString());
+                                  scale = -2;
+                                  context.read<UserProvider>().setMapVal(widget.index, scale);
+                                  debugPrint(context.read<UserProvider>().getMapVal(widget.index).toString());
                                 });
                               },
                               activeColor: Colors.blue,

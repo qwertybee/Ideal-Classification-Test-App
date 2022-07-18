@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:project_2/exploration_screens/explore_categories.dart';
+import 'package:project_2/providers/user_provider.dart';
 import 'package:project_2/question_screens/display_questions.dart';
 import 'package:project_2/question_screens/questions.dart';
 import 'package:project_2/shared.dart';
+import 'package:provider/provider.dart';
 
 import '../api/api_services.dart';
 import '../api/category_api/cateDetail/detail_skill.dart';
@@ -26,7 +28,6 @@ class _TestResultState extends State<TestResult> {
   void initState() {
     super.initState();
     _getData();
-    getTestResult();
   }
 
   void _getData() async {
@@ -42,34 +43,36 @@ class _TestResultState extends State<TestResult> {
   //   }
   // }
 
-  Future<void> getTestResult() async {
-    double leastVar = 1000;
-    String currLeastVar = "";
-    for (var eachDetailSkill in allDetailSkill!) {
-      debugPrint(SharedPrefUtils.readPrefInt(0.toString()));
-      double sumDiff = 0;
-      int count = 0;
-      for (int i = 0; i < Questionnaires.lstQuestions.length; i++) {
-        int eachUserSkillVal = SharedPrefUtils.readPrefInt(i.toString()) ?? 0;
-        debugPrint("index with value of $eachUserSkillVal");
-        sumDiff += (eachUserSkillVal - eachDetailSkill!.data[i].lvValue).abs();
-        debugPrint("val of sumDiff $sumDiff");
-        if (i == Questionnaires.lstQuestions.length-1) {
-          if (sumDiff < leastVar) {
-            leastVar = sumDiff;
-            currLeastVar = categoriesDetail[count].name;
-            debugPrint("done with count $count with result as $currLeastVar");
+  void getTestResult() {
+    if (allDetailSkill != null) {
+      double leastVar = 1000;
+      String currLeastVar = "";
+      for (var eachDetailSkill in allDetailSkill!) {
+        double sumDiff = 0;
+        int count = 0;
+        for (int i = 0; i < Questionnaires.lstQuestions.length; i++) {
+          int eachUserSkillVal = context.read<UserProvider>().userSkillVals[i] ?? 0;
+          debugPrint("index with value of $eachUserSkillVal");
+          sumDiff += (eachUserSkillVal - eachDetailSkill!.data[i].lvValue).abs();
+          debugPrint("val of sumDiff $sumDiff");
+          if (i == Questionnaires.lstQuestions.length-1) {
+            if (sumDiff < leastVar) {
+              leastVar = sumDiff;
+              currLeastVar = categoriesDetail[count].name;
+              debugPrint("done with count $count with result as $currLeastVar");
+            }
           }
         }
+        count++;
       }
-      count++;
+      userResult = currLeastVar;
     }
-    userResult = currLeastVar;
   }
 
 
   @override
   Widget build(BuildContext context) {
+    getTestResult();
     return Scaffold(
       body: (allDetailSkill == null)
           ? const Center(

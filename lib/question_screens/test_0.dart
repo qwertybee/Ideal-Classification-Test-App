@@ -16,12 +16,6 @@ class Test0 extends StatefulWidget {
 class _Test0State extends State<Test0> {
   // late final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
-  @override
-  void initState() {
-    super.initState();
-    SharedPrefUtils.clearPref();
-  }
-
   // Future<void> _clearPref() async { // clear all data from sharedPrefs
   //   final SharedPreferences prefs = await _prefs;
   //   await prefs.clear();
