@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:project_2/question_screens/display_questions.dart';
+import 'package:project_2/question_screens/questions.dart';
 
 import '../api/api_services.dart';
 import '../api/category_api/cateDetail/detail_skill.dart';
 import '../primary.dart';
+
+import 'package:shared_preferences/shared_preferences.dart';
 
 class TestResult extends StatefulWidget {
   const TestResult({Key? key}) : super(key: key);
@@ -15,6 +18,7 @@ class TestResult extends StatefulWidget {
 
 class _TestResultState extends State<TestResult> {
   List<DetailSkill?>? allDetailSkill;
+  late final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
   @override
   void initState() {
@@ -27,15 +31,43 @@ class _TestResultState extends State<TestResult> {
     Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {}));
   }
 
-  void getTestResult() {
+  Future<void> getTestResult() async {
+    final SharedPreferences prefs = await _prefs;
+    List<List<int>> lstVariance = [];
+    for (var eachDetailSkill in allDetailSkill!) {
+      List<int> variance = [];
+      for (int i = 0; i < Questionnaires.lstQuestions.length; i++) {
+        // there's 35 skills to compare in each occupation
+        // variance = user's 35 skills between each skill's lv value
+        String eachUserSkillVal = prefs.getString(i.toString()) ?? '0';
+        if (i == Questionnaires.lstQuestions.length-1) {
+          // when last element
+
+        }
+        debugPrint(eachUserSkillVal);
+      }
+      lstVariance.add(variance);
+    }
     // get API for skills in detailed occupation
     // get difference/variance of each occupation's skills
     // get average of all variance
     // lowest variance is the result
   }
 
+
   @override
   Widget build(BuildContext context) {
+    late final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+    late String userResult;
+
+
+    // Future<void> _clearPref() async { // clear all data from sharedPrefs
+    //   final SharedPreferences prefs = await _prefs;
+    //   await prefs.clear();
+    // }
+
+    // if function is not async, no need for await when accessing its return value
+    getTestResult();
     return Scaffold(
       body: (allDetailSkill == null)
           ? const Center(

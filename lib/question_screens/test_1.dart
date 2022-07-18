@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
 class Test1 extends StatefulWidget {
   final String question;
-  const Test1({Key? key, required this.question}) : super(key: key);
+  final int index;
+  const Test1({Key? key, required this.question, required this.index}) : super(key: key);
 
   @override
   State<Test1> createState() => _Test1State();
@@ -12,9 +15,30 @@ class Test1 extends StatefulWidget {
 class _Test1State extends State<Test1> {
   int scale = 0;
   int group = 1;
+  late final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+
+  @override
+  void initState() {
+    super.initState();
+    // _clearPref();
+  }
+
+  Future<void> _clearPref() async { // clear all data from sharedPrefs
+    final SharedPreferences prefs = await _prefs;
+    await prefs.clear();
+  }
+
+  Future<void> _storeValue() async {
+    final SharedPreferences prefs = await _prefs;
+    // final String prefSkillVal = prefs.getString(widget.index.toString()) ?? '0';
+    // debugPrint("prefSkillsvalue here before " + prefSkillVal.toString());
+    prefs.setString(widget.index.toString(), scale.toString());
+    // debugPrint("prefSkillsvalue here after " + scale.toString());
+  }
 
   @override
   Widget build(BuildContext context) {
+    _storeValue();
     return Scaffold(
       body: Stack(
         fit: StackFit.expand,
@@ -49,7 +73,7 @@ class _Test1State extends State<Test1> {
                               onChanged: (val) {
                                 setState(() {
                                   scale = val as int;
-                                  debugPrint(scale.toString());
+                                  // debugPrint(scale.toString());
                                 });
                               },
                               activeColor: Colors.blue,
@@ -63,7 +87,7 @@ class _Test1State extends State<Test1> {
                               onChanged: (val) {
                                 setState(() {
                                   scale = val as int;
-                                  debugPrint(scale.toString());
+                                  // debugPrint(scale.toString());
                                 });
                               },
                               activeColor: Colors.blue,
@@ -77,7 +101,7 @@ class _Test1State extends State<Test1> {
                               onChanged: (val) {
                                 setState(() {
                                   scale = val as int;
-                                  debugPrint(scale.toString());
+                                  // debugPrint(scale.toString());
                                 });
                               },
                               activeColor: Colors.blue,
@@ -91,7 +115,7 @@ class _Test1State extends State<Test1> {
                               onChanged: (val) {
                                 setState(() {
                                   scale = val as int;
-                                  debugPrint(scale.toString());
+                                  // debugPrint(scale.toString());
                                 });
                               },
                               activeColor: Colors.blue,
@@ -105,7 +129,7 @@ class _Test1State extends State<Test1> {
                               onChanged: (val) {
                                 setState(() {
                                   scale = val as int;
-                                  debugPrint(scale.toString());
+                                  // debugPrint(scale.toString());
                                 });
                               },
                               activeColor: Colors.blue,

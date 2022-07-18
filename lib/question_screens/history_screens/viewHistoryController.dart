@@ -13,6 +13,10 @@ class ViewHistory extends StatefulWidget {
 class _ViewHistoryState extends State<ViewHistory> {
   @override
   Widget build(BuildContext context) {
+    // show latest result of test only (no need to be list), if there doesn't exist result
+    // text "Oops! No test history found"
+    // picture of error from storyset.com
+    // just have button to 'take test now' below it
     return Scaffold(
       body: StreamBuilder<User?>(
         stream: FirebaseAuth.instance.authStateChanges(),

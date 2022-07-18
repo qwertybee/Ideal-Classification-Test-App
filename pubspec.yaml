@@ -44,6 +44,7 @@ dependencies:
   syncfusion_flutter_treemap: ^20.2.38-beta
   multi_charts: ^0.3.0
   flutter_svg_provider: ^1.0.3
+  shared_preferences: ^2.0.15
   
 dev_dependencies:
   flutter_test:

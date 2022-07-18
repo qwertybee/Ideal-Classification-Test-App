@@ -29,7 +29,7 @@ class TestIntro extends StatelessWidget {
                   ),
                   textAlign: TextAlign.center,
                 ),
-                SizedBox(height: 15),
+                const SizedBox(height: 15),
                 Lottie.network(
                     "https://assets5.lottiefiles.com/private_files/lf30_ppdduhse.json",
                   // repeat: true,
@@ -78,7 +78,7 @@ class TestIntro extends StatelessWidget {
               onPressed: () async {
                 Navigator.push(context, MaterialPageRoute(builder: (context) => ViewHistory()));
               },
-              child: const Text("View Test History"),
+              child: const Text("View Your Results"),
             ),
           ),
         ],

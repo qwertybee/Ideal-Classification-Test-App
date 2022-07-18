@@ -13,7 +13,7 @@ class Questions extends StatefulWidget {
 }
 
 class _QuestionsState extends State<Questions> {
-  PageController _controller = PageController();
+  final PageController _controller = PageController();
   bool onLastPage = false;
   bool onFirstPage = true;
 
@@ -31,9 +31,9 @@ class _QuestionsState extends State<Questions> {
               });
             },
             children: [
-              Test0(),
-              for (var eachQuestion in Questionnaires.lstQuestions)
-                Test1(question: eachQuestion),
+              const Test0(),
+              for (int i = 0; i < Questionnaires.lstQuestions.length; i++)
+                Test1(question: Questionnaires.lstQuestions[i], index: i),
             ],
           ),
           Container(
