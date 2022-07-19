@@ -71,20 +71,21 @@ class _ExploreState extends State<Explore> {
                 borderRadius: BorderRadius.circular(40),
               ),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  IconButton(
-                      icon: Icon(Icons.search_rounded),
-                      onPressed: () {
-                        showSearch(
-                          context: context,
-                          delegate: MySearchDelegate(),
-                        );
-                      },
-                  ),
-                  Text("Search",
+                  const Text("    Search",
                     style: TextStyle(
                       fontSize: 18, color: Color(0xFFA0A5BD)
                     ),
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.search_rounded),
+                    onPressed: () {
+                      showSearch(
+                        context: context,
+                        delegate: MySearchDelegate(),
+                      );
+                    },
                   ),
                 ],
               ),
