@@ -134,7 +134,7 @@ class _ExploreState extends State<Explore> {
                             ),
                             Text('${categories[index].tag} Groups',
                             style: TextStyle(
-                              color: Color(0xFF0D1333).withOpacity(0.5)
+                              color: Color(0xFF0D1333).withOpacity(0.8)
                             ),
                             )
                           ],
