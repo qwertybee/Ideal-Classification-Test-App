@@ -75,7 +75,7 @@ class _ExploreState extends State<Explore> {
                 children: [
                   const Text("    Search",
                     style: TextStyle(
-                      fontSize: 18, color: Color(0xFFA0A5BD)
+                      fontSize: 18, color: Colors.blueGrey
                     ),
                   ),
                   IconButton(
