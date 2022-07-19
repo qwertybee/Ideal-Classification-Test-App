@@ -489,21 +489,21 @@ packages:
       name: syncfusion_flutter_charts
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "20.2.38"
+    version: "20.2.39"
   syncfusion_flutter_core:
     dependency: transitive
     description:
       name: syncfusion_flutter_core
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "20.2.38"
+    version: "20.2.39"
   syncfusion_flutter_treemap:
     dependency: "direct main"
     description:
       name: syncfusion_flutter_treemap
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "20.2.38-beta"
+    version: "20.2.39-beta"
   term_glyph:
     dependency: transitive
     description:

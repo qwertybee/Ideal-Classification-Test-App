@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:project_2/profile_screens/change_password.dart';
@@ -43,12 +44,23 @@ class _ProfilePageState extends State<ProfilePage>{
                     label: Text(
                       'View Test History',
                     ),
-                    onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ViewFirebaseHistory(),
-                      ),
-                    ),
+                    onPressed: () {
+                      try {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  ViewFirebaseHistory()
+                              ,
+                            )
+                        );
+                      }
+                      on StateError catch (e) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('No Test History found!')),);
+                      }
+                    }
+
                 ),
               ),
 

@@ -5,9 +5,9 @@ import 'package:lottie/lottie.dart';
 import 'package:project_2/exploration_screens/explore_categories.dart';
 import 'package:project_2/exploration_screens/explore_display_screens/display_detail.dart';
 import 'package:project_2/providers/user_provider.dart';
+import 'package:project_2/question_screens/SharedPrefUtils.dart';
 import 'package:project_2/question_screens/display_questions.dart';
 import 'package:project_2/question_screens/questions.dart';
-import 'package:project_2/shared.dart';
 import 'package:provider/provider.dart';
 
 import '../api/api_links.dart';
@@ -74,13 +74,12 @@ class _TestResultState extends State<TestResult> {
             .collection("test_result")
             .add({
           'result': userResult,
-          'date': DateTime.now(),
+          'date': DateTime.now().toString(),
         });
       } else {
         // Not signed in, save result to shared prefs
-        SharedPreferences prefs = await SharedPreferences.getInstance();
-        prefs.setString('result', userResult!);
-        prefs.setString('date', DateTime.now().toString());
+        SharedPrefUtils.saveStr('result', userResult!);
+        SharedPrefUtils.saveStr('date', DateTime.now().toString());
       }
     }
   }

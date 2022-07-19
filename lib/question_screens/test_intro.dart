@@ -77,7 +77,7 @@ class TestIntro extends StatelessWidget {
                   )
               ),
               onPressed: () async {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => TestResult()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const ViewHistory()));
               },
               child: const Text("View Your Results"),
             ),
