@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:project_2/question_screens/history_screens/viewHistoryController.dart';
 import 'package:project_2/question_screens/display_questions.dart';
+import 'package:project_2/question_screens/test_result.dart';
 
 class TestIntro extends StatelessWidget {
   const TestIntro({Key? key}) : super(key: key);
@@ -76,7 +77,7 @@ class TestIntro extends StatelessWidget {
                   )
               ),
               onPressed: () async {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => ViewHistory()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => TestResult()));
               },
               child: const Text("View Your Results"),
             ),

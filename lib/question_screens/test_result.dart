@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:project_2/exploration_screens/explore_categories.dart';
+import 'package:project_2/exploration_screens/explore_display_screens/display_detail.dart';
 import 'package:project_2/providers/user_provider.dart';
 import 'package:project_2/question_screens/display_questions.dart';
 import 'package:project_2/question_screens/questions.dart';
 import 'package:project_2/shared.dart';
 import 'package:provider/provider.dart';
 
+import '../api/api_links.dart';
 import '../api/api_services.dart';
 import '../api/category_api/cateDetail/detail_skill.dart';
 import '../primary.dart';
@@ -23,6 +25,7 @@ class TestResult extends StatefulWidget {
 class _TestResultState extends State<TestResult> {
   List<DetailSkill?>? allDetailSkill;
   String? userResult = "";
+  int indexOfDetailOcc = 0;
 
   @override
   void initState() {
@@ -35,36 +38,26 @@ class _TestResultState extends State<TestResult> {
     Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {}));
   }
 
-  // Future<void> saveResultToFirebase() async {
-  //   final SharedPreferences prefs = await _prefs;
-  //   for (int i = 0; i < Questionnaires.lstQuestions.length; i++) {
-  //     String eachUserSkillVal = prefs.getString(i.toString()) ?? '0';
-  //     // sth like this using prefs.getStuff() like dictionary
-  //   }
-  // }
-
   void getTestResult() {
     if (allDetailSkill != null) {
       double leastVar = 1000;
       String currLeastVar = "";
       for (var eachDetailSkill in allDetailSkill!) {
         double sumDiff = 0;
-        int count = 0;
+        indexOfDetailOcc = 0;
         for (int i = 0; i < Questionnaires.lstQuestions.length; i++) {
           int eachUserSkillVal = context.read<UserProvider>().userSkillVals[i] ?? 0;
-          debugPrint("index with value of $eachUserSkillVal");
-          sumDiff += (eachUserSkillVal - eachDetailSkill!.data[i].lvValue).abs();
-          debugPrint("val of sumDiff $sumDiff");
+          sumDiff += (eachDetailSkill!.data[i].lvValue - eachUserSkillVal);
           if (i == Questionnaires.lstQuestions.length-1) {
             if (sumDiff < leastVar) {
               leastVar = sumDiff;
-              currLeastVar = categoriesDetail[count].name;
-              debugPrint("done with count $count with result as $currLeastVar");
+              currLeastVar = categoriesDetail[indexOfDetailOcc].name;
             }
           }
         }
-        count++;
+        indexOfDetailOcc++;
       }
+      indexOfDetailOcc--;
       userResult = currLeastVar;
     }
   }
@@ -74,76 +67,110 @@ class _TestResultState extends State<TestResult> {
   Widget build(BuildContext context) {
     getTestResult();
     return Scaffold(
-      body: (allDetailSkill == null)
+      body: (allDetailSkill == null || userResult == null)
           ? const Center(
         child: CircularProgressIndicator(),
       )
           : Scaffold(
-        body: Container(
-            padding: const EdgeInsets.fromLTRB(75, 75, 75, 75),
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Text("result is here ${userResult.toString()}"),
-                  const Text("RESULT",
-                    style: TextStyle(
-                      fontSize: 37,
-                      color: Colors.purple,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const Text("Show result here, latest result stored in 'Profile' section"),
-                  Lottie.network(
-                    "https://assets2.lottiefiles.com/packages/lf20_h4bos27x.json",
-                    // repeat: true,
-                  ),
-                  SizedBox(
-                    width: 300,
-                    height: 40,
-                    child: TextButton(
-                          style: ButtonStyle(
-                              foregroundColor: MaterialStateProperty.all(Colors.white),
-                              backgroundColor: MaterialStateProperty.all(Colors.purple),
-                              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(12.0),
-                                      side: const BorderSide(color: Colors.purple)
-                                  )
-                              )
-                          ),
-                          onPressed: () {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) => const Questions()));                },
-                          child: const Text("Take Test Again"),
-                    ),
-                  ),
-                  const SizedBox(height: 15),
-                  SizedBox(
-                    width: 300,
-                    height: 40,
-                    child: TextButton(
-                      style: ButtonStyle(
-                          foregroundColor: MaterialStateProperty.all(Colors.white),
-                          backgroundColor: MaterialStateProperty.all(Colors.purple),
-                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                              RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12.0),
-                                  side: const BorderSide(color: Colors.purple)
-                              )
-                          )
+        body: Column(
+          children: [
+            Container(
+              padding: const EdgeInsets.fromLTRB(75, 110, 75, 50),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    const Text("RESULT",
+                      style: TextStyle(
+                        fontSize: 40,
+                        color: Colors.green,
+                        fontWeight: FontWeight.bold,
                       ),
-                      onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => const Primary()));
-                        },
-                      child: const Text("Done"),
                     ),
-                  ),
-                ],
+                    Text(
+                        "\n$userResult\n",
+                      style: const TextStyle(
+                        fontSize: 30, fontWeight: FontWeight.bold, color: Colors.blueGrey
+                      ),
+                    ),
+                    Lottie.network(
+                      "https://assets9.lottiefiles.com/private_files/lf30_qam8tww4.json",
+                    ),
+                  ],
+                ),
               ),
-          ),
+            ),
+            SizedBox(
+              width: 300,
+              height: 40,
+              child: TextButton(
+                style: ButtonStyle(
+                    foregroundColor: MaterialStateProperty.all(Colors.white),
+                    backgroundColor: MaterialStateProperty.all(Colors.green),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12.0),
+                        )
+                    )
+                ),
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => getResultRedirection()));                },
+                child: Text("More about $userResult"),
+              ),
+            ),
+            const SizedBox(height: 15),
+            SizedBox(
+              width: 300,
+              height: 40,
+              child: TextButton(
+                style: ButtonStyle(
+                    foregroundColor: MaterialStateProperty.all(Colors.white),
+                    backgroundColor: MaterialStateProperty.all(Colors.green),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12.0),
+                        )
+                    )
+                ),
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const Questions()));
+                  },
+                child: const Text("Take Test Again"),
+              ),
+            ),
+            const SizedBox(height: 15),
+            SizedBox(
+              width: 300,
+              height: 40,
+              child: TextButton(
+                style: ButtonStyle(
+                    foregroundColor: MaterialStateProperty.all(Colors.white),
+                    backgroundColor: MaterialStateProperty.all(Colors.green),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12.0),
+                        )
+                    )
+                ),
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const Primary()));
+                },
+                child: const Text("Done"),
+              ),
+            ),
+          ],
+
         ),
       )
+    );
+  }
+
+  getResultRedirection() {
+    return DisplayDetail(title: categoriesDetail[indexOfDetailOcc].name,
+        category: "Detailed Occupation Group",
+        nav: ApiConstants.cateDetailInfo[indexOfDetailOcc]
     );
   }
 }
