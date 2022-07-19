@@ -54,11 +54,11 @@ class _ExploreDetailState extends State<ExploreDetail> {
                                     Row(children: [
                                       Expanded(child: Column(
                                         children: [
-                                          Text("Detailed Group categories contain ${categoriesDetail.length} major categories that comprises of the jobs of the world",
+                                          Text("Detailed Group categories contains ${categoriesDetail.length} group major categories that comprises of the jobs of the world",
                                             maxLines: 5,
                                             style: TextStyle(
                                               fontSize: 20,
-                                              color: Color(0xFF8F8F8F),
+                                              color: Colors.black87,
                                             ),
                                           ),
                                           SizedBox(height: 5,),

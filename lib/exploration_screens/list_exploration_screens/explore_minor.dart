@@ -54,11 +54,11 @@ class _ExploreMinorState extends State<ExploreMinor> {
                                     Row(children: [
                                       Expanded(child: Column(
                                         children: [
-                                          Text("Minor Group categories contain ${categoriesMinor.length} that comprises of the jobs of the world",
+                                          Text("Minor Group categories contains the ${categoriesMinor.length} job group that comprises of the jobs of the world",
                                             maxLines: 5,
                                             style: TextStyle(
                                               fontSize: 20,
-                                              color: Color(0xFF8F8F8F),
+                                              color: Colors.black87,
                                             ),
                                           ),
                                           SizedBox(height: 5,),

@@ -26,7 +26,7 @@ class _ExploreMajorState extends State<ExploreMajor> {
                 Container(
                   height: size.height * .35,
                   width: double.infinity,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       image: DecorationImage(
                           image: AssetImage("images/marketing.png"),
                           fit: BoxFit.fitWidth
@@ -55,11 +55,11 @@ class _ExploreMajorState extends State<ExploreMajor> {
                                     Row(children: [
                                       Expanded(child: Column(
                                         children: [
-                                          Text("Major Group categories contain ${categoriesMajor.length} that comprises of the jobs of the world",
+                                          Text("Major Group categories contains ${categoriesMajor.length} group that comprises of the jobs of the world",
                                             maxLines: 5,
                                             style: TextStyle(
                                               fontSize: 20,
-                                              color: Color(0xFF8F8F8F),
+                                              color: Colors.black87,
                                             ),
                                           ),
                                           SizedBox(height: 5,),
