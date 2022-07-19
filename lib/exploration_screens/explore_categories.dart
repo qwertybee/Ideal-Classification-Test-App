@@ -13,14 +13,14 @@ List<Category> categories = categoriesData
     .toList();
 
 var categoriesData = [
-  {"name": "Major Group", 'tag': 6, 'nav': "images/marketing.png"},
-  {"name": "Broad Occupation", 'tag': 11, 'nav': "images/ux_design.png"},
+  {"name": "Major Group", 'tag': categoriesMajorData.length, 'nav': "images/marketing.png"},
+  {"name": "Broad Occupation", 'tag': categoriesBroadData.length, 'nav': "images/ux_design.png"},
   {
     "name": "Minor Group",
-    'tag': 16,
+    'tag': categoriesMinorData.length,
     'nav': "images/photography.png"
   },
-  {"name": "Detailed Occupation", 'tag': 70, 'nav': "images/business.png"},
+  {"name": "Detailed Occupation", 'tag': categoriesDetailData.length, 'nav': "images/business.png"},
 ];
 
 // EACH DETAIL OF MAJOR GROUP CATEGORIES
