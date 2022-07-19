@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:project_2/exploration_screens/explore_categories.dart';
@@ -23,6 +25,7 @@ class TestResult extends StatefulWidget {
 }
 
 class _TestResultState extends State<TestResult> {
+  final db = FirebaseFirestore.instance;
   List<DetailSkill?>? allDetailSkill;
   String? userResult = "";
   int indexOfDetailOcc = 0;
@@ -38,7 +41,8 @@ class _TestResultState extends State<TestResult> {
     Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {}));
   }
 
-  void getTestResult() {
+
+  getTestResult() async {
     if (allDetailSkill != null) {
       double leastVar = 1000;
       String currLeastVar = "";
@@ -46,9 +50,11 @@ class _TestResultState extends State<TestResult> {
         double sumDiff = 0;
         indexOfDetailOcc = 0;
         for (int i = 0; i < Questionnaires.lstQuestions.length; i++) {
-          int eachUserSkillVal = context.read<UserProvider>().userSkillVals[i] ?? 0;
+          int eachUserSkillVal = context
+              .read<UserProvider>()
+              .userSkillVals[i] ?? 0;
           sumDiff += (eachDetailSkill!.data[i].lvValue - eachUserSkillVal);
-          if (i == Questionnaires.lstQuestions.length-1) {
+          if (i == Questionnaires.lstQuestions.length - 1) {
             if (sumDiff < leastVar) {
               leastVar = sumDiff;
               currLeastVar = categoriesDetail[indexOfDetailOcc].name;
@@ -58,9 +64,27 @@ class _TestResultState extends State<TestResult> {
         indexOfDetailOcc++;
       }
       indexOfDetailOcc--;
+
       userResult = currLeastVar;
+
+      if (FirebaseAuth.instance.currentUser != null) {
+        // Signed in, save result to firebase
+        db.collection('user_test_results').doc(
+            FirebaseAuth.instance.currentUser?.uid)
+            .collection("test_result")
+            .add({
+          'result': userResult,
+          'date': DateTime.now(),
+        });
+      } else {
+        // Not signed in, save result to shared prefs
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.setString('result', userResult!);
+        prefs.setString('date', DateTime.now().toString());
+      }
     }
   }
+
 
 
   @override
