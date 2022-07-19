@@ -23,7 +23,6 @@ var categoriesData = [
   {"name": "Detailed Occupation", 'tag': 70, 'nav': "images/business.png"},
 ];
 
-
 // EACH DETAIL OF MAJOR GROUP CATEGORIES
 List<Category> categoriesMajor = categoriesMajorData
     .map((item) => Category(item['name'].toString(), item['tag'].toString(), item['nav'].toString()))

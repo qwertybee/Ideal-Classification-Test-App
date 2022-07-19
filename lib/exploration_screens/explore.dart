@@ -1,7 +1,13 @@
+import 'dart:core';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:project_2/exploration_screens/explore_categories.dart';
+import 'explore_display_screens/display_broad.dart';
+import 'explore_display_screens/display_detail.dart';
+import 'explore_display_screens/display_major.dart';
+import 'explore_display_screens/display_minor.dart';
 import 'list_exploration_screens/explore_broad.dart';
 import 'list_exploration_screens/explore_detail.dart';
 import 'list_exploration_screens/explore_major.dart';
@@ -57,7 +63,7 @@ class _ExploreState extends State<Explore> {
             ),
             Container(
               margin: const EdgeInsets.symmetric(vertical: 25),
-              padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 7),
               height: 50,
               width: double.infinity,
               decoration: BoxDecoration(
@@ -65,7 +71,16 @@ class _ExploreState extends State<Explore> {
                 borderRadius: BorderRadius.circular(40),
               ),
               child: Row(
-                children: const [
+                children: [
+                  IconButton(
+                      icon: Icon(Icons.search_rounded),
+                      onPressed: () {
+                        showSearch(
+                          context: context,
+                          delegate: MySearchDelegate(),
+                        );
+                      },
+                  ),
                   Text("Search",
                     style: TextStyle(
                       fontSize: 18, color: Color(0xFFA0A5BD)
@@ -133,4 +148,95 @@ class _ExploreState extends State<Explore> {
       ),
     );
   }
+}
+
+List<String>? getSearchResultsSuggestions() {
+  List<String>? temp = [];
+  for (var eachName in categoriesMajor) {
+    temp.add(eachName.name);
+  }
+  for (var eachName in categoriesBroad) {
+    temp.add(eachName.name);
+  }
+  for (var eachName in categoriesMinor) {
+    temp.add(eachName.name);
+  }
+  for (var eachName in categoriesDetail) {
+    temp.add(eachName.name);
+  }
+  return temp;
+}
+
+Widget getDisplayCate(String name, String tag, List<String> nav) {
+  if (tag == "Major Occupation Group") { // tag == category
+    return DisplayMajor(title: name, category: tag, nav: nav,);
+  }
+  else if (tag == "Broad Occupation Group") {
+    return DisplayBroad(title: name, category: tag, nav: nav,);
+  }
+  else if (tag == "Minor Occupation Group") {
+    return DisplayMinor(title: name, category: tag, nav: nav,);
+  }
+  else {
+    return DisplayDetail(title: name, category: tag, nav: nav,);
+  }
+}
+
+class MySearchDelegate extends SearchDelegate {
+  late final List<String>? searchResults = getSearchResultsSuggestions();
+
+
+  @override
+  Widget? buildLeading(BuildContext context) => IconButton(
+    icon: Icon(Icons.arrow_back_rounded),
+    onPressed: () {
+      close(context, null);
+    },
+  );
+
+  @override
+  List<Widget>? buildActions(BuildContext context) => [
+    IconButton(
+        onPressed: () {
+          if (query.isEmpty) {
+            close(context, null);
+          }
+          else {
+            query = "";
+          }
+        },
+        icon: const Icon(Icons.clear),
+    ),
+  ];
+
+  @override
+  Widget buildResults(BuildContext context) => Center(
+    child: Text(
+      query,
+    ),
+  );
+//gotoDisplayResult(context, query);
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    List<String>? suggestions = searchResults?.where((searchResult) {
+        final result = searchResult.toLowerCase();
+        final input = query.toLowerCase();
+        return result.contains(input);
+    }).toList();
+
+    return ListView.builder(
+        itemCount: suggestions?.length,
+        itemBuilder: (context, index) {
+          final suggestion = suggestions![index];
+          return ListTile(
+            title: Text(suggestion),
+            onTap: () {
+              query = suggestion;
+              showResults(context);
+            },
+          );
+        });
+  }
+
+
 }
