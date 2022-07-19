@@ -117,7 +117,7 @@ class _Test1State extends State<Test1> {
                               groupValue: scale,
                               onChanged: (val) {
                                 setState(() {
-                                  scale = 1;
+                                  scale = -1;
                                   context.read<UserProvider>().setMapVal(widget.index, scale);
                                   // debugPrint(context.read<UserProvider>().getMapVal(widget.index).toString());
                                 });
