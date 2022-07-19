@@ -25,7 +25,7 @@ class _Test1State extends State<Test1> {
   void initState() {
     super.initState();
     context.read<UserProvider>().userSkillVals[widget.index] = scale;
-    debugPrint(context.read<UserProvider>().getMapVal(widget.index).toString());
+    // debugPrint(context.read<UserProvider>().getMapVal(widget.index).toString());
     // SharedPrefUtils.saveInt(widget.index.toString(), scale);
   }
 
@@ -74,7 +74,7 @@ class _Test1State extends State<Test1> {
                                 setState(() {
                                   scale = 2;
                                   context.read<UserProvider>().setMapVal(widget.index, scale);
-                                  debugPrint(context.read<UserProvider>().getMapVal(widget.index).toString());
+                                  // debugPrint(context.read<UserProvider>().getMapVal(widget.index).toString());
                                 });
                               },
                               activeColor: Colors.blue,
@@ -89,7 +89,7 @@ class _Test1State extends State<Test1> {
                                 setState(() {
                                   scale = 1;
                                   context.read<UserProvider>().setMapVal(widget.index, scale);
-                                  debugPrint(context.read<UserProvider>().getMapVal(widget.index).toString());
+                                  // debugPrint(context.read<UserProvider>().getMapVal(widget.index).toString());
                                 });
                               },
                               activeColor: Colors.blue,
@@ -104,7 +104,7 @@ class _Test1State extends State<Test1> {
                                 setState(() {
                                   scale = 0;
                                   context.read<UserProvider>().setMapVal(widget.index, scale);
-                                  debugPrint(context.read<UserProvider>().getMapVal(widget.index).toString());
+                                  // debugPrint(context.read<UserProvider>().getMapVal(widget.index).toString());
                                 });
                               },
                               activeColor: Colors.blue,
@@ -119,7 +119,7 @@ class _Test1State extends State<Test1> {
                                 setState(() {
                                   scale = 1;
                                   context.read<UserProvider>().setMapVal(widget.index, scale);
-                                  debugPrint(context.read<UserProvider>().getMapVal(widget.index).toString());
+                                  // debugPrint(context.read<UserProvider>().getMapVal(widget.index).toString());
                                 });
                               },
                               activeColor: Colors.blue,
@@ -134,7 +134,7 @@ class _Test1State extends State<Test1> {
                                 setState(() {
                                   scale = -2;
                                   context.read<UserProvider>().setMapVal(widget.index, scale);
-                                  debugPrint(context.read<UserProvider>().getMapVal(widget.index).toString());
+                                  // debugPrint(context.read<UserProvider>().getMapVal(widget.index).toString());
                                 });
                               },
                               activeColor: Colors.blue,
