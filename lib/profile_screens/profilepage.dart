@@ -32,7 +32,6 @@ class _ProfilePageState extends State<ProfilePage>{
                 child: TextButton.icon(
                   style: ButtonStyle(
                     foregroundColor: MaterialStateProperty.all(Colors.white),
-
                     backgroundColor: MaterialStateProperty.all(Color(0xFF534293)),
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(
