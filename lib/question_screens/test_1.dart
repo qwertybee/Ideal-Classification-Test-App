@@ -68,11 +68,11 @@ class _Test1State extends State<Test1> {
                           ListTile(
                             title: const Text('Strongly Agree'),
                             leading: Radio(
-                              value: 2,
+                              value: -2,
                               groupValue: scale,
                               onChanged: (val) {
                                 setState(() {
-                                  scale = 2;
+                                  scale = -2;
                                   context.read<UserProvider>().setMapVal(widget.index, scale);
                                   // debugPrint(context.read<UserProvider>().getMapVal(widget.index).toString());
                                 });
@@ -83,11 +83,11 @@ class _Test1State extends State<Test1> {
                           ListTile(
                             title: const Text('Agree'),
                             leading: Radio(
-                              value: 1,
+                              value: -1,
                               groupValue: scale,
                               onChanged: (val) {
                                 setState(() {
-                                  scale = 1;
+                                  scale = -1;
                                   context.read<UserProvider>().setMapVal(widget.index, scale);
                                   // debugPrint(context.read<UserProvider>().getMapVal(widget.index).toString());
                                 });
@@ -113,11 +113,11 @@ class _Test1State extends State<Test1> {
                           ListTile(
                             title: const Text('Disagree',),
                             leading: Radio(
-                              value: -1,
+                              value: 1,
                               groupValue: scale,
                               onChanged: (val) {
                                 setState(() {
-                                  scale = -1;
+                                  scale = 1;
                                   context.read<UserProvider>().setMapVal(widget.index, scale);
                                   // debugPrint(context.read<UserProvider>().getMapVal(widget.index).toString());
                                 });
@@ -128,11 +128,11 @@ class _Test1State extends State<Test1> {
                           ListTile(
                             title: const Text('Strongly Disagree'),
                             leading: Radio(
-                              value: -2,
+                              value: 2,
                               groupValue: scale,
                               onChanged: (val) {
                                 setState(() {
-                                  scale = -2;
+                                  scale = 2;
                                   context.read<UserProvider>().setMapVal(widget.index, scale);
                                   // debugPrint(context.read<UserProvider>().getMapVal(widget.index).toString());
                                 });

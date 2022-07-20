@@ -21,9 +21,10 @@ class _ProfilePageState extends State<ProfilePage>{
           padding: EdgeInsets.all(50.0),
           child: Column(
             children: [
-              const SizedBox(height: 24),
+              const SizedBox(height: 50),
               buildName(user),
-
+              // const SizedBox(height: 24),
+              Image.asset('images/Mobile UX-amico.png'),
               SizedBox(height: 20),
               SizedBox(
                 width: 300,

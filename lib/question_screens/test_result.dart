@@ -115,9 +115,10 @@ class _TestResultState extends State<TestResult> {
                         fontSize: 30, fontWeight: FontWeight.bold, color: Colors.blueGrey
                       ),
                     ),
-                    Lottie.network(
-                      "https://assets9.lottiefiles.com/private_files/lf30_qam8tww4.json",
-                    ),
+                    Image.asset("images/amico.png")
+                    // Lottie.network(
+                    //   "https://assets9.lottiefiles.com/private_files/lf30_qam8tww4.json",
+                    // ),
                   ],
                 ),
               ),
