@@ -29,6 +29,7 @@ class _TestResultState extends State<TestResult> {
   List<DetailSkill?>? allDetailSkill;
   String? userResult = "";
   int indexOfDetailOcc = 0;
+  late final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
   @override
   void initState() {
@@ -41,6 +42,10 @@ class _TestResultState extends State<TestResult> {
     Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {}));
   }
 
+  Future<void> _storeValue() async {
+    final SharedPreferences prefs = await _prefs;
+    prefs.setString(indexOfDetailOcc.toString(), userResult!);
+  }
 
   getTestResult() async {
     if (allDetailSkill != null) {
@@ -64,8 +69,8 @@ class _TestResultState extends State<TestResult> {
         indexOfDetailOcc++;
       }
       indexOfDetailOcc--;
-
       userResult = currLeastVar;
+      _storeValue;
 
       if (FirebaseAuth.instance.currentUser != null) {
         // Signed in, save result to firebase
